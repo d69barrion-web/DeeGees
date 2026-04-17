@@ -79,7 +79,8 @@
         <input type="number" id="hip" placeholder="Hip">
         <input type="number" id="rise" placeholder="Rise">
         <input type="number" id="outseam" placeholder="Outseam">
-
+        <input type="number" id="inseam" placeholder="Inseam">
+        
         <button class="btn" onclick="updatePattern()">Update Pattern</button>
       </div>
 
@@ -111,7 +112,8 @@ function updatePattern() {
   const hip = parseFloat(document.getElementById("hip").value) || 0;
   const rise = parseFloat(document.getElementById("rise").value) || 0;
   const outseam = parseFloat(document.getElementById("outseam").value) || 0;
-
+  const inseam = parseFloat(document.getElementById("inseam").value) || 0;
+  
   drawPattern({ waist, hip, rise, outseam });
 }
 
