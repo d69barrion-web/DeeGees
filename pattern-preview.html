@@ -132,15 +132,21 @@ function drawPattern(m) {
   const scale = 10;
   const center = 150;
 
-  const Lwaist = (m.waist / 4) * scale;
-  const Lbottom = (m.leg_opening / 4) * scale;
   const height = m.outseam * scale;
+  const kneeLine = ((height - m.rise) /2) * scale;
+  const bottomLine = height;
+
+  const Lwaist = (m.waist / 4) * scale;
+  const Lknee = (m.knee / 4) * scale;
+  const Lbottom = (m.leg_opening / 4) * scale;
   const rise = m.rise * scale;
 
   const p1 = { x: center - Lwaist, y: 20 };
   const p2 = { x: center + Lwaist, y: 20 };
-  const p3 = { x: center + Lbottom, y: 20 + height };
-  const p4 = { x: center - Lbottom, y: 20 + height };
+  const p3 = { x: center + Lknee, y: 20 + kneeLine };
+  const p4 = { x: center - Lbottom, y: 20 + bottomLine};
+  const p5 = { x: center + Lbottom, y: 20 + bottomLine };
+  const p6 = { x: center - Lbottom, y: 20 + kneeLine };
 
   
 
@@ -149,6 +155,8 @@ function drawPattern(m) {
     L ${p2.x} ${p2.y}
     L ${p3.x} ${p3.y}
     L ${p4.x} ${p4.y}
+    L ${p5.x} ${p5.y}
+    L ${p6.x} ${p6.y}
     Z
   `;
 
