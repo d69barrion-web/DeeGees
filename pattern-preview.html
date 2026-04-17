@@ -80,6 +80,7 @@
         <input type="number" id="rise" placeholder="Rise">
         <input type="number" id="outseam" placeholder="Outseam">
         <input type="number" id="inseam" placeholder="Inseam">
+        <input type="number" id="thigh" placeholder="Thigh">
         
         <button class="btn" onclick="updatePattern()">Update Pattern</button>
       </div>
@@ -103,6 +104,7 @@ function loadData() {
   document.getElementById("rise").value = params.get("rise") || "";
   document.getElementById("outseam").value = params.get("outseam") || "";
   document.getElementById("inseam").value = params.get("inseam") || "";
+  document.getElementById("thigh").value = params.get("thigh") || "";
 
   updatePattern();
 }
@@ -113,6 +115,7 @@ function updatePattern() {
   const rise = parseFloat(document.getElementById("rise").value) || 0;
   const outseam = parseFloat(document.getElementById("outseam").value) || 0;
   const inseam = parseFloat(document.getElementById("inseam").value) || 0;
+  const thigh = parseFloat(document.getElementById("thigh").value) || 0;
   
   drawPattern({ waist, hip, rise, outseam });
 }
