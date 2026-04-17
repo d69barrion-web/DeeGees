@@ -82,6 +82,7 @@
         <input type="number" id="inseam" placeholder="Inseam">
         <input type="number" id="thigh" placeholder="Thigh">
         <input type="number" id="knee" placeholder="Knee">
+        <input type="number" id="leg_opening" placeholder="leg_opening">
         
         <button class="btn" onclick="updatePattern()">Update Pattern</button>
       </div>
@@ -107,8 +108,8 @@ function loadData() {
   document.getElementById("inseam").value = params.get("inseam") || "";
   document.getElementById("thigh").value = params.get("thigh") || "";
   document.getElementById("knee").value = params.get("knee") || "";
+  document.getElementById("leg_opening").value = params.get("leg_opening") || "";
   
-
   updatePattern();
 }
 
@@ -120,6 +121,7 @@ function updatePattern() {
   const inseam = parseFloat(document.getElementById("inseam").value) || 0;
   const thigh = parseFloat(document.getElementById("thigh").value) || 0;
   const knee = parseFloat(document.getElementById("knee").value) || 0;
+  const leg_opening = parseFloat(document.getElementById("leg_opening").value) || 0;
   
   drawPattern({ waist, hip, rise, outseam });
 }
