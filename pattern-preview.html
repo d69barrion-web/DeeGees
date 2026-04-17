@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeeGees - Pattern Preview</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #38bdf8;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #38bdf8;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    svg {
+      width: 100%;
+      height: 500px;
+      background: #0f172a;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Pattern Preview</h1>
+
+    <div class="layout">
+
+      <!-- LEFT: Editable inputs -->
+      <div class="card">
+        <h3>Edit Measurements</h3>
+
+        <input type="number" id="waist" placeholder="Waist">
+        <input type="number" id="hip" placeholder="Hip">
+        <input type="number" id="rise" placeholder="Rise">
+        <input type="number" id="outseam" placeholder="Outseam">
+
+        <button class="btn" onclick="updatePattern()">Update Pattern</button>
+      </div>
+
+      <!-- RIGHT: SVG preview -->
+      <div class="card">
+        <svg id="svgCanvas"></svg>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+
+// GET values from URL
+const params = new URLSearchParams(window.location.search);
+
+function loadData() {
+  document.getElementById("waist").value = params.get("waist") || "";
+  document.getElementById("hip").value = params.get("hip") || "";
+  document.getElementById("rise").value = params.get("rise") || "";
+  document.getElementById("outseam").value = params.get("outseam") || "";
+
+  updatePattern();
+}
+
+function updatePattern() {
+  const waist = parseFloat(document.getElementById("waist").value) || 0;
+  const hip = parseFloat(document.getElementById("hip").value) || 0;
+  const rise = parseFloat(document.getElementById("rise").value) || 0;
+  const outseam = parseFloat(document.getElementById("outseam").value) || 0;
+
+  drawPattern({ waist, hip, rise, outseam });
+}
+
+function drawPattern(m) {
+  const svg = document.getElementById("svgCanvas");
+
+  const scale = 2;
+
+  const width = (m.hip / 2) * scale;
+  const height = m.outseam * scale;
+  const rise = m.rise * scale;
+
+  const p1 = { x: 50, y: 20 };
+  const p2 = { x: 50 + width, y: 20 };
+  const p3 = { x: 50 + width, y: height };
+  const p4 = { x: 50, y: height };
+
+  const crotch = {
+    x: p2.x - (width * 0.25),
+    y: p1.y + rise
+  };
+
+  const path = `
+    M ${p1.x} ${p1.y}
+    L ${p2.x} ${p2.y}
+    L ${crotch.x} ${crotch.y}
+    L ${p3.x} ${p3.y}
+    L ${p4.x} ${p4.y}
+    Z
+  `;
+
+  svg.innerHTML = `<path d="${path}" fill="none" stroke="#38bdf8" stroke-width="2"/>`;
+}
+
+// auto load
+loadData();
+
+</script>
+
+</body>
+</html>
