@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeeGees - Measurements</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+
+    p {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 12px;
+    }
+
+    .group-title {
+      color: #38bdf8;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus {
+      box-shadow: 0 0 0 2px #38bdf8;
+    }
+
+    .btn {
+      margin-top: 25px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #0ea5e9;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #94a3b8;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Enter Measurements</h1>
+    <p>Ilagay ang sukat ng customer para makabuo ng tamang pattern</p>
+
+    <div class="card">
+      
+      <form id="measurementForm">
+
+        <h3 class="group-title">Basic Measurements</h3>
+
+        <div class="form-group">
+          <label>Waist (baywang)</label>
+          <input type="number" step="0.1" name="waist" required>
+        </div>
+
+        <div class="form-group">
+          <label>Hip (balakang)</label>
+          <input type="number" step="0.1" name="hip" required>
+        </div>
+
+        <div class="form-group">
+          <label>Rise (crotch depth)</label>
+          <input type="number" step="0.1" name="rise" required>
+        </div>
+
+        <div class="form-group">
+          <label>Outseam (haba ng pantalon)</label>
+          <input type="number" step="0.1" name="outseam" required>
+        </div>
+
+        <div class="form-group">
+          <label>Inseam</label>
+          <input type="number" step="0.1" name="inseam" required>
+        </div>
+
+        <h3 class="group-title">Leg Measurements</h3>
+
+        <div class="form-group">
+          <label>Thigh</label>
+          <input type="number" step="0.1" name="thigh">
+        </div>
+
+        <div class="form-group">
+          <label>Knee</label>
+          <input type="number" step="0.1" name="knee">
+        </div>
+
+        <div class="form-group">
+          <label>Leg Opening</label>
+          <input type="number" step="0.1" name="leg_opening">
+        </div>
+
+        </div>
+
+    <a href="pattern-preview.html" class="btn">Generate Pattern</a>
+
+  </div>
+
+      </form>
+    </div>
+
+    <a href="Pattern Maker.html" class="back">← Back to Home</a>
+  </div>
+
+<script>
+document.getElementById("measurementForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = new FormData(this);
+  const params = new URLSearchParams(data).toString();
+
+  // Redirect to preview page with data
+  window.location.href = "pattern-preview.html?" + params;
+});
+</script>
+</body>
+</html>
