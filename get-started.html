@@ -156,17 +156,74 @@
   </div>
 
   <script>
-    document.getElementById("measurementForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+document.getElementById("measurementForm").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-      const data = Object.fromEntries(new FormData(this));
+  const data = Object.fromEntries(new FormData(this));
 
-      console.log("Measurements:", data);
+  // Convert to numbers
+  const waist = parseFloat(data.waist);
+  const hip = parseFloat(data.hip);
+  const rise = parseFloat(data.rise);
+  const outseam = parseFloat(data.outseam);
 
-      // NEXT STEP: ipapasa natin ito sa pattern generator page
-      alert("Pattern generation coming next step 😄");
-    });
-  </script>
+  drawPattern({ waist, hip, rise, outseam });
+});
+
+function drawPattern(m) {
+
+  // Simple scaling (para makita sa screen)
+  const scale = 3;
+
+  const width = (m.hip / 2) * scale;
+  const height = m.outseam * scale;
+  const rise = m.rise * scale;
+
+  // Basic points (simplified pantalon front)
+  const p1 = { x: 50, y: 20 }; // top left
+  const p2 = { x: 50 + width, y: 20 }; // top right
+  const p3 = { x: 50 + width, y: height }; // bottom right
+  const p4 = { x: 50, y: height }; // bottom left
+
+  const crotch = {
+    x: p2.x - (width * 0.25),
+    y: p1.y + rise
+  };
+
+  // SVG path
+  const path = `
+    M ${p1.x} ${p1.y}
+    L ${p2.x} ${p2.y}
+    L ${crotch.x} ${crotch.y}
+    L ${p3.x} ${p3.y}
+    L ${p4.x} ${p4.y}
+    Z
+  `;
+
+  // Inject SVG
+  document.body.innerHTML = `
+    <div style="text-align:center; padding:20px; background:#0f172a; color:white;">
+      <h2>Pattern Preview</h2>
+
+      <svg width="100%" height="${height + 50}" style="background:#1e293b; border-radius:10px;">
+        <path d="${path}" fill="none" stroke="#38bdf8" stroke-width="2"/>
+      </svg>
+
+      <br><br>
+      <button onclick="location.reload()" style="
+        padding:10px 20px;
+        background:#38bdf8;
+        border:none;
+        border-radius:6px;
+        font-weight:bold;
+        cursor:pointer;
+      ">
+        ← Back
+      </button>
+    </div>
+  `;
+}
+</script>
 
 </body>
 </html>
