@@ -123,22 +123,24 @@ function updatePattern() {
   const knee = parseFloat(document.getElementById("knee").value) || 0;
   const leg_opening = parseFloat(document.getElementById("leg_opening").value) || 0;
   
-  drawPattern({ waist, hip, rise, outseam });
+  drawPattern({ waist, hip, rise, outseam, inseam, thigh, knee, leg_opening });
 }
 
 function drawPattern(m) {
   const svg = document.getElementById("svgCanvas");
 
   const scale = 10;
+  const center = 150;
 
-  const width = (m.hip / 2) * scale;
+  const Lwaist = (m.waist / 4) * scale;
+  const Lbottom = (m.leg-opening / 4) * scale;
   const height = m.outseam * scale;
   const rise = m.rise * scale;
 
-  const p1 = { x: 50, y: 20 };
-  const p2 = { x: 50 + width, y: 20 };
-  const p3 = { x: 50 + width, y: height };
-  const p4 = { x: 50, y: height };
+  const p1 = { x: center - Lwaist, y: 20 };
+  const p2 = { x: centre + Lwaist, y: 20 };
+  const p3 = { x: center + Lbottom, y: 20 + height };
+  const p4 = { x: center - Lbottom, y: height };
 
   const crotch = {
     x: p2.x - (width * 0.25),
