@@ -140,12 +140,9 @@ function drawPattern(m) {
   const p1 = { x: center - Lwaist, y: 20 };
   const p2 = { x: centre + Lwaist, y: 20 };
   const p3 = { x: center + Lbottom, y: 20 + height };
-  const p4 = { x: center - Lbottom, y: height };
+  const p4 = { x: center - Lbottom, y: 20 + height };
 
-  const crotch = {
-    x: p2.x - (width * 0.25),
-    y: p1.y + rise
-  };
+  
 
   const path = `
     M ${p1.x} ${p1.y}
