@@ -147,11 +147,382 @@
           <input type="number" step="0.1" name="leg_opening">
         </div>
 
-        </div>
+        
+Pre, naalala ko yung iniisip ko dati.. Yung paggawa ng website para sa mga mananahi.. Yung kung kailangan nilang gumawa ng pattern ng pantalon, i-e-enter na lang nila yung measurements na nakuha nila sa customer, yung webpage na ang mag-generate ng pattern.
 
-    <a href="pattern-preview.html" class="btn">Generate Pattern</a>
+Kadalasan kase sa itsura pa lang ng pattern, halatado na kung hindi maganda kalalabasan. Kaya sa webpage pa lang, ma-e-edit na nila. Kapag okay na, saka lang nila ido-download yung pattern.
+
+Pero gusto muna sanang gumawa ng parang introduction page ng webpage. Introduction page na nag-i-explain kung anong benefit nung paggamit ng website para sa paggawa ng pattern.
+
+Bukod sa introduction, meron din itong "Get Started" button na maghahatid sa kanila sa next page.
+
+Gawa nga ulit tayo ng ganun bro. DeeGees ang gusto kong ipangalan sa website.
+
+Ayos ‘to bro—may potential talaga ‘tong idea mo. Practical + may clear na problema na sinosolve 👍
+
+Gawan natin ng malinis, convincing, at relatable na introduction page para sa DeeGees.
+
+🔷 Concept: Simple, direct, at naka-focus sa pain ng mananahi
+Writing
+DeeGees
+Precision Starts with the Right Pattern
+Ilang beses mo nang naranasan na sa pattern pa lang… alam mo nang may mali?
+
+Yung tipong kahit hindi pa tinatahi, halata na—hindi uupo nang maayos ang pantalon. Sayang sa oras. Sayang sa tela.
+
+Sa DeeGees, binabago natin ‘yan.
+
+Ano ang DeeGees?
+Ang DeeGees ay isang web-based tool na tumutulong sa mga mananahi na gumawa ng mas eksaktong pattern—lalo na para sa pantalon—gamit ang tamang measurements.
+
+I-enter mo lang ang measurements ng customer, at ang system na ang bahalang mag-generate ng pattern para sa’yo.
+
+Bakit DeeGees?
+✔ Mas mabilis – Hindi mo na kailangang mag-manual computation
+✔ Mas accurate – Bawas trial-and-error
+✔ Visual agad – Makikita mo na ang pattern bago pa man gupitin ang tela
+✔ Editable – Pwede mong i-adjust hanggang makuha mo ang tamang fit
+✔ Downloadable – Kapag satisfied ka na, saka mo lang i-save at gamitin
+
+Para Kanino Ito?
+Para ito sa:
+• Mga mananahi na gustong mapabilis ang trabaho
+• Mga gustong i-improve ang consistency ng fitting
+• Mga baguhan na gustong matuto ng tamang patterning
+• Mga beterano na gusto ng mas efficient na proseso
+
+Isang Bagong Paraan ng Pananahi
+Hindi kailangang baguhin ang galing mo bilang mananahi.
+
+Ang binabago lang natin—ang paraan kung paano ka nagsisimula.
+
+Dahil ang magandang tahi… nagsisimula sa tamang pattern.
+
+Ready ka na ba?
+Subukan mo ang mas mabilis, mas malinaw, at mas maaasahang paraan ng paggawa ng pattern.
+
+[ Get Started ]
+
+Kung gusto mo bro, next step pwede natin gawin:
+
+UI layout (paano itsura ng page)
+
+Tagalog vs English version (pwede natin gawing mas “masa”)
+
+o yung actual pattern generator logic (dito na papasok yung astig na part 😄)
+
+Gusto mo bang gawing mas Tagalog-heavy para swak sa masa audience mo?
+
+
+Ayos na yan bro. Gawa na tayo ng HTML para diyan 😁
+
+Sige bro 😄 gagawan natin ng single-file landing page (HTML + CSS) para sa DeeGees. Clean, simple, ready i-upload or i-edit sa CodePen / hosting.
+
+🔷 DeeGees Landing Page (HTML)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DeeGees - Pattern Generator</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      color: #38bdf8;
+      letter-spacing: 2px;
+    }
+
+    h2 {
+      font-weight: normal;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 12px;
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .section-title {
+      color: #38bdf8;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 14px 28px;
+      background: #38bdf8;
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #0ea5e9;
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      font-style: italic;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>DeeGees</h1>
+    <h2>Precision Starts with the Right Pattern</h2>
+
+    <div class="card">
+      <p>
+        Ilang beses mo nang naranasan na sa pattern pa lang… alam mo nang may mali?
+        Sayang sa oras. Sayang sa tela.
+      </p>
+
+      <h3 class="section-title">Ano ang DeeGees?</h3>
+      <p>
+        Ang DeeGees ay isang web-based tool na gumagawa ng mas eksaktong pantalon pattern
+        gamit ang measurements ng customer.
+      </p>
+
+      <h3 class="section-title">Bakit DeeGees?</h3>
+      <ul>
+        <li>Mas mabilis gumawa ng pattern</li>
+        <li>Mas accurate kaysa manual lang</li>
+        <li>Makikita agad ang resulta bago gupit</li>
+        <li>Editable bago i-download</li>
+        <li>Downloadable kapag okay na</li>
+      </ul>
+
+      <h3 class="section-title">Para kanino?</h3>
+      <ul>
+        <li>Mananahi na gustong bumilis ang trabaho</li>
+        <li>Beginners na gustong matuto ng patterning</li>
+        <li>Experienced tailors na gusto ng efficiency</li>
+      </ul>
+
+      <p class="footer-note">
+        Ang galing mo bilang mananahi hindi pinapalitan—pinapabilis lang.
+      </p>
+
+    </div>
+
+    <a href="get-started.html" class="btn">Get Started</a>
 
   </div>
+
+</body>
+</html>
+🔥 Next step (optional bro)
+Pwede natin sunod gawin:
+
+👉 Get Started page (measurement input form)
+
+👉 Auto pattern preview (SVG or canvas)
+
+👉 Real computation ng pantalon pattern (dito na papasok yung “core engine”)
+
+👉 Or gawing mas modern UI (Tailwind + animation + glassmorphism)
+
+Sabihin mo lang bro kung saan ka pupunta—dito na tayo magbuo ng actual system 😄
+
+
+Uploaded image
+Ayos bro, gumagana. Get Started page (measurements input form) naman ang gawin mo.😊
+
+Ayos yan bro, ang linis na ng dating 🔥
+Sige, next level na tayo—Get Started page (measurement form).
+
+Gagawa tayo ng:
+
+malinis na form
+
+naka-group ang measurements
+
+may preview button (next step ready na tayo)
+
+🔷 get-started.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeeGees - Measurements</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+
+    p {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 12px;
+    }
+
+    .group-title {
+      color: #38bdf8;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus {
+      box-shadow: 0 0 0 2px #38bdf8;
+    }
+
+    .btn {
+      margin-top: 25px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #0ea5e9;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #94a3b8;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Enter Measurements</h1>
+    <p>Ilagay ang sukat ng customer para makabuo ng tamang pattern</p>
+
+    <div class="card">
+      
+      <form id="measurementForm">
+
+        <h3 class="group-title">Basic Measurements</h3>
+
+        <div class="form-group">
+          <label>Waist (baywang)</label>
+          <input type="number" step="0.1" name="waist" required>
+        </div>
+
+        <div class="form-group">
+          <label>Hip (balakang)</label>
+          <input type="number" step="0.1" name="hip" required>
+        </div>
+
+        <div class="form-group">
+          <label>Rise (crotch depth)</label>
+          <input type="number" step="0.1" name="rise" required>
+        </div>
+
+        <div class="form-group">
+          <label>Outseam (haba ng pantalon)</label>
+          <input type="number" step="0.1" name="outseam" required>
+        </div>
+
+        <div class="form-group">
+          <label>Inseam</label>
+          <input type="number" step="0.1" name="inseam" required>
+        </div>
+
+        <h3 class="group-title">Leg Measurements</h3>
+
+        <div class="form-group">
+          <label>Thigh</label>
+          <input type="number" step="0.1" name="thigh">
+        </div>
+
+        <div class="form-group">
+          <label>Knee</label>
+          <input type="number" step="0.1" name="knee">
+        </div>
+
+        <div class="form-group">
+          <label>Leg Opening</label>
+          <input type="number" step="0.1" name="leg_opening">
+        </div>
+
+        <button type="submit" class="btn">Generate Pattern</button>
 
       </form>
     </div>
