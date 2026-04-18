@@ -254,9 +254,34 @@ const p12 = {
     L ${p13.x} ${p13.y}
     Z
   `;
-const topY = 0;
+  const topY = 0;
   const bottomY = bottomLine0 + 20; // konting allowance
+  const waistLineXo = 0;
+  const waistLineXi = 300; // konting allowance
+  const frontHipLineXo = 0;
+  const frontHipLineXi = 300;
+  const crotchLineXo = 0;
+  const crotchLineXi = 300;
+  const thighLineXo = 0;
+  const thighLineXi = 300;
+  const kneeLineXo = 0;
+  const kneeLineXi = 300;
+  const bottomLine1Xo = 0; 
+  const bottomLine1Xi = 300;
+  const bottomLine0Xo = 0; 
+  const bottomLine0Xi = 300;
+  
+  
   svg.innerHTML = `
+  <line 
+    x1="${waistLineXo}" 
+    y1="${waistLine}" 
+    x2="${waistLineXi}" 
+    y2="${waistLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
   <line 
     x1="${center}" 
     y1="${topY}" 
