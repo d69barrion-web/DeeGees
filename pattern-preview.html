@@ -147,8 +147,8 @@ function drawPattern(m) {
   const Lbottom = (m.leg_opening / 4) * scale;
   const Lcrotch = ((m.hip / 6 ) + 1 ) * scale;
 
-  const p1 = { x: center - (3 * scale), y: waistLine };
-  const p2 = { x: (center + Lwaist)-(3 * scale), y: waistLine };
+  const p1 = { x: center - Lwaist, y: waistLine };
+  const p2 = { x: center + Lwaist, y: waistLine };
   const p3 = { x: center + FLhip, y: frontHipLine };
   const p4 = { x: center + Lthigh, y: thighLine };
   const p5 = { x: center + Lknee, y: kneeLine };
