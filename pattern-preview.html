@@ -137,19 +137,19 @@ function drawPattern(m) {
   const crotchLine = 20 + (m.rise * scale);
   const frontHipLine = crotchLine - (2 * scale);
   const kneeLine = crotchLine + (((m.outseam - m.rise) / 2 ) * scale);
-  const bottomLine = waistline + Length;
+  const bottomLine = waistLine + Length;
 
   const Lwaist = (m.waist / 4) * scale;
   const Lknee = (m.knee / 4) * scale;
   const Lbottom = (m.leg_opening / 4) * scale;
   
 
-  const p1 = { x: center - Lwaist, y: 20 };
-  const p2 = { x: center + Lwaist, y: 20 };
-  const p3 = { x: center + Lknee, y: 20 + kneeLine };
-  const p4 = { x: center + Lbottom, y: 20 + bottomLine};
-  const p5 = { x: center - Lbottom, y: 20 + bottomLine };
-  const p6 = { x: center - Lknee, y: 20 + kneeLine };
+  const p1 = { x: center - Lwaist, y: waistLine };
+  const p2 = { x: center + Lwaist, y: waistLine };
+  const p3 = { x: center + Lknee, y: kneeLine };
+  const p4 = { x: center + Lbottom, y: bottomLine};
+  const p5 = { x: center - Lbottom, y: bottomLine };
+  const p6 = { x: center - Lknee, y: kneeLine };
 
   
 
