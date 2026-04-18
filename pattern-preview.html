@@ -217,11 +217,7 @@ function drawPattern(m) {
 
   const crotchDepth = m.crotch_depth || 0;
     
-// adjust crotch point
-const p10 = { 
-  x: center - Lcrotch - crotchDepth, 
-  y: crotchLine 
-};
+
   
   const p1 = { x: center - Lwaist + waistOffset, y: waistLine };
   const p2 = { x: center + Lwaist + waistOffset, y: waistLine };
@@ -234,7 +230,11 @@ const p10 = {
   const p7 = { x: center - Lbottom, y: bottomLine };
   const p8 = { x: center - Lknee + kneeOffset, y: kneeLine };
   const p9 = { x: center - Lthigh, y: thighLine };
-  
+  // adjust crotch point
+const p10 = { 
+  x: center - Lcrotch - crotchDepth, 
+  y: crotchLine 
+};
   const p11 = { x: center - FLhip + hipOffset, y: frontHipLine };
 
   const path = `
