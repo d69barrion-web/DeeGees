@@ -195,6 +195,8 @@ function drawPattern(m) {
 
   const scale = 10;
   const center = 150;
+  const topY = 0;
+  const bottomY = bottomLine + 20; // konting allowance
 
   const waistOffset = m.waist_shift;
   const hipOffset = m.hip_shift;
@@ -250,9 +252,23 @@ const p10 = {
     Z
   `;
 
-  svg.innerHTML = `<path d="${path}" fill="none" stroke="#38bdf8" stroke-width="2"/>`;
-}
+  svg.innerHTML = `
+  <line 
+    x1="${center}" 
+    y1="${topY}" 
+    x2="${center}" 
+    y2="${bottomY}" 
+    stroke="red" 
+    stroke-width="1"
+  />
 
+  <path 
+    d="${path}" 
+    fill="none" 
+    stroke="#38bdf8" 
+    stroke-width="2"
+  />
+`;
 // init
 loadData();
 
