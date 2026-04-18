@@ -87,6 +87,26 @@
         <button class="btn" onclick="updatePattern()">Update Pattern</button>
       </div>
 
+      <h3 class="group-title">Adjustments</h3>
+
+<div class="form-group">
+  <label>Waist Shift</label>
+  <input type="range" id="waistShift" min="-50" max="50" value="0" step="1">
+  <span id="waistShiftVal">0</span>
+</div>
+
+<div class="form-group">
+  <label>Hip Shift</label>
+  <input type="range" id="hipShift" min="-50" max="50" value="0" step="1">
+  <span id="hipShiftVal">0</span>
+</div>
+
+<div class="form-group">
+  <label>Knee Shift</label>
+  <input type="range" id="kneeShift" min="-50" max="50" value="0" step="1">
+  <span id="kneeShiftVal">0</span>
+</div>
+
       <!-- RIGHT: SVG preview -->
       <div class="card">
         <svg id="svgCanvas"></svg>
