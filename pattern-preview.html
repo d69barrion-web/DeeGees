@@ -129,8 +129,8 @@
         </div>
 
         <div class="form-group">
-           <label>Thigh adj: <span id="thighVal">0</span></label>
-           <input type="range" id="thighAdj" min="0" || "" max=params.get("thigh") || "" value=params.get("thigh") / 2>
+           <label>Thigh adj: <span id="thighVal">params.get("thigh")/span></label>
+           <input type="range" id="thighAdj" min="0" || "" max=params.get("thigh") * 2 || "" value=params.get("thigh") >
         </div>
 
       </div>
