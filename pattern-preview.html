@@ -1,47 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeeGees - Pattern Preview</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeeGees - Pattern Preview</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+  }
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
+  .container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+  }
 
-    h1 {
-      text-align: center;
-      color: #38bdf8;
-    }
+  h1 {
+    text-align: center;
+    color: #38bdf8;
+  }
 
+  .layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .card {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+  }
+
+  input[type="range"] {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px;
+    background: #38bdf8;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  svg {
+    width: 100%;
+    height: 500px;
+    background: #0f172a;
+    border-radius: 10px;
+  }
+
+  /* ✅ MOBILE FIX */
+  @media (max-width: 768px) {
     .layout {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 20px;
-      margin-top: 20px;
+      grid-template-columns: 1fr;
     }
 
-    .card {
-      background: #1e293b;
-      padding: 15px;
-      border-radius: 10px;
+    svg {
+      height: 400px;
     }
+  }
+</style>
+</head>
 
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 5px;
+<body>
+
+<div class="container">
+  <h1>Pattern Preview</h1>
+
+  <div class="layout">
+
+    <!-- LEFT SIDE -->
+    <div>
+
+      <!-- Measurements -->
+      <div class="card">
+        <h3>Edit Measurements</h3>
+
+        <input type="number" id="waist" placeholder="Waist">
+        <input type="number" id="hip" placeholder="Hip">
+        <input type="number" id="rise" placeholder="Rise">
+        <input type="number" id="outseam" placeholder="Outseam">
+        <input type="number" id="inseam" placeholder="Inseam">
+        <input type="number" id="thigh" placeholder="Thigh">
+        <input type="number" id="knee" placeholder="Knee">
+        <input type="number" id="leg_opening" placeholder="Leg Opening">
+
+        <button class="btn" onclick="updatePattern()">Update Pattern</button>
+      </div>
+
+      <!-- Adjustments -->
+      <div class="card">
+        <h3>Adjustments</h3>
+
+        <div class="form-group">
+          <label>Waist Shift: <span id="waistShiftVal">0</span></label>
+          <input type="range" id="waistShift" min="-50" max="50" value="0">
+        </div>
+
+        <div class="form-group">
+          <label>Hip Shift: <span id="hipShiftVal">0</span></label>
+          <input type="range" id="hipShift" min="-50" max="50" value="0">
+        </div>
+
+        <div class="form-group">
+          <label>Knee Shift: <span id="kneeShiftVal">0</span></label>
+          <input type="range" id="kneeShift" min="-50" max="50" value="0">
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="card">
+      <svg id="svgCanvas"></svg>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+// Load from URL
+const params = new URLSearchParams(window.location.search);
+
+function loadData() {
+  document.getElementById("waist").value = params.get("waist") || "";
+  document.getElementById("hip").value = params.get("hip") || "";
+  document.getElementById("rise").value = params.get("rise") || "";
+  document.getElementById("outseam").value = params.get("outseam") || "";
+  document.getElementById("inseam").value = params.get("inseam") || "";
+  document.getElementById("thigh").value = params.get("thigh") || "";
+  document.getElementById("knee").value = params.get("knee") || "";
+  document.getElementById("leg_opening").value = params.get("leg_opening") || "";
+
+  updatePattern();
+}
+
+// Sliders
+const waistSlider = document.getElementById("waistShift");
+const hipSlider = document.getElementById("hipShift");
+const kneeSlider = document.getElementById("kneeShift");
+
+waistSlider.addEventListener("input", updatePattern);
+hipSlider.addEventListener("input", updatePattern);
+kneeSlider.addEventListener("input", updatePattern);
+
+function updatePattern() {
+  const m = {
+    waist: parseFloat(document.getElementById("waist").value) || 0,
+    hip: parseFloat(document.getElementById("hip").value) || 0,
+    rise: parseFloat(document.getElementById("rise").value) || 0,
+    outseam: parseFloat(document.getElementById("outseam").value) || 0,
+    inseam: parseFloat(document.getElementById("inseam").value) || 0,
+    thigh: parseFloat(document.getElementById("thigh").value) || 0,
+    knee: parseFloat(document.getElementById("knee").value) || 0,
+    leg_opening: parseFloat(document.getElementById("leg_opening").value) || 0,
+
+    waist_shift: parseInt(waistSlider.value),
+    hip_shift: parseInt(hipSlider.value),
+    knee_shift: parseInt(kneeSlider.value)
+  };
+
+  document.getElementById("waistShiftVal").textContent = m.waist_shift;
+  document.getElementById("hipShiftVal").textContent = m.hip_shift;
+  document.getElementById("kneeShiftVal").textContent = m.knee_shift;
+
+  drawPattern(m);
+}
+
+function drawPattern(m) {
+  const svg = document.getElementById("svgCanvas");
+
+  const scale = 10;
+  const center = 150;
+
+  const waistOffset = m.waist_shift;
+  const hipOffset = m.hip_shift;
+  const kneeOffset = m.knee_shift;
+
+  const Length = m.outseam * scale;
+  const waistLine = 20;
+  const crotchLine = 20 + (m.rise * scale);
+  const frontHipLine = crotchLine - (2 * scale);
+  const thighLine = crotchLine + (4 * scale);
+  const kneeLine = crotchLine + (((m.outseam - m.rise) / 2) * scale);
+  const bottomLine = waistLine + Length;
+
+  const Lwaist = (m.waist / 6) * scale;
+  const FLhip = (m.hip / 6) * scale;
+  const Lthigh = (m.thigh / 4) * scale;
+  const Lknee = (m.knee / 4) * scale;
+  const Lbottom = (m.leg_opening / 4) * scale;
+  const Lcrotch = ((m.hip / 6) + 1) * scale;
+
+  const p1 = { x: center - Lwaist + waistOffset, y: waistLine };
+  const p2 = { x: center + Lwaist + waistOffset, y: waistLine };
+
+  const p3 = { x: center + FLhip + hipOffset, y: frontHipLine };
+  const p4 = { x: center + Lthigh, y: thighLine };
+  const p5 = { x: center + Lknee + kneeOffset, y: kneeLine };
+  const p6 = { x: center + Lbottom, y: bottomLine };
+
+  const p7 = { x: center - Lbottom, y: bottomLine };
+  const p8 = { x: center - Lknee + kneeOffset, y: kneeLine };
+  const p9 = { x: center - Lthigh, y: thighLine };
+  const p10 = { x: center - Lcrotch, y: crotchLine };
+  const p11 = { x: center - FLhip + hipOffset, y: frontHipLine };
+
+  const path = `
+    M ${p1.x} ${p1.y}
+    L ${p2.x} ${p2.y}
+    L ${p3.x} ${p3.y}
+    L ${p4.x} ${p4.y}
+    L ${p5.x} ${p5.y}
+    L ${p6.x} ${p6.y}
+    L ${p7.x} ${p7.y}
+    L ${p8.x} ${p8.y}
+    L ${p9.x} ${p9.y}
+    L ${p10.x} ${p10.y}
+    L ${p11.x} ${p11.y}
+    Z
+  `;
+
+  svg.innerHTML = `<path d="${path}" fill="none" stroke="#38bdf8" stroke-width="2"/>`;
+}
+
+// init
+loadData();
+
+</script>
+
+</body>
+</html>
       border: none;
     }
 
