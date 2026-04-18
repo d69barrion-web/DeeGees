@@ -206,7 +206,8 @@ function drawPattern(m) {
   const frontHipLine = crotchLine - (2 * scale);
   const thighLine = crotchLine + (4 * scale);
   const kneeLine = crotchLine + (((m.outseam - m.rise) / 2) * scale);
-  const bottomLine = waistLine + Length;
+  const bottomLine1 = waistLine + Length;
+  const bottomLine0 = bottomLine1 + (2 * scale);
 
   const Lwaist = (m.waist / 6) * scale;
   const FLhip = (m.hip / 6) * scale;
@@ -225,17 +226,18 @@ function drawPattern(m) {
   const p3 = { x: center + FLhip + hipOffset, y: frontHipLine };
   const p4 = { x: center + Lthigh, y: thighLine };
   const p5 = { x: center + Lknee, y: kneeLine };
-  const p6 = { x: center + Lbottom, y: bottomLine };
-
-  const p7 = { x: center - Lbottom, y: bottomLine };
-  const p8 = { x: center - Lknee, y: kneeLine };
-  const p9 = { x: center - Lthigh, y: thighLine };
+  const p6 = { x: center + Lbottom, y: bottomLine1 };
+  const p7 = { x: center + Lbottom, y: bottomLine0 };
+  const p8 = { x: center - Lbottom, y: bottomLine0 };
+  const p9 = { x: center - Lbottom, y: bottomLine1 };
+  const p10 = { x: center - Lknee, y: kneeLine };
+  const p11 = { x: center - Lthigh, y: thighLine };
   // adjust crotch point
-const p10 = { 
+const p12 = { 
   x: center - Lcrotch - crotchDepth, 
   y: crotchLine 
 };
-  const p11 = { x: center - FLhip + hipOffset, y: frontHipLine };
+  const p13 = { x: center - FLhip + hipOffset, y: frontHipLine };
 
   const path = `
     M ${p1.x} ${p1.y}
@@ -244,14 +246,16 @@ const p10 = {
     Q ${p4.x} ${p4.y} ${p5.x} ${p5.y}
     L ${p6.x} ${p6.y}
     L ${p7.x} ${p7.y}
-    Q ${p8.x} ${p8.y} ${p9.x} ${p9.y}
-    Q ${p9.x} ${p9.y} ${p10.x} ${p10.y}
+    L ${p8.x} ${p8.y}
+    L ${p9.x} ${p9.y}
     L ${p10.x} ${p10.y}
     L ${p11.x} ${p11.y}
+    L ${p12.x} ${p12.y}
+    L ${p13.x} ${p13.y}
     Z
   `;
 const topY = 0;
-  const bottomY = bottomLine + 20; // konting allowance
+  const bottomY = bottomLine0 + 20; // konting allowance
   svg.innerHTML = `
   <line 
     x1="${center}" 
