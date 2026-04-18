@@ -274,6 +274,15 @@ const p12 = {
   
   svg.innerHTML = `
   <line 
+    x1="${center}" 
+    y1="${topY}" 
+    x2="${center}" 
+    y2="${bottomY}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
     x1="${waistLineXo}" 
     y1="${waistLine}" 
     x2="${waistLineXi}" 
@@ -283,10 +292,55 @@ const p12 = {
     stroke-dasharray="5,5"
   />
   <line 
-    x1="${center}" 
-    y1="${topY}" 
-    x2="${center}" 
-    y2="${bottomY}" 
+    x1="${hipLineXo}" 
+    y1="${hipLine}" 
+    x2="${hipLineXi}" 
+    y2="${hipLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${crotchLineXo}" 
+    y1="${crotchLine}" 
+    x2="${crotchLineXi}" 
+    y2="${crotchLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+    <line 
+    x1="${thighLineXo}" 
+    y1="${thighLine}" 
+    x2="${thighLineXi}" 
+    y2="${thighLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${kneeLineXo}" 
+    y1="${kneeLine}" 
+    x2="${kneeLineXi}" 
+    y2="${kneeLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${bottomLine1LineXo}" 
+    y1="${bottomLine1}" 
+    x2="${bottomLine1Xi}" 
+    y2="${bottomLine1}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${bottomLine0LineXo}" 
+    y1="${bottomLine0}" 
+    x2="${bottomLine0Xi}" 
+    y2="${bottomLine0}" 
     stroke="red" 
     stroke-width="1"
     stroke-dasharray="5,5"
