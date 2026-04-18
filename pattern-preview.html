@@ -213,7 +213,7 @@ function updatePattern() {
     thigh_adj: parseInt(thighSlider.value),
     knee_adj: parseInt(kneeSlider.value),
     bottom_adj: parseInt(bottomSlider.value),
-    hip_adj: parseInt(hipSlider.value)
+    fronthip_adj: parseInt(hipSlider.value)
   };
 
   document.getElementById("waistShiftVal").textContent = m.waist_shift;
@@ -240,7 +240,7 @@ function drawPattern(m) {
   const thighOffset = m.thigh_adj;
   const kneeOffset = m.knee_adj;
   const bottomOffset = m.bottom_adj;
-  const hipOffset = m.hip_adj;
+  const hipOffset = m.frontHip_adj;
 
   const Length = m.outseam * scale;
   const waistLine = 50;
