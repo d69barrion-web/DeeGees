@@ -195,8 +195,7 @@ function drawPattern(m) {
 
   const scale = 10;
   const center = 150;
-  const topY = 0;
-  const bottomY = bottomLine + 20; // konting allowance
+  
 
   const waistOffset = m.waist_shift;
   const hipOffset = m.hip_shift;
@@ -251,7 +250,8 @@ const p10 = {
     L ${p11.x} ${p11.y}
     Z
   `;
-
+const topY = 0;
+  const bottomY = bottomLine + 20; // konting allowance
   svg.innerHTML = `
   <line 
     x1="${center}" 
