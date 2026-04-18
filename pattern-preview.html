@@ -125,7 +125,12 @@
 
         <div class="form-group">
            <label>Crotch Depth: <span id="crotchVal">0</span></label>
-           <input type="range" id="crotchDepth" min="-20" max="40" value="10">
+           <input type="range" id="crotchDepth" min="-20" max="40" value="0">
+        </div>
+
+        <div class="form-group">
+           <label>Thigh adj: <span id="thighVal">0</span></label>
+           <input type="range" id="thighAdj" min="-20" max="40" value="0">
         </div>
 
       </div>
@@ -161,11 +166,14 @@ function loadData() {
 // Sliders
 const waistSlider = document.getElementById("waistShift");
 const hipSlider = document.getElementById("hipShift");
-const crotchSlider = document.getElementById("crotchDepth");
+const crotchSlider = document.getElementById("crotchDepth"); 
+const thighSlider = document.getElementById("thighAdj");
   
 crotchSlider.addEventListener("input", updatePattern);
 waistSlider.addEventListener("input", updatePattern);
 hipSlider.addEventListener("input", updatePattern);
+thighSlider.addEventListener("input", updatePattern);
+  
 
 function updatePattern() {
   const m = {
@@ -180,12 +188,14 @@ function updatePattern() {
 
     waist_shift: parseInt(waistSlider.value),
     hip_shift: parseInt(hipSlider.value),
-    crotch_depth: parseInt(crotchSlider.value)
+    crotch_depth: parseInt(crotchSlider.value),
+    thigh_adj: parseInt(thighSlider.value)
   };
 
   document.getElementById("waistShiftVal").textContent = m.waist_shift;
   document.getElementById("hipShiftVal").textContent = m.hip_shift;
   document.getElementById("crotchVal").textContent = m.crotch_depth;
+  document.getElementById("thighVal").textContent = m.thigh_adj;
 
   drawPattern(m);
 }
@@ -199,6 +209,8 @@ function drawPattern(m) {
 
   const waistOffset = m.waist_shift;
   const hipOffset = m.hip_shift;
+  const thighOffset = m.thigh_adj;
+  
 
   const Length = m.outseam * scale;
   const waistLine = 50;
@@ -224,19 +236,16 @@ function drawPattern(m) {
   const p2 = { x: center + Lwaist + waistOffset, y: waistLine };
 
   const p3 = { x: center + FLhip + hipOffset, y: frontHipLine };
-  const p4 = { x: center + Lthigh, y: thighLine };
+  const p4 = { x: center + Lthigh + thighOffset, y: thighLine };
   const p5 = { x: center + Lknee, y: kneeLine };
   const p6 = { x: center + Lbottom, y: bottomLine1 };
   const p7 = { x: center + Lbottom, y: bottomLine0 };
   const p8 = { x: center - Lbottom, y: bottomLine0 };
   const p9 = { x: center - Lbottom, y: bottomLine1 };
   const p10 = { x: center - Lknee, y: kneeLine };
-  const p11 = { x: center - Lthigh, y: thighLine };
+  const p11 = { x: center - Lthigh - thighOffset, y: thighLine };
   // adjust crotch point
-const p12 = { 
-  x: center - Lcrotch - crotchDepth, 
-  y: crotchLine 
-};
+  const p12 = { x: center - Lcrotch - crotchDepth, y: crotchLine};
   const p13 = { x: center - FLhip + hipOffset, y: frontHipLine };
 
   const path = `
