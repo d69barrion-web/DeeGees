@@ -124,8 +124,8 @@
         </div>
 
         <div class="form-group">
-          <label>Knee Shift: <span id="kneeShiftVal">0</span></label>
-          <input type="range" id="kneeShift" min="-50" max="50" value="0">
+           <label>Crotch Depth: <span id="crotchVal">0</span></label>
+           <input type="range" id="crotchDepth" min="-20" max="40" value="10">
         </div>
 
       </div>
@@ -161,11 +161,11 @@ function loadData() {
 // Sliders
 const waistSlider = document.getElementById("waistShift");
 const hipSlider = document.getElementById("hipShift");
-const kneeSlider = document.getElementById("kneeShift");
-
+const crotchSlider = document.getElementById("crotchDepth");
+  
+crotchSlider.addEventListener("input", updatePattern);
 waistSlider.addEventListener("input", updatePattern);
 hipSlider.addEventListener("input", updatePattern);
-kneeSlider.addEventListener("input", updatePattern);
 
 function updatePattern() {
   const m = {
@@ -208,6 +208,14 @@ function drawPattern(m) {
   const kneeLine = crotchLine + (((m.outseam - m.rise) / 2) * scale);
   const bottomLine = waistLine + Length;
 
+  const crotchDepth = m.crotch_depth || 0;
+
+// adjust crotch point
+const p10 = { 
+  x: center - Lcrotch - crotchDepth, 
+  y: crotchLine 
+};
+
   const Lwaist = (m.waist / 6) * scale;
   const FLhip = (m.hip / 6) * scale;
   const Lthigh = (m.thigh / 4) * scale;
@@ -232,15 +240,12 @@ function drawPattern(m) {
   const path = `
     M ${p1.x} ${p1.y}
     L ${p2.x} ${p2.y}
-    L ${p3.x} ${p3.y}
-    L ${p4.x} ${p4.y}
-    L ${p5.x} ${p5.y}
+    Q ${p3.x} ${p3.y} ${p4.x} ${p4.y}
+    Q ${p4.x} ${p4.y} ${p5.x} ${p5.y}
     L ${p6.x} ${p6.y}
     L ${p7.x} ${p7.y}
-    L ${p8.x} ${p8.y}
-    L ${p9.x} ${p9.y}
-    L ${p10.x} ${p10.y}
-    L ${p11.x} ${p11.y}
+    Q ${p8.x} ${p8.y} ${p9.x} ${p9.y}
+    Q ${p10.x} ${p10.y} ${p11.x} ${p11.y}
     Z
   `;
 
