@@ -185,7 +185,7 @@ function updatePattern() {
 
   document.getElementById("waistShiftVal").textContent = m.waist_shift;
   document.getElementById("hipShiftVal").textContent = m.hip_shift;
-  document.getElementById("crotchShiftVal").textContent = m.crotch_depth;
+  document.getElementById("crotchVal").textContent = m.crotch_depth;
 
   drawPattern(m);
 }
@@ -198,7 +198,6 @@ function drawPattern(m) {
 
   const waistOffset = m.waist_shift;
   const hipOffset = m.hip_shift;
-  const kneeOffset = m.crotch_depth;
 
   const Length = m.outseam * scale;
   const waistLine = 20;
@@ -224,11 +223,11 @@ function drawPattern(m) {
 
   const p3 = { x: center + FLhip + hipOffset, y: frontHipLine };
   const p4 = { x: center + Lthigh, y: thighLine };
-  const p5 = { x: center + Lknee + kneeOffset, y: kneeLine };
+  const p5 = { x: center + Lknee, y: kneeLine };
   const p6 = { x: center + Lbottom, y: bottomLine };
 
   const p7 = { x: center - Lbottom, y: bottomLine };
-  const p8 = { x: center - Lknee + kneeOffset, y: kneeLine };
+  const p8 = { x: center - Lknee, y: kneeLine };
   const p9 = { x: center - Lthigh, y: thighLine };
   // adjust crotch point
 const p10 = { 
