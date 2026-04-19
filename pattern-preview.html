@@ -347,13 +347,7 @@ function drawPattern(m) {
   const wdistance = Math.sqrt(wdx * wdx + wdy * wdy) / scale;
 
   
-  svg.innerHTML = `
-  <text x="${wmidX}" y="${wmidY}" fill="yellow" font-size="12">
-    ${wdistance.toFixed(1)} "
-  </text>
-  <text x="${cmidX}" y="${cmidY}" fill="yellow" font-size="12">
-    ${cdistance.toFixed(1)} "
-  </text>
+  svg.innerHTML = 
   <line 
     x1="${center}" 
     y1="${topY}" 
@@ -433,6 +427,12 @@ function drawPattern(m) {
     stroke="#38bdf8" 
     stroke-width="2"
   />
+  <text x="${wmidX}" y="${wmidY}" fill="yellow" font-size="12">
+    ${wdistance.toFixed(1)} "
+  </text>
+  <text x="${cmidX}" y="${cmidY}" fill="yellow" font-size="12">
+    ${cdistance.toFixed(1)} "
+  </text>
 `; }
   // init
 loadData();
