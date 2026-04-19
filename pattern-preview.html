@@ -331,11 +331,13 @@ function drawPattern(m) {
   const crotch = { x: center - Lcrotch - crotchDepth, y: crotchLine };
   const midX = (centerPoint.x + crotch.x) / 2;
   const midY = (centerPoint.y + crotch.y) / 2;
- 
+  const dx = crotch.x - centerPoint.x;
+  const dy = crotch.y - centerPoint.y;
+  const distance = Math.sqrt(dx * dx + dy * dy) / scale;
   
   svg.innerHTML = `
   <text x="${midX}" y="${midY}" fill="yellow" font-size="12">
-    Crotch Depth
+    ${distance.toFixed(1)} cm
   </text>
   <line 
     x1="${center}" 
