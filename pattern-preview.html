@@ -343,24 +343,6 @@ function drawPattern(m) {
   const bottomLine0Xo = 0; 
   const bottomLine0Xi = 300;
   
-  //CROTCH TIP computation 
-  const crotchCenterPoint = { x: center, y: crotchLine };
-  //LEFT + CROTCHTIP +- CROTCHDEPTH
-  const Lcrotch = { x: center - Hcrotch - crotchDepth, y: crotchLine };
-  const LcmidX = (crotchCenterPoint.x + Lcrotch.x) / 2;
-  const LcmidY = (crotchCenterPoint.y + Lcrotch.y) / 2;
-  const Lcdx = Lcrotch.x - crotchCenterPoint.x;
-  const Lcdy = Lcrotch.y - crotchCenterPoint.y;
-  const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
-
-  //RIGHT
-  const Rcrotch = { x: center + HRcrotch + crotchWidth, y: crotchLine };
-  const RcmidX = (crotchCenterPoint.x + Rcrotch.x) / 2;
-  const RcmidY = (crotchCenterPoint.y + Rcrotch.y) / 2;
-  const Rcdx = Rcrotch.x - crotchCenterPoint.x;
-  const Rcdy = Rcrotch.y - crotchCenterPoint.y;
-  const Rcdistance = Math.sqrt(Rcdx * Rcdx + Rcdy * Rcdy) / scale;
-
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: waistLine };
   //LEFT END-POINT 
@@ -396,7 +378,43 @@ function drawPattern(m) {
   const Rhdx = Rhip.x - frontHipCenterPoint.x;
   const Rhdy = Rhip.y - frontHipCenterPoint.y;
   const Rhdistance = Math.sqrt(Rhdx * Rhdx + Rhdy * Rhdy) / scale;
-                   
+ 
+  //CROTCH TIP computation 
+  const crotchCenterPoint = { x: center, y: crotchLine };
+  //LEFT + CROTCHTIP +- CROTCHDEPTH
+  const Lcrotch = { x: center - Hcrotch - crotchDepth, y: crotchLine };
+  const LcmidX = (crotchCenterPoint.x + Lcrotch.x) / 2;
+  const LcmidY = (crotchCenterPoint.y + Lcrotch.y) / 2;
+  const Lcdx = Lcrotch.x - crotchCenterPoint.x;
+  const Lcdy = Lcrotch.y - crotchCenterPoint.y;
+  const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
+
+  //RIGHT
+  const Rcrotch = { x: center + HRcrotch + crotchWidth, y: crotchLine };
+  const RcmidX = (crotchCenterPoint.x + Rcrotch.x) / 2;
+  const RcmidY = (crotchCenterPoint.y + Rcrotch.y) / 2;
+  const Rcdx = Rcrotch.x - crotchCenterPoint.x;
+  const Rcdy = Rcrotch.y - crotchCenterPoint.y;
+  const Rcdistance = Math.sqrt(Rcdx * Rcdx + Rcdy * Rcdy) / scale;
+
+  //DISTANCE FROM CENTER TO FRONT THIGH END-POINTS 
+  const frontThighCenterPoint = { x: center, y: thighLine };
+  //LEFT END-POINT 
+  const Lthigh = { x: center - Hthigh - thighOffset, y: thighLine };
+  const LtmidX = (frontThighCenterPoint.x + Lhip.x) / 2;
+  const LtmidY = (frontThighCenterPoint.y + Lhip.y) / 2;
+  const Ltdx = Lhip.x - frontThighCenterPoint.x;
+  const Ltdy = Lhip.y - frontThighCenterPoint.y;
+  const Ltdistance = Math.sqrt(Ltdx * Ltdx + Ltdy * Ltdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rthigh = { x: center + Hthigh + thighOffset, y: thighLine };
+  const RhmidX = (frontThighCenterPoint.x + Rhip.x) / 2;
+  const RhmidY = (frontThighCenterPoint.y + Rhip.y) / 2;
+  const Rhdx = Rhip.x - frontThighCenterPoint.x;
+  const Rhdy = Rhip.y - frontThighCenterPoint.y;
+  const Rhdistance = Math.sqrt(Rhdx * Rhdx + Rhdy * Rhdy) / scale;
+ 
   svg.innerHTML = 
   `
   <line 
@@ -496,6 +514,12 @@ function drawPattern(m) {
   <text x="${RcmidX}" y="${RcmidY}" fill="yellow" font-size="12">
     ${Rcdistance.toFixed(1)} "
   </text>
+  <text x="${LtmidX}" y="${LtmidY}" fill="yellow" font-size="12">
+    ${Ltdistance.toFixed(1)} "
+  </text>
+  <text x="${RtmidX}" y="${RtmidY}" fill="yellow" font-size="12">
+    ${Rtdistance.toFixed(1)} "
+  </text>
   
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
@@ -558,6 +582,26 @@ function drawPattern(m) {
     y1="${crotchCenterPoint.y}" 
     x2="${Rcrotch.x}" 
     y2="${Rcrotch.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${frontThighCenterPoint.x}" 
+    y1="${frontThighCenterPointy}" 
+    x2="${Lthigh.x}" 
+    y2="${Lthigh.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${frontThighCenterPoint.x}" 
+    y1="${frontThighCenterPoint.y}" 
+    x2="${Rthigh.x}" 
+    y2="${Rthigh.y}"  
     stroke="white"
     stroke-width="0.5"
     marker-start="url(#arrow)"
