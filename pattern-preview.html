@@ -337,7 +337,7 @@ function drawPattern(m) {
   const Lcdy = Lcrotch.y - crotchCenterPoint.y;
   const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
 
-  //DISTANCE WAIST's END-POINTS FROM CENTER
+  //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: waistLine };
   //LEFT END-POINT 
   const Lwaist = { x: center - Hwaist + waistShift - waistOffset, y: waistLine };
@@ -354,7 +354,25 @@ function drawPattern(m) {
   const Rwdx = Rwaist.x - waistCenterPoint.x;
   const Rwdy = Rwaist.y - waistCenterPoint.y;
   const Rwdistance = Math.sqrt(Rwdx * Rwdx + Rwdy * Rwdy) / scale;
-  
+
+  //DISTANCE FROM CENTER TO FRONTHIP END-POINTS 
+  const frontHipCenterPoint = { x: center, y: frontHipLine };
+  //LEFT END-POINT 
+  const Lhip = { x: center - HFhip + hipShift - hipOffset, y: frontHipLine };
+  const LhmidX = (frontHipCenterPoint.x + Lhip.x) / 2;
+  const LhmidY = (frontHipCenterPoint.y + Lhip.y) / 2;
+  const Lhdx = Lhip.x - frontHipCenterPoint.x;
+  const Lhdy = Lhip.y - frontHipCenterPoint.y;
+  const Lhdistance = Math.sqrt(Lhdx * Lhdx + Lhdy * Lhdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rhip = { x: center + HFhip + hipShift + hipOffset, y: waistLine };
+  const RhmidX = (frontHipCenterPoint.x + Rhip.x) / 2;
+  const RhmidY = (frontHipCenterPoint.y + Rhip.y) / 2;
+  const Rhdx = Rhip.x - frontHipCenterPoint.x;
+  const Rhdy = Rhip.y - frontHipCenterPoint.y;
+  const Rhdistance = Math.sqrt(Rhdx * Rhdx + Rhdy * Rhdy) / scale;
+                   
   svg.innerHTML = 
   `
   <line 
@@ -442,6 +460,12 @@ function drawPattern(m) {
   <text x="${RwmidX}" y="${RwmidY}" fill="yellow" font-size="12">
     ${Rwdistance.toFixed(1)} "
   </text>
+  <text x="${LhmidX}" y="${LhmidY}" fill="yellow" font-size="12">
+    ${Lhdistance.toFixed(1)} "
+  </text>
+  <text x="${RhmidX}" y="${RhmidY}" fill="yellow" font-size="12">
+    ${Rhdistance.toFixed(1)} "
+  </text>
   <text x="${LcmidX}" y="${LcmidY}" fill="yellow" font-size="12">
     ${Lcdistance.toFixed(1)} "
   </text>
@@ -467,6 +491,26 @@ function drawPattern(m) {
     y1="${waistCenterPoint.y}" 
     x2="${Rwaist.x}" 
     y2="${Rwaist.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${frontHipCenterPoint.x}" 
+    y1="${frontHipCenterPointy}" 
+    x2="${Lhip.x}" 
+    y2="${Lhip.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${frontHipCenterPoint.x}" 
+    y1="${frontHipCenterPoint.y}" 
+    x2="${Rhip.x}" 
+    y2="${Rhip.y}"  
     stroke="white"
     stroke-width="0.5"
     marker-start="url(#arrow)"
