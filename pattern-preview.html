@@ -277,6 +277,7 @@ function drawPattern(m) {
   const Hknee = (m.knee / 4) * scale;
   const Hbottom = (m.leg_opening / 4) * scale;
   const Hcrotch = ((m.hip / 6) + 1) * scale;
+  const HRcrotch = ((m.hip / 6) * scale;
 
   const crotchDepth = m.crotch_depth || 0;
     
@@ -286,7 +287,7 @@ function drawPattern(m) {
   const p2 = { x: center + Hwaist + waistShift + waistOffset, y: waistLine };
 
   const p3 = { x: center + HFhip + hipShift + hipOffset, y: frontHipLine };
-  const p4 = { x: center + Hcrotch , y: crotchLine};
+  const p4 = { x: center + HRcrotch , y: crotchLine};
   const p5 = { x: center + Hthigh + thighOffset, y: thighLine };
   const p6 = { x: center + Hknee + kneeOffset, y: kneeLine };
   const p7 = { x: center + Hbottom + bottomOffset, y: bottomLine1 };
@@ -343,7 +344,7 @@ function drawPattern(m) {
   const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
 
   //RIGHT
-  const Rcrotch = { x: center + Hcrotch, y: crotchLine };
+  const Rcrotch = { x: center + HRcrotch, y: crotchLine };
   const RcmidX = (crotchCenterPoint.x + Rcrotch.x) / 2;
   const RcmidY = (crotchCenterPoint.y + Rcrotch.y) / 2;
   const Rcdx = Rcrotch.x - crotchCenterPoint.x;
