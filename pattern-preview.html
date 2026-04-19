@@ -401,19 +401,19 @@ function drawPattern(m) {
   const frontThighCenterPoint = { x: center, y: thighLine };
   //LEFT END-POINT 
   const Lthigh = { x: center - Hthigh - thighOffset, y: thighLine };
-  const LtmidX = (frontThighCenterPoint.x + Lhip.x) / 2;
-  const LtmidY = (frontThighCenterPoint.y + Lhip.y) / 2;
-  const Ltdx = Lhip.x - frontThighCenterPoint.x;
-  const Ltdy = Lhip.y - frontThighCenterPoint.y;
+  const LtmidX = (frontThighCenterPoint.x + Lthigh.x) / 2;
+  const LtmidY = (frontThighCenterPoint.y + Lthigh.y) / 2;
+  const Ltdx = Lthigh.x - frontThighCenterPoint.x;
+  const Ltdy = Lthigh.y - frontThighCenterPoint.y;
   const Ltdistance = Math.sqrt(Ltdx * Ltdx + Ltdy * Ltdy) / scale;
 
   //RIGHT END-POINT 
   const Rthigh = { x: center + Hthigh + thighOffset, y: thighLine };
-  const RhmidX = (frontThighCenterPoint.x + Rhip.x) / 2;
-  const RhmidY = (frontThighCenterPoint.y + Rhip.y) / 2;
-  const Rhdx = Rhip.x - frontThighCenterPoint.x;
-  const Rhdy = Rhip.y - frontThighCenterPoint.y;
-  const Rhdistance = Math.sqrt(Rhdx * Rhdx + Rhdy * Rhdy) / scale;
+  const RtmidX = (frontThighCenterPoint.x + Rthigh.x) / 2;
+  const RtmidY = (frontThighCenterPoint.y + Rthigh.y) / 2;
+  const Rtdx = Rthigh.x - frontThighCenterPoint.x;
+  const Rtdy = Rthigh.y - frontThighCenterPoint.y;
+  const Rtdistance = Math.sqrt(Rtdx * Rtdx + Rtdy * Rtdy) / scale;
  
   svg.innerHTML = 
   `
@@ -589,7 +589,7 @@ function drawPattern(m) {
   />
   <line 
     x1="${frontThighCenterPoint.x}" 
-    y1="${frontThighCenterPointy}" 
+    y1="${frontThighCenterPointy.y}" 
     x2="${Lthigh.x}" 
     y2="${Lthigh.y}"  
     stroke="white"
