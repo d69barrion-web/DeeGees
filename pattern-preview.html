@@ -340,7 +340,7 @@ function drawPattern(m) {
   //DISTANCE WAIST's END-POINTS FROM CENTER
   //LEFT END-POINT 
   const waistCenterPoint = { x: center, y: waistLine };
-  const Lwaist = { x: center - Lwaist + waistShift - waistOffset, y: waistLine };
+  const Lwaist = { x: center - Hwaist + waistShift - waistOffset, y: waistLine };
   const LwmidX = (waistCenterPoint.x + Lwaist.x) / 2;
   const LwmidY = (waistCenterPoint.y + Lwaist.y) / 2;
   const Lwdx = Lwaist.x - waistCenterPoint.x;
