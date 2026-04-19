@@ -332,7 +332,7 @@ function drawPattern(m) {
   const crotchCenterPoint = { x: center, y: crotchLine };
   const crotch = { x: center - Lcrotch - crotchDepth, y: crotchLine };
   const cmidX = (crotchCenterPoint.x + crotch.x) / 2;
-  const cmidY = ((crotchCenterPoint.y + crotch.y) / 2) + 1;
+  const cmidY = (crotchCenterPoint.y + crotch.y) / 2;
   const cdx = crotch.x - crotchCenterPoint.x;
   const cdy = crotch.y - crotchCenterPoint.y;
   const cdistance = Math.sqrt(cdx * cdx + cdy * cdy) / scale;
@@ -341,7 +341,7 @@ function drawPattern(m) {
   const waistCenterPoint = { x: center, y: waistLine };
   const waist = { x: center - Lwaist + waistShift - waistOffset, y: waistLine };
   const wmidX = (waistCenterPoint.x + waist.x) / 2;
-  const wmidY = ((waistCenterPoint.y + waist.y) / 2) + 1;
+  const wmidY = (waistCenterPoint.y + waist.y) / 2;
   const wdx = waist.x - waistCenterPoint.x;
   const wdy = waist.y - waistCenterPoint.y;
   const wdistance = Math.sqrt(wdx * wdx + wdy * wdy) / scale;
