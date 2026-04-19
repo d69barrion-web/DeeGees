@@ -144,8 +144,13 @@
         </div>
 
         <div class="form-group">
-           <label>Crotch Depth: <span id="crotchVal">0</span></label>
+           <label>Crotch Tip: <span id="crotchVal">0</span></label>
            <input type="range" id="crotchDepth" min="-20" max="20" value="0">
+        </div>
+
+        <div class="form-group">
+           <label>Crotch Width: <span id="crotchWidthVal">0</span></label>
+           <input type="range" id="crotchWidth" min="-20" max="20" value="0">
         </div>
 
         <div class="form-group">
@@ -198,16 +203,18 @@ function loadData() {
 // Sliders
 const waistSlider = document.getElementById("waistShift");
 const hipSlider = document.getElementById("hipShift");
-const crotchSlider = document.getElementById("crotchDepth"); 
+const crotchSlider = document.getElementById("crotchDepth");
+const crotchWidthSlider = document.getElementById("crotchWidth"); 
 const thighSlider = document.getElementById("thighAdj");
 const kneeSlider = document.getElementById("kneeAdj");
 const bottomSlider = document.getElementById("bottomAdj");
 const frontHipSlider = document.getElementById("frontHipAdj");
 const frontWaistSlider = document.getElementById("frontWaistAdj");
                 
-crotchSlider.addEventListener("input", updatePattern);
 waistSlider.addEventListener("input", updatePattern);
 hipSlider.addEventListener("input", updatePattern);
+crotchSlider.addEventListener("input", updatePattern);
+crotchWidthSlider.addEventListener("input", updatePattern);
 thighSlider.addEventListener("input", updatePattern);
 kneeSlider.addEventListener("input", updatePattern);
 bottomSlider.addEventListener("input", updatePattern);
@@ -228,6 +235,7 @@ function updatePattern() {
     waist_shift: parseInt(waistSlider.value),
     hip_shift: parseInt(hipSlider.value),
     crotch_depth: parseInt(crotchSlider.value),
+    crotch_width: parseInt(crotchWidthSlider.value),
     thigh_adj: parseInt(thighSlider.value),
     knee_adj: parseInt(kneeSlider.value),
     bottom_adj: parseInt(bottomSlider.value),
@@ -238,6 +246,7 @@ function updatePattern() {
   document.getElementById("waistShiftVal").textContent = m.waist_shift;
   document.getElementById("hipShiftVal").textContent = m.hip_shift;
   document.getElementById("crotchVal").textContent = m.crotch_depth;
+  document.getElementById("crotchWidthVal").textContent = m.crotch_width;
   document.getElementById("thighVal").textContent = m.thigh_adj;
   document.getElementById("kneeVal").textContent = m.knee_adj;
   document.getElementById("bottomVal").textContent = m.bottom_adj;
@@ -280,6 +289,7 @@ function drawPattern(m) {
   const HRcrotch = (m.hip / 6) * scale;
 
   const crotchDepth = m.crotch_depth || 0;
+  const crotchWidth = m.crotch_width || 0;
     
 
   
@@ -287,7 +297,7 @@ function drawPattern(m) {
   const p2 = { x: center + Hwaist + waistShift + waistOffset, y: waistLine };
 
   const p3 = { x: center + HFhip + hipShift + hipOffset, y: frontHipLine };
-  const p4 = { x: center + HRcrotch , y: crotchLine};
+  const p4 = { x: center + HRcrotch + crotchWidth , y: crotchLine};
   const p5 = { x: center + Hthigh + thighOffset, y: thighLine };
   const p6 = { x: center + Hknee + kneeOffset, y: kneeLine };
   const p7 = { x: center + Hbottom + bottomOffset, y: bottomLine1 };
@@ -344,7 +354,7 @@ function drawPattern(m) {
   const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
 
   //RIGHT
-  const Rcrotch = { x: center + HRcrotch, y: crotchLine };
+  const Rcrotch = { x: center + HRcrotch + crotchWidth, y: crotchLine };
   const RcmidX = (crotchCenterPoint.x + Rcrotch.x) / 2;
   const RcmidY = (crotchCenterPoint.y + Rcrotch.y) / 2;
   const Rcdx = Rcrotch.x - crotchCenterPoint.x;
