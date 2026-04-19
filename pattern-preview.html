@@ -338,8 +338,8 @@ function drawPattern(m) {
   const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
 
   //DISTANCE WAIST's END-POINTS FROM CENTER
-  //LEFT END-POINT 
   const waistCenterPoint = { x: center, y: waistLine };
+  //LEFT END-POINT 
   const Lwaist = { x: center - Hwaist + waistShift - waistOffset, y: waistLine };
   const LwmidX = (waistCenterPoint.x + Lwaist.x) / 2;
   const LwmidY = (waistCenterPoint.y + Lwaist.y) / 2;
@@ -347,6 +347,13 @@ function drawPattern(m) {
   const Lwdy = Lwaist.y - waistCenterPoint.y;
   const Lwdistance = Math.sqrt(Lwdx * Lwdx + Lwdy * Lwdy) / scale;
 
+  //RIGHT END-POINT 
+  const Rwaist = { x: center + Hwaist + waistShift + waistOffset, y: waistLine };
+  const RwmidX = (waistCenterPoint.x + Rwaist.x) / 2;
+  const RwmidY = (waistCenterPoint.y + Rwaist.y) / 2;
+  const Rwdx = Rwaist.x - waistCenterPoint.x;
+  const Rwdy = Rwaist.y - waistCenterPoint.y;
+  const Rwdistance = Math.sqrt(Rwdx * Rwdx + Rwdy * Rwdy) / scale;
   
   svg.innerHTML = 
   `
@@ -432,6 +439,9 @@ function drawPattern(m) {
   <text x="${LwmidX}" y="${LwmidY}" fill="yellow" font-size="12">
     ${Lwdistance.toFixed(1)} "
   </text>
+  <text x="${RwmidX}" y="${RwmidY}" fill="yellow" font-size="12">
+    ${Rwdistance.toFixed(1)} "
+  </text>
   <text x="${LcmidX}" y="${LcmidY}" fill="yellow" font-size="12">
     ${Lcdistance.toFixed(1)} "
   </text>
@@ -447,6 +457,16 @@ function drawPattern(m) {
     y1="${waistCenterPoint.y}" 
     x2="${Lwaist.x}" 
     y2="${Lwaist.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${waistCenterPoint.x}" 
+    y1="${waistCenterPoint.y}" 
+    x2="${Rwaist.x}" 
+    y2="${Rwaist.y}"  
     stroke="white"
     stroke-width="0.5"
     marker-start="url(#arrow)"
