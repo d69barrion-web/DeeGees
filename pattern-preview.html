@@ -432,6 +432,24 @@ function drawPattern(m) {
   const Rkdx = Rknee.x - frontkneeCenterPoint.x;
   const Rkdy = Rknee.y - frontkneeCenterPoint.y;
   const Rkdistance = Math.sqrt(Rkdx * Rkdx + Rkdy * Rkdy) / scale;
+
+  //DISTANCE FROM CENTER TO FRONT LEG-OPENING END-POINTS 
+  const frontBottomCenterPoint = { x: center, y: bottomLine0 };
+  //LEFT END-POINT 
+  const Lbottom = { x: center - Hbottom - bottomOffset, y: bottomLine0 };
+  const LbmidX = (frontBottomCenterPoint.x + Lbottom.x) / 2;
+  const LbmidY = (frontBottomCenterPoint.y + Lbottom.y) / 2;
+  const Lbdx = Lbottom.x - frontBottomCenterPoint.x;
+  const Lbdy = Lbottom.y - frontBottomCenterPoint.y;
+  const Lbdistance = Math.sqrt(Lbdx * Lbdx + Lbdy * Lbdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rbottom = { x: center + Hbottom + bottomOffset, y: bottomLine0 };
+  const RbmidX = (frontBottomCenterPoint.x + Rbottomx) / 2;
+  const RbmidY = (frontBottomCenterPoint.y + Rbottom.y) / 2;
+  const Rbdx = Rbottom.x - frontBottomCenterPoint.x;
+  const Rbdy = Rbottom.y - frontBottomCenterPoint.y;
+  const Rbdistance = Math.sqrt(Rbdx * Rbdx + Rbdy * Rbdy) / scale;
  
   svg.innerHTML = 
   `
@@ -544,6 +562,12 @@ function drawPattern(m) {
   <text x="${RkmidX}" y="${RkmidY}" fill="yellow" font-size="12">
     ${Rkdistance.toFixed(1)} "
   </text>
+  <text x="${LbmidX}" y="${LbmidY}" fill="yellow" font-size="12">
+    ${Lbdistance.toFixed(1)} "
+  </text>
+  <text x="${RbmidX}" y="${RbmidY}" fill="yellow" font-size="12">
+    ${Rbdistance.toFixed(1)} "
+  </text>
   
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
@@ -646,6 +670,26 @@ function drawPattern(m) {
     y1="${frontkneeCenterPoint.y}" 
     x2="${Rknee.x}" 
     y2="${Rknee.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${frontBottomCenterPoint.x}" 
+    y1="${frontBottomCenterPoint.y}" 
+    x2="${Lbottom.x}" 
+    y2="${Lbottom.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${frontBottomCenterPoint.x}" 
+    y1="${frontBottomCenterPoint.y}" 
+    x2="${Rbottom.x}" 
+    y2="${Rbottom.y}"  
     stroke="white"
     stroke-width="0.5"
     marker-start="url(#arrow)"
