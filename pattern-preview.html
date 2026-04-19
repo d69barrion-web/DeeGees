@@ -269,8 +269,8 @@ function drawPattern(m) {
   const bottomLine1 = waistLine + Length;
   const bottomLine0 = bottomLine1 + (2 * scale);
 
-  const Lwaist = (m.waist / 6) * scale;
-  const FLhip = (m.hip / 6) * scale;
+  const Lwaist = (m.waist / 8) * scale;
+  const FLhip = (m.hip / 8) * scale;
   const Lthigh = (m.thigh / 4) * scale;
   const Lknee = (m.knee / 4) * scale;
   const Lbottom = (m.leg_opening / 4) * scale;
@@ -339,7 +339,7 @@ function drawPattern(m) {
 
   //DISTANCE WAIST's END-POINTS FROM CENTER
   const waistCenterPoint = { x: center, y: waistLine };
-  const waist = { x: (center - Lwaist + waistShift - waistOffset) / 2, y: waistLine };
+  const waist = { x: center - Lwaist + waistShift - waistOffset, y: waistLine };
   const wmidX = (waistCenterPoint.x + waist.x) / 2;
   const wmidY = (waistCenterPoint.y + waist.y) / 2;
   const wdx = waist.x - waistCenterPoint.x;
