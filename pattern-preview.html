@@ -327,15 +327,20 @@ function drawPattern(m) {
   const bottomLine1Xi = 300;
   const bottomLine0Xo = 0; 
   const bottomLine0Xi = 300;
+  const centerCrotch = {x: center, y: crotchLine};
+  const crotchTip = {x: p12.x, y: p12.y};
+  const midCrotch = (crotchTip + (centerCrotch - crotchTip) / 2);
   
-  
-  svg.innerHTML = `
+  svg.innerHTML =
+  <text x="${midCrotch.x}" y="${midCrotch.y}" fill="yellow" font-size="12">
+    midCrotch / scale
+  </text>
   <line 
     x1="${center}" 
     y1="${topY}" 
     x2="${center}" 
     y2="${bottomY}" 
-    stroke="red" 
+    stroke="red" sa 
     stroke-width="1"
     stroke-dasharray="5,5"
   />
