@@ -434,6 +434,24 @@ function drawPattern(m) {
   <text x="${cmidX}" y="${cmidY}" fill="yellow" font-size="12">
     ${cdistance.toFixed(1)} "
   </text>
+
+  <line 
+    x1="${waistCenterPoint.x}" 
+    y1="${waistCenterPoint.y}" 
+    x2="${waist.x}" 
+    y2="${waist.y}" 
+    stroke="gray" 
+    stroke-dasharray="4"
+  />
+
+  <line 
+    x1="${crotchCenterPoint.x}" 
+    y1="${crotchCenterPoint.y}" 
+    x2="${crotch.x}" 
+    y2="${crotch.y}" 
+    stroke="gray" 
+    stroke-dasharray="4"
+  />
   
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
