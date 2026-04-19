@@ -286,17 +286,18 @@ function drawPattern(m) {
   const p2 = { x: center + Hwaist + waistShift + waistOffset, y: waistLine };
 
   const p3 = { x: center + HFhip + hipShift + hipOffset, y: frontHipLine };
-  const p4 = { x: center + Hthigh + thighOffset, y: thighLine };
-  const p5 = { x: center + Hknee + kneeOffset, y: kneeLine };
-  const p6 = { x: center + Hbottom + bottomOffset, y: bottomLine1 };
-  const p7 = { x: center + Hbottom + bottomOffset, y: bottomLine0 };
-  const p8 = { x: center - Hbottom - bottomOffset, y: bottomLine0 };
-  const p9 = { x: center - Hbottom - bottomOffset, y: bottomLine1 };
-  const p10 = { x: center - Hknee - kneeOffset, y: kneeLine };
-  const p11 = { x: center - Hthigh - thighOffset, y: thighLine };
+  const p4 = { x: center + Hcrotch , y: crotchLine};
+  const p5 = { x: center + Hthigh + thighOffset, y: thighLine };
+  const p6 = { x: center + Hknee + kneeOffset, y: kneeLine };
+  const p7 = { x: center + Hbottom + bottomOffset, y: bottomLine1 };
+  const p8 = { x: center + Hbottom + bottomOffset, y: bottomLine0 };
+  const p9 = { x: center - Hbottom - bottomOffset, y: bottomLine0 };
+  const p10 = { x: center - Hbottom - bottomOffset, y: bottomLine1 };
+  const p11 = { x: center - Hknee - kneeOffset, y: kneeLine };
+  const p12 = { x: center - Hthigh - thighOffset, y: thighLine };
   // adjust crotch point
-  const p12 = { x: center - Hcrotch - crotchDepth, y: crotchLine};
-  const p13 = { x: center - HFhip + hipShift - hipOffset, y: frontHipLine };
+  const p13 = { x: center - Hcrotch - crotchDepth, y: crotchLine};
+  const p14 = { x: center - HFhip + hipShift - hipOffset, y: frontHipLine };
 
   const path = `
     M ${p1.x} ${p1.y}
@@ -311,6 +312,7 @@ function drawPattern(m) {
     L ${p11.x} ${p11.y}
     L ${p12.x} ${p12.y}
     L ${p13.x} ${p13.y}
+    L ${p14.x} ${p14.y}
     Z
   `;
   const topY = 0;
@@ -332,12 +334,21 @@ function drawPattern(m) {
   
   //CROTCH TIP computation 
   const crotchCenterPoint = { x: center, y: crotchLine };
+  //LEFT + CROTCHTIP +- CROTCHDEPTH
   const Lcrotch = { x: center - Hcrotch - crotchDepth, y: crotchLine };
   const LcmidX = (crotchCenterPoint.x + Lcrotch.x) / 2;
   const LcmidY = (crotchCenterPoint.y + Lcrotch.y) / 2;
   const Lcdx = Lcrotch.x - crotchCenterPoint.x;
   const Lcdy = Lcrotch.y - crotchCenterPoint.y;
   const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
+
+  //RIGHT
+  const Rcrotch = { x: center + Hcrotch, y: crotchLine };
+  const RcmidX = (crotchCenterPoint.x + Rcrotch.x) / 2;
+  const RcmidY = (crotchCenterPoint.y + Rcrotch.y) / 2;
+  const Rcdx = Rcrotch.x - crotchCenterPoint.x;
+  const Rcdy = Rcrotch.y - crotchCenterPoint.y;
+  const Rcdistance = Math.sqrt(Rcdx * Rcdx + Rcdy * Rcdy) / scale;
 
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: waistLine };
@@ -471,6 +482,9 @@ function drawPattern(m) {
   <text x="${LcmidX}" y="${LcmidY}" fill="yellow" font-size="12">
     ${Lcdistance.toFixed(1)} "
   </text>
+  <text x="${RcmidX}" y="${RcmidY}" fill="yellow" font-size="12">
+    ${Rcdistance.toFixed(1)} "
+  </text>
   
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
@@ -523,6 +537,16 @@ function drawPattern(m) {
     y1="${crotchCenterPoint.y}" 
     x2="${Lcrotch.x}" 
     y2="${Lcrotch.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${crotchCenterPoint.x}" 
+    y1="${crotchCenterPoint.y}" 
+    x2="${Rcrotch.x}" 
+    y2="${Rcrotch.y}"  
     stroke="white"
     stroke-width="0.5"
     marker-start="url(#arrow)"
