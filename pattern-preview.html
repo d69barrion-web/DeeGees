@@ -331,10 +331,11 @@ function drawPattern(m) {
   const crotchTip = {x: p12.x, y: p12.y};
   const midCrotch = (crotchTip + (centerCrotch - crotchTip) / 2);
   
-  svg.innerHTML =
-  <text x="${crotchTip.x}" y="${crotchTip.y}" fill="yellow" font-size="12">
-    crotchTip
+  svg.innerHTML += `
+  <text x="${midX}" y="${midY}" fill="yellow" font-size="12">
+    Crotch Depth
   </text>
+`;
   <line 
     x1="${center}" 
     y1="${topY}" 
