@@ -428,7 +428,7 @@ function drawPattern(m) {
   //RIGHT END-POINT 
   const Rknee = { x: center + Hknee + kneeOffset, y: kneeLine };
   const RkmidX = (frontkneeCenterPoint.x + Rknee.x) / 2;
-  const RkmidY = (frontkneeCenterPointy + Rknee.y) / 2;
+  const RkmidY = (frontkneeCenterPoint.y + Rknee.y) / 2;
   const Rkdx = Rknee.x - frontkneeCenterPoint.x;
   const Rkdy = Rknee.y - frontkneeCenterPoint.y;
   const Rkdistance = Math.sqrt(Rkdx * Rkdx + Rkdy * Rkdy) / scale;
