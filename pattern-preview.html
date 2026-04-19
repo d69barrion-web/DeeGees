@@ -327,17 +327,32 @@ function drawPattern(m) {
   const bottomLine1Xi = 300;
   const bottomLine0Xo = 0; 
   const bottomLine0Xi = 300;
-  const centerPoint = { x: center, y: crotchLine };
+  
+  //CROTCH TIP computation 
+  const crotchCenterPoint = { x: center, y: crotchLine };
   const crotch = { x: center - Lcrotch - crotchDepth, y: crotchLine };
-  const midX = (centerPoint.x + crotch.x) / 2;
-  const midY = (centerPoint.y + crotch.y) / 2;
-  const dx = crotch.x - centerPoint.x;
-  const dy = crotch.y - centerPoint.y;
-  const distance = Math.sqrt(dx * dx + dy * dy) / scale;
+  const cmidX = (crotchCenterPoint.x + crotch.x) / 2;
+  const cmidY = (crotchCenterPoint.y + crotch.y) / 2;
+  const cdx = crotch.x - crotchCenterPoint.x;
+  const cdy = crotch.y - crotchCenterPoint.y;
+  const cdistance = Math.sqrt(cdx * cdx + cdy * cdy) / scale;
+
+  //DISTANCE WAIST's END-POINTS FROM CENTER
+  const waistCenterPoint = { x: center, y: waistLine };
+  const waist = { x: center - Lwaist + waistShift - waistOffset, y: waistLine };
+  const wmidX = (waistCenterPoint.x + waist.x) / 2;
+  const wmidY = (waistCenterPoint.y + waist.y) / 2;
+  const wdx = waist.x - waistCenterPoint.x;
+  const wdy = waist.y - waistCenterPoint.y;
+  const wdistance = Math.sqrt(wdx * wdx + wdy * wdy) / scale;
+
   
   svg.innerHTML = `
-  <text x="${midX}" y="${midY}" fill="yellow" font-size="12">
-    ${distance.toFixed(1)} "
+  <text x="${wmidX}" y="${wmidY}" fill="yellow" font-size="12">
+    ${wdistance.toFixed(1)} "
+  </text>
+  <text x="${cmidX}" y="${cmidY}" fill="yellow" font-size="12">
+    ${cdistance.toFixed(1)} "
   </text>
   <line 
     x1="${center}" 
