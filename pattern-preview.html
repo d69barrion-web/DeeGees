@@ -366,7 +366,7 @@ function drawPattern(m) {
   const Lhdistance = Math.sqrt(Lhdx * Lhdx + Lhdy * Lhdy) / scale;
 
   //RIGHT END-POINT 
-  const Rhip = { x: center + HFhip + hipShift + hipOffset, y: waistLine };
+  const Rhip = { x: center + HFhip + hipShift + hipOffset, y: frontHipLine };
   const RhmidX = (frontHipCenterPoint.x + Rhip.x) / 2;
   const RhmidY = (frontHipCenterPoint.y + Rhip.y) / 2;
   const Rhdx = Rhip.x - frontHipCenterPoint.x;
