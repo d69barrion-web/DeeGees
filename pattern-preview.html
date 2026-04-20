@@ -297,14 +297,14 @@ function drawPattern(m) {
 
   const fp3 = { x: center + HFhip + frontHipShift + hipOffset, y: frontHipLine };
   const fp4 = { x: center + HRcrotch + crotchWidth , y: crotchLine};
-  const fp5 = { x: center + Hthigh + thighOffset, y: thighLine };
+  const fp5 = { x: center + Hthigh + thighOffset - (scale / 2), y: thighLine };
   const fp6 = { x: center + Hknee + kneeOffset, y: kneeLine };
   const fp7 = { x: center + Hbottom + bottomOffset, y: bottomLine1 };
   const fp8 = { x: center + Hbottom + bottomOffset, y: bottomLine0 };
   const fp9 = { x: center - Hbottom - bottomOffset, y: bottomLine0 };
   const fp10 = { x: center - Hbottom - bottomOffset, y: bottomLine1 };
   const fp11 = { x: center - Hknee - kneeOffset, y: kneeLine };
-  const fp12 = { x: center - Hthigh - thighOffset, y: thighLine };
+  const fp12 = { x: center - Hthigh - thighOffset + (scale / 2), y: thighLine };
   // adjust crotch point
   const fp13 = { x: center - Hcrotch - crotchDepth, y: crotchLine};
   const fp14 = { x: center - HFhip + frontHipShift - hipOffset, y: frontHipLine };
@@ -333,14 +333,14 @@ function drawPattern(m) {
   
   //BACK PATTERN DRAWING 
   const bp1 = {x: center, y: thighLine };
-  const bp2 = {x: center + Hthigh + thighOffset + scale, y: thighLine};
+  const bp2 = {x: center + Hthigh + thighOffset +  (1.5 * scale), y: thighLine};
   const bp3 = {x: center + Hknee + kneeOffset + scale, y: kneeLine };
   const bp4 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine1};
   const bp5 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine0};
   const bp6 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine0};
   const bp7 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine0};
   const bp8 = {x: center - Hknee - kneeOffset - scale, y: kneeLine };
-  const bp9 = { x: center - Hthigh - thighOffset - scale, y: thighLine };
+  const bp9 = { x: center - Hthigh - thighOffset - (1.5 * scale), y: thighLine };
 
   const bpath = `
     M ${bp1.x} ${bp1.y}
