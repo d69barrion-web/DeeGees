@@ -272,6 +272,7 @@ function drawPattern(m) {
 
   const Length = m.outseam * scale;
   const frontWaistLine = 50;
+  const backWaistLine = frontWaistLine - (2 * scale);
   const crotchLine = frontWaistLine + ((m.rise - 1) * scale);
   const frontHipLine = crotchLine - (2 * scale);
   const thighLine = crotchLine + (4 * scale);
@@ -288,10 +289,9 @@ function drawPattern(m) {
   const HRcrotch = (m.hip / 6) * scale;
 
   const crotchDepth = m.crotch_depth || 0;
-  const crotchWidth = m.crotch_width || 0;
+  const crotchWidth = m.crotch_width || 0
     
-
-  
+  //FRONT PATTERN DRAWING 
   const p1 = { x: center + waistShift - waistOffset, y: frontWaistLine };
   const p2 = { x: center + Hwaist + waistShift + waistOffset, y: frontWaistLine };
 
@@ -326,6 +326,8 @@ function drawPattern(m) {
     L ${p15.x} ${p15.y}
     Z
   `;
+  //BACK PATTERN DRAWING 
+  
   const topY = 0;
   const bottomY = bottomLine0 + 20; // konting allowance
   const waistLineXo = 0;
@@ -380,21 +382,21 @@ function drawPattern(m) {
   const Rhdistance = Math.sqrt(Rhdx * Rhdx + Rhdy * Rhdy) / scale;
  
   //CROTCH TIP computation 
-  const crotchCenterPoint = { x: center, y: crotchLine };
+  const frontCrotchCenterPoint = { x: center, y: crotchLine };
   //LEFT + CROTCHTIP +- CROTCHDEPTH
   const Lcrotch = { x: center - Hcrotch - crotchDepth, y: crotchLine };
-  const LcmidX = (crotchCenterPoint.x + Lcrotch.x) / 2;
-  const LcmidY = (crotchCenterPoint.y + Lcrotch.y) / 2;
-  const Lcdx = Lcrotch.x - crotchCenterPoint.x;
-  const Lcdy = Lcrotch.y - crotchCenterPoint.y;
+  const LcmidX = (frontCrotchCenterPoint.x + Lcrotch.x) / 2;
+  const LcmidY = (frontCrotchCenterPoint.y + Lcrotch.y) / 2;
+  const Lcdx = Lcrotch.x - frontCrotchCenterPoint.x;
+  const Lcdy = Lcrotch.y - frontCrotchCenterPoint.y;
   const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
 
   //RIGHT
   const Rcrotch = { x: center + HRcrotch + crotchWidth, y: crotchLine };
-  const RcmidX = (crotchCenterPoint.x + Rcrotch.x) / 2;
-  const RcmidY = (crotchCenterPoint.y + Rcrotch.y) / 2;
-  const Rcdx = Rcrotch.x - crotchCenterPoint.x;
-  const Rcdy = Rcrotch.y - crotchCenterPoint.y;
+  const RcmidX = (frontCrotchCenterPoint.x + Rcrotch.x) / 2;
+  const RcmidY = (frontCrotchCenterPoint.y + Rcrotch.y) / 2;
+  const Rcdx = Rcrotch.x - frontCrotchCenterPoint.x;
+  const Rcdy = Rcrotch.y - frontCrotchCenterPoint.y;
   const Rcdistance = Math.sqrt(Rcdx * Rcdx + Rcdy * Rcdy) / scale;
 
   //DISTANCE FROM CENTER TO FRONT THIGH END-POINTS 
@@ -637,8 +639,8 @@ function drawPattern(m) {
     marker-end="url(#arrow)"
   />
   <line 
-    x1="${crotchCenterPoint.x}" 
-    y1="${crotchCenterPoint.y}" 
+    x1="${frontCrotchCenterPoint.x}" 
+    y1="${frontCrotchCenterPoint.y}" 
     x2="${Lcrotch.x}" 
     y2="${Lcrotch.y}"  
     stroke="white"
@@ -647,8 +649,8 @@ function drawPattern(m) {
     marker-end="url(#arrow)"
   />
   <line 
-    x1="${crotchCenterPoint.x}" 
-    y1="${crotchCenterPoint.y}" 
+    x1="${frontCrotchCenterPoint.x}" 
+    y1="${frontCrotchCenterPoint.y}" 
     x2="${Rcrotch.x}" 
     y2="${Rcrotch.y}"  
     stroke="white"
