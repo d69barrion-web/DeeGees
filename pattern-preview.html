@@ -310,7 +310,7 @@ function drawPattern(m) {
   const fp14 = { x: center - HFhip + frontHipShift - hipOffset, y: frontHipLine };
   const fp15 = { x: center - Hwaist + waistShift - waistOffset, y: frontWaistLine };
 
-  const path = `
+  const fpath = `
     M ${fp1.x} ${fp1.y}
     L ${fp2.x} ${fp2.y}
     Q ${fp3.x} ${fp3.y} ${fp4.x} ${fp4.y}
@@ -329,8 +329,27 @@ function drawPattern(m) {
   const thighPoint = {x: center + Hthigh, y: thighLine};
   const crotchPoint = {x: center + Hcrotch, y: crotchLine};
   const hipPoint = {x: center + Hcrotch, y: frontHipLine};
+
   
   //BACK PATTERN DRAWING 
+  const bp1 = {x: center, y: kneeLine };
+  const bp2 = {x: fp6.x + scale, y: kneeLine };
+  const bp3 = {x: fp7.x + scale, y: bottom1Line};
+  const bp4 = {x: fp8.x + scale, y: bottom0Line};
+  const bp5 = {x: fp9.x + scale, y: bottom0Line};
+  const bp6 = {x: fp10.x + scale, y: bottom1Line};
+  const bp7 = {x: fp11.x + scale, y: kneeLine};
+
+  const bpath = `
+    M ${bp1.x} ${bp1.y}
+    L ${bp2.x} ${bp2.y}
+    L ${bp3.x} ${bp3.y}
+    L ${bp4.x} ${bp4.y}
+    L ${bp5.x} ${bp5.y}
+    L ${bp6.x} ${bp6.y}
+    L ${bp7.x} ${bp7.y}
+    Z
+    `;
   
   const topY = 0;
   const bottomY = bottomLine0 + 20; // konting allowance
@@ -533,7 +552,7 @@ function drawPattern(m) {
   />
 
   <path 
-    d="${path}" 
+    d="${fpath}" 
     fill="none" 
     stroke="#38bdf8" 
     stroke-width="2"
@@ -735,7 +754,13 @@ svgBack.innerHTML =
     stroke-dasharray="5,5"
   />
   <path 
-    d="${path}" 
+    d="${fpath}" 
+    fill="none" 
+    stroke="#38bdf8" 
+    stroke-width="2"
+  />
+  <path 
+    d="${bpath}" 
     fill="none" 
     stroke="#38bdf8" 
     stroke-width="2"
