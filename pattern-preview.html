@@ -118,10 +118,13 @@
     <!-- FRONT PART -->
     <div class="card">
       <h2>(FRONT PART)</h2>
-      
-      <svg id="svgCanvas"></svg>
+      <svg id="svgCanvasFront"></svg> 
+    </div>
 
-      
+    <!-- FRONT & BACK PART -->
+    <div class="card">
+      <h2>(FRONT & BACK PART)</h2>
+      <svg id="svgCanvasBack"></svg> 
     </div>
 
     <!-- ADJUSTMENT CONTROLS -->
@@ -257,7 +260,7 @@ function updatePattern() {
 }
 
 function drawPattern(m) {
-  const svg = document.getElementById("svgCanvas");
+  const svgFront = document.getElementById("svgCanvasFront");
 
   const scale = 10;
   const center = 100;
@@ -452,7 +455,7 @@ function drawPattern(m) {
   const Rbdy = Rbottom.y - frontBottomCenterPoint.y;
   const Rbdistance = Math.sqrt(Rbdx * Rbdx + Rbdy * Rbdy) / scale;
  
-  svg.innerHTML = 
+  svgFront.innerHTML = 
   `
   <line 
     x1="${center}" 
