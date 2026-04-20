@@ -293,7 +293,7 @@ function drawPattern(m) {
     
 
   
-  const p1 = { x: center - Hwaist + waistShift - waistOffset, y: waistLine };
+  const p1 = { x: center + waistShift - waistOffset, y: waistLine };
   const p2 = { x: center + Hwaist + waistShift + waistOffset, y: waistLine };
 
   const p3 = { x: center + HFhip + hipShift + hipOffset, y: frontHipLine };
@@ -309,6 +309,7 @@ function drawPattern(m) {
   // adjust crotch point
   const p13 = { x: center - Hcrotch - crotchDepth, y: crotchLine};
   const p14 = { x: center - HFhip + hipShift - hipOffset, y: frontHipLine };
+  const p15 = { x: center - Hwaist + waistShift - waistOffset, y: waistLine };
 
   const path = `
     M ${p1.x} ${p1.y}
@@ -320,10 +321,10 @@ function drawPattern(m) {
     L ${p8.x} ${p8.y}
     L ${p9.x} ${p9.y}
     L ${p10.x} ${p10.y}
-    L ${p11.x} ${p11.y}
-    L ${p12.x} ${p12.y}
-    L ${p13.x} ${p13.y}
+    Q ${p11.x} ${p11.y} ${p12.x} ${p12.y}
+    Q ${p12.x} ${p12.y} ${p13.x} ${p13.y}
     L ${p14.x} ${p14.y}
+    L ${p15.x} ${p15.y}
     Z
   `;
   const topY = 0;
