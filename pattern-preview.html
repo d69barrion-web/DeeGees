@@ -324,8 +324,13 @@ function drawPattern(m) {
     Q ${fp12.x} ${fp12.y} ${fp13.x} ${fp13.y}
     L ${fp14.x} ${fp14.y}
     L ${fp15.x} ${fp15.y}
-    
+    Z
   `;
+  const crotchPath = `
+    M ${fp4.x} ${fp4.y}
+    L ${fp6.x} ${fp6.y}
+    `;
+  
   const thighPoint = {x: center + Hthigh, y: thighLine};
   const crotchPoint = {x: center + Hcrotch, y: crotchLine};
   const hipPoint = {x: center + Hcrotch, y: frontHipLine};
@@ -759,6 +764,12 @@ svgBack.innerHTML =
   />
   <path 
     d="${fpath}" 
+    fill="none" 
+    stroke="#38bdf8" 
+    stroke-width="2"
+  />
+  <path 
+    d="${crotchPath}" 
     fill="none" 
     stroke="#38bdf8" 
     stroke-width="2"
