@@ -332,13 +332,15 @@ function drawPattern(m) {
 
   
   //BACK PATTERN DRAWING 
-  const bp1 = {x: center, y: kneeLine };
-  const bp2 = {x: center + Hknee + kneeOffset + scale, y: kneeLine };
-  const bp3 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine1};
-  const bp4 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine0};
-  const bp5 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine0};
+  const bp1 = {x: center, y: thighLine };
+  const bp2 = {x: center + Hthigh + thighOffset + scale, y: thighLine};
+  const bp3 = {x: center + Hknee + kneeOffset + scale, y: kneeLine };
+  const bp4 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine1};
+  const bp5 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine0};
   const bp6 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine0};
-  const bp7 = {x: center - Hknee - kneeOffset - scale, y: kneeLine };
+  const bp7 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine0};
+  const bp8 = {x: center - Hknee - kneeOffset - scale, y: kneeLine };
+  const bp9 = { x: center - Hthigh - thighOffset - scale, y: thighLine };
 
   const bpath = `
     M ${bp1.x} ${bp1.y}
@@ -348,6 +350,8 @@ function drawPattern(m) {
     L ${bp5.x} ${bp5.y}
     L ${bp6.x} ${bp6.y}
     L ${bp7.x} ${bp7.y}
+    L ${bp8.x} ${bp8.y}
+    L ${bp9.x} ${bp9.y}
     Z
     `;
   
