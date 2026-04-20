@@ -336,9 +336,9 @@ function drawPattern(m) {
   const bp2 = {x: fp6.x + scale, y: kneeLine };
   const bp3 = {x: fp7.x + scale, y: bottom1Line};
   const bp4 = {x: fp8.x + scale, y: bottom0Line};
-  const bp5 = {x: fp9.x + scale, y: bottom0Line};
-  const bp6 = {x: fp10.x + scale, y: bottom1Line};
-  const bp7 = {x: fp11.x + scale, y: kneeLine};
+  const bp5 = {x: fp9.x - scale, y: bottom0Line};
+  const bp6 = {x: fp10.x - scale, y: bottom1Line};
+  const bp7 = {x: fp11.x - scale, y: kneeLine};
 
   const bpath = `
     M ${bp1.x} ${bp1.y}
