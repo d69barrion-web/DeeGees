@@ -719,6 +719,15 @@ function drawPattern(m) {
 `;
 svgBack.innerHTML = 
   `
+  <line 
+    x1="${center}" 
+    y1="${topY}" 
+    x2="${center}" 
+    y2="${bottomY}" 
+    stroke="white"
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
   <path 
     d="${path}" 
     fill="none" 
