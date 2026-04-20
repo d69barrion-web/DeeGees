@@ -273,11 +273,11 @@ function drawPattern(m) {
 
   const Length = m.outseam * scale;
   const waistLine = 50;
-  const crotchLine = waistLine + (m.rise * scale);
+  const crotchLine = waistLine + ((m.rise - 1) * scale);
   const frontHipLine = crotchLine - (2 * scale);
   const thighLine = crotchLine + (4 * scale);
   const kneeLine = crotchLine + (((m.outseam - m.rise) / 2) * scale);
-  const bottomLine1 = waistLine + Length;
+  const bottomLine1 = waistLine + (Length - scale);
   const bottomLine0 = bottomLine1 + (2 * scale);
 
   const Hwaist = (m.waist / 8) * scale;
