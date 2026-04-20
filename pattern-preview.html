@@ -263,7 +263,7 @@ function drawPattern(m) {
   
 
   const waistShift = m.waist_shift;
-  const hipShift = m.hip_shift;
+  const frontHipShift = m.hip_shift;
   const thighOffset = m.thigh_adj;
   const kneeOffset = m.knee_adj;
   const bottomOffset = m.bottom_adj;
@@ -295,7 +295,7 @@ function drawPattern(m) {
   const p1 = { x: center + waistShift - waistOffset, y: waistLine };
   const p2 = { x: center + Hwaist + waistShift + waistOffset, y: waistLine };
 
-  const p3 = { x: center + HFhip + hipShift + hipOffset, y: frontHipLine };
+  const p3 = { x: center + HFhip + fronHipShift + hipOffset, y: frontHipLine };
   const p4 = { x: center + HRcrotch + crotchWidth , y: crotchLine};
   const p5 = { x: center + Hthigh + thighOffset, y: thighLine };
   const p6 = { x: center + Hknee + kneeOffset, y: kneeLine };
@@ -307,7 +307,7 @@ function drawPattern(m) {
   const p12 = { x: center - Hthigh - thighOffset, y: thighLine };
   // adjust crotch point
   const p13 = { x: center - Hcrotch - crotchDepth, y: crotchLine};
-  const p14 = { x: center - HFhip + hipShift - hipOffset, y: frontHipLine };
+  const p14 = { x: center - HFhip + fronHipShift - hipOffset, y: frontHipLine };
   const p15 = { x: center - Hwaist + waistShift - waistOffset, y: waistLine };
 
   const path = `
@@ -364,7 +364,7 @@ function drawPattern(m) {
   //DISTANCE FROM CENTER TO FRONTHIP END-POINTS 
   const frontHipCenterPoint = { x: center, y: frontHipLine };
   //LEFT END-POINT 
-  const Lhip = { x: center - HFhip + hipShift - hipOffset, y: frontHipLine };
+  const Lhip = { x: center - HFhip + fronHipShift - hipOffset, y: frontHipLine };
   const LhmidX = (frontHipCenterPoint.x + Lhip.x) / 2;
   const LhmidY = (frontHipCenterPoint.y + Lhip.y) / 2;
   const Lhdx = Lhip.x - frontHipCenterPoint.x;
@@ -372,7 +372,7 @@ function drawPattern(m) {
   const Lhdistance = Math.sqrt(Lhdx * Lhdx + Lhdy * Lhdy) / scale;
 
   //RIGHT END-POINT 
-  const Rhip = { x: center + HFhip + hipShift + hipOffset, y: frontHipLine };
+  const Rhip = { x: center + HFhip + fronHipShift + hipOffset, y: frontHipLine };
   const RhmidX = (frontHipCenterPoint.x + Rhip.x) / 2;
   const RhmidY = (frontHipCenterPoint.y + Rhip.y) / 2;
   const Rhdx = Rhip.x - frontHipCenterPoint.x;
