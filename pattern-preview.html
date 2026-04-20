@@ -464,9 +464,9 @@ function drawPattern(m) {
   />
   <line 
     x1="${waistLineXo}" 
-    y1="${waistLine}" 
+    y1="${frontWaistLine}" 
     x2="${waistLineXi}" 
-    y2="${waistLine}" 
+    y2="${frontWaistLine}" 
     stroke="red" 
     stroke-width="1"
     stroke-dasharray="5,5"
@@ -536,7 +536,7 @@ function drawPattern(m) {
     center
   </text>
   <text x="${200}" y="${LwmidY}" fill="white" font-size="12">
-    waistLine
+    front waistLine
   </text>
   <text x="${LwmidX}" y="${LwmidY}" fill="yellow" font-size="12">
     ${Lwdistance.toFixed(1)} "
@@ -545,7 +545,7 @@ function drawPattern(m) {
     ${Rwdistance.toFixed(1)} "
   </text>
   <text x="${200}" y="${LhmidY}" fill="white" font-size="12">
-    hipLine
+    front hipLine
   </text>
   <text x="${LhmidX}" y="${LhmidY}" fill="yellow" font-size="12">
     ${Lhdistance.toFixed(1)} "
