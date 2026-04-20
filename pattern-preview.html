@@ -255,6 +255,8 @@ function updatePattern() {
 
 function drawPattern(m) {
   const svgFront = document.getElementById("svgCanvasFront");
+  const svgBack = document.getElementById("svgCanvasBack");
+
 
   const scale = 10;
   const center = 100;
@@ -714,7 +716,16 @@ function drawPattern(m) {
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
-`; }
+`;
+svgBack.innerHTML = 
+  `
+  <path 
+    d="${path}" 
+    fill="none" 
+    stroke="#38bdf8" 
+    stroke-width="2"
+  />
+`;}
   // init
 loadData();
 
