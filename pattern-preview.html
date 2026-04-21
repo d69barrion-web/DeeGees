@@ -388,7 +388,7 @@ function drawPattern(m) {
   //DISTANCE FROM CENTER TO FRONTHIP END-POINTS 
   const frontHipCenterPoint = { x: center, y: frontHipLine };
   //LEFT END-POINT 
-  const Lhip = { x: center - HFhip + frontHipShift + hipOffset - (HFhip - Hthigh), y: frontHipLine };
+  const Lhip = { x: center - HFhip + frontHipShift - hipOffset - (HFhip - Hthigh), y: frontHipLine };
   const LhmidX = (frontHipCenterPoint.x + Lhip.x) / 2;
   const LhmidY = (frontHipCenterPoint.y + Lhip.y) / 2;
   const Lhdx = Lhip.x - frontHipCenterPoint.x;
@@ -414,7 +414,7 @@ function drawPattern(m) {
   const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
 
   //RIGHT
-  const Rcrotch = { x: center + Hthigh, y: crotchLine };
+  const Rcrotch = { x: center + Hthigh + thighOffset, y: crotchLine};
   const RcmidX = (frontCrotchCenterPoint.x + Rcrotch.x) / 2;
   const RcmidY = (frontCrotchCenterPoint.y + Rcrotch.y) / 2;
   const Rcdx = Rcrotch.x - frontCrotchCenterPoint.x;
