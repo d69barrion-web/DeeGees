@@ -293,10 +293,10 @@ function drawPattern(m) {
     
   //FRONT PATTERN DRAWING 
   const fp1 = { x: center + waistShift - waistOffset, y: frontWaistLine };
-  const fp2 = { x: center + Hwaist + waistShift + waistOffset, y: frontWaistLine };
+  const fp2 = { x: center + Hwaist + waistShift + waistOffset + (Hwaist - (3 * scale)), y: frontWaistLine };
 
-  const fp3 = { x: center + HFhip + frontHipShift + hipOffset, y: frontHipLine };
-  const fp4 = { x: center + HRcrotch + crotchWidth , y: crotchLine};
+  const fp3 = { x: center + Hthigh + frontHipShift + hipOffset, y: frontHipLine };
+  const fp4 = { x: center + Hthigh + crotchWidth , y: crotchLine};
   const fp5 = { x: center + Hthigh + thighOffset, y: thighLine };
   const fp6 = { x: center + Hknee + kneeOffset, y: kneeLine };
   const fp7 = { x: center + Hbottom + bottomOffset, y: bottomLine1 };
