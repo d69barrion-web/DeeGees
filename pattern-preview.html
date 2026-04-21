@@ -295,7 +295,7 @@ function drawPattern(m) {
   const fp1 = { x: center + waistShift - waistOffset, y: frontWaistLine };
   const fp2 = { x: center + Hwaist + waistShift + waistOffset + (Hwaist - (3 * scale)), y: frontWaistLine };
 
-  const fp3 = { x: center + Hthigh + frontHipShift + hipOffset, y: frontHipLine };
+  const fp3 = { x: center + Hthigh + frontHipShift, y: frontHipLine };
   const fp4 = { x: center + Hthigh + crotchWidth , y: crotchLine};
   const fp5 = { x: center + Hthigh + thighOffset, y: thighLine };
   const fp6 = { x: center + Hknee + kneeOffset, y: kneeLine };
@@ -308,7 +308,7 @@ function drawPattern(m) {
   // adjust crotch point
   const fp13 = { x: center - Hcrotch - crotchDepth, y: crotchLine};
   const fp14 = { x: center - HFhip + frontHipShift - hipOffset - (HFhip - Hthigh), y: frontHipLine };
-  const fp15 = { x: center - (3 * scale) + waistShift - waistOffset, y: frontWaistLine };
+  const fp15 = { x: center - (3 * scale) + waistShift, y: frontWaistLine };
 
   const fpath = `
     M ${fp1.x} ${fp1.y}
@@ -380,7 +380,7 @@ function drawPattern(m) {
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: frontWaistLine };
   //LEFT END-POINT 
-  const Lwaist = { x: center - (3 * scale) + waistShift - waistOffset, y: frontWaistLine };
+  const Lwaist = { x: center - (3 * scale) + waistShift, y: frontWaistLine };
   const LwmidX = (waistCenterPoint.x + Lwaist.x) / 2;
   const LwmidY = (waistCenterPoint.y + Lwaist.y) / 2;
   const Lwdx = Lwaist.x - waistCenterPoint.x;
@@ -398,7 +398,7 @@ function drawPattern(m) {
   //DISTANCE FROM CENTER TO FRONTHIP END-POINTS 
   const frontHipCenterPoint = { x: center, y: frontHipLine };
   //LEFT END-POINT 
-  const Lhip = { x: center - HFhip + frontHipShift - hipOffset - (HFhip - Hthigh), y: frontHipLine };
+  const Lhip = { x: center - HFhip + frontHipShift - (HFhip - Hthigh), y: frontHipLine };
   const LhmidX = (frontHipCenterPoint.x + Lhip.x) / 2;
   const LhmidY = (frontHipCenterPoint.y + Lhip.y) / 2;
   const Lhdx = Lhip.x - frontHipCenterPoint.x;
