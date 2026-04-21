@@ -146,11 +146,6 @@
         </div>
 
         <div class="form-group">
-           <label>Crotch Width: <span id="crotchWidthVal">0</span></label>
-           <input type="range" id="crotchWidth" min="-20" max="20" value="0">
-        </div>
-
-        <div class="form-group">
            <label>Front Waist adj: <span id="frontWaistVal">0</label>
            <input type="range" id="frontWaistAdj" min="-20" max="20" value="0">
         </div>
@@ -201,7 +196,6 @@ function loadData() {
 const waistSlider = document.getElementById("waistShift");
 const hipSlider = document.getElementById("hipShift");
 const crotchSlider = document.getElementById("crotchDepth");
-const crotchWidthSlider = document.getElementById("crotchWidth"); 
 const thighSlider = document.getElementById("thighAdj");
 const kneeSlider = document.getElementById("kneeAdj");
 const bottomSlider = document.getElementById("bottomAdj");
@@ -211,7 +205,6 @@ const frontWaistSlider = document.getElementById("frontWaistAdj");
 waistSlider.addEventListener("input", updatePattern);
 hipSlider.addEventListener("input", updatePattern);
 crotchSlider.addEventListener("input", updatePattern);
-crotchWidthSlider.addEventListener("input", updatePattern);
 thighSlider.addEventListener("input", updatePattern);
 kneeSlider.addEventListener("input", updatePattern);
 bottomSlider.addEventListener("input", updatePattern);
@@ -232,7 +225,6 @@ function updatePattern() {
     waist_shift: parseInt(waistSlider.value),
     hip_shift: parseInt(hipSlider.value),
     crotch_depth: parseInt(crotchSlider.value),
-    crotch_width: parseInt(crotchWidthSlider.value),
     thigh_adj: parseInt(thighSlider.value),
     knee_adj: parseInt(kneeSlider.value),
     bottom_adj: parseInt(bottomSlider.value),
@@ -243,7 +235,6 @@ function updatePattern() {
   document.getElementById("waistShiftVal").textContent = m.waist_shift;
   document.getElementById("hipShiftVal").textContent = m.hip_shift;
   document.getElementById("crotchVal").textContent = m.crotch_depth;
-  document.getElementById("crotchWidthVal").textContent = m.crotch_width;
   document.getElementById("thighVal").textContent = m.thigh_adj;
   document.getElementById("kneeVal").textContent = m.knee_adj;
   document.getElementById("bottomVal").textContent = m.bottom_adj;
@@ -289,14 +280,13 @@ function drawPattern(m) {
   const HRcrotch = (m.hip / 6) * scale;
 
   const crotchDepth = m.crotch_depth || 0;
-  const crotchWidth = m.crotch_width || 0
-    
+      
   //FRONT PATTERN DRAWING 
   const fp1 = { x: center + waistShift - waistOffset, y: frontWaistLine };
   const fp2 = { x: center + Hwaist + waistShift + waistOffset + (Hwaist - (3 * scale)), y: frontWaistLine };
 
-  const fp3 = { x: center + Hthigh + frontHipShift, y: frontHipLine };
-  const fp4 = { x: center + Hthigh + crotchWidth , y: crotchLine};
+  const fp3 = { x: center + Hthigh + frontHipShift + thighOffset, y: frontHipLine };
+  const fp4 = { x: center + Hthigh + thighOffset, y: crotchLine};
   const fp5 = { x: center + Hthigh + thighOffset, y: thighLine };
   const fp6 = { x: center + Hknee + kneeOffset, y: kneeLine };
   const fp7 = { x: center + Hbottom + bottomOffset, y: bottomLine1 };
@@ -398,7 +388,7 @@ function drawPattern(m) {
   //DISTANCE FROM CENTER TO FRONTHIP END-POINTS 
   const frontHipCenterPoint = { x: center, y: frontHipLine };
   //LEFT END-POINT 
-  const Lhip = { x: center - HFhip + frontHipShift - (HFhip - Hthigh), y: frontHipLine };
+  const Lhip = { x: center - HFhip + frontHipShift + hipOffset - (HFhip - Hthigh), y: frontHipLine };
   const LhmidX = (frontHipCenterPoint.x + Lhip.x) / 2;
   const LhmidY = (frontHipCenterPoint.y + Lhip.y) / 2;
   const Lhdx = Lhip.x - frontHipCenterPoint.x;
@@ -406,7 +396,7 @@ function drawPattern(m) {
   const Lhdistance = Math.sqrt(Lhdx * Lhdx + Lhdy * Lhdy) / scale;
 
   //RIGHT END-POINT 
-  const Rhip = { x: center + Hthigh + frontHipShift + hipOffset, y: frontHipLine };
+  const Rhip = { x: center + Hthigh + frontHipShift + thighOffset, y: frontHipLine };
   const RhmidX = (frontHipCenterPoint.x + Rhip.x) / 2;
   const RhmidY = (frontHipCenterPoint.y + Rhip.y) / 2;
   const Rhdx = Rhip.x - frontHipCenterPoint.x;
@@ -424,7 +414,7 @@ function drawPattern(m) {
   const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
 
   //RIGHT
-  const Rcrotch = { x: center + Hthigh + crotchWidth, y: crotchLine };
+  const Rcrotch = { x: center + Hthigh, y: crotchLine };
   const RcmidX = (frontCrotchCenterPoint.x + Rcrotch.x) / 2;
   const RcmidY = (frontCrotchCenterPoint.y + Rcrotch.y) / 2;
   const Rcdx = Rcrotch.x - frontCrotchCenterPoint.x;
