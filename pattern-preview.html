@@ -307,7 +307,7 @@ function drawPattern(m) {
   const fp12 = { x: center - Hthigh - thighOffset, y: thighLine };
   // adjust crotch point
   const fp13 = { x: center - Hcrotch - crotchDepth, y: crotchLine};
-  const fp14 = { x: center - HFhip + frontHipShift - hipOffset, y: frontHipLine };
+  const fp14 = { x: center - HFhip + frontHipShift - hipOffset - (HFhip - Hthigh), y: frontHipLine };
   const fp15 = { x: center - (3 * scale) + waistShift - waistOffset, y: frontWaistLine };
 
   const fpath = `
@@ -380,7 +380,7 @@ function drawPattern(m) {
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: frontWaistLine };
   //LEFT END-POINT 
-  const Lwaist = { x: center - Hwaist + waistShift - waistOffset, y: frontWaistLine };
+  const Lwaist = { x: center - (3 * scale) + waistShift - waistOffset, y: frontWaistLine };
   const LwmidX = (waistCenterPoint.x + Lwaist.x) / 2;
   const LwmidY = (waistCenterPoint.y + Lwaist.y) / 2;
   const Lwdx = Lwaist.x - waistCenterPoint.x;
@@ -388,7 +388,7 @@ function drawPattern(m) {
   const Lwdistance = Math.sqrt(Lwdx * Lwdx + Lwdy * Lwdy) / scale;
 
   //RIGHT END-POINT 
-  const Rwaist = { x: center + Hwaist + waistShift + waistOffset, y: frontWaistLine };
+  const Rwaist = { x: center + Hwaist + waistShift + waistOffset + (Hwaist - (3 * scale)), y: frontWaistLine };
   const RwmidX = (waistCenterPoint.x + Rwaist.x) / 2;
   const RwmidY = (waistCenterPoint.y + Rwaist.y) / 2;
   const Rwdx = Rwaist.x - waistCenterPoint.x;
@@ -398,7 +398,7 @@ function drawPattern(m) {
   //DISTANCE FROM CENTER TO FRONTHIP END-POINTS 
   const frontHipCenterPoint = { x: center, y: frontHipLine };
   //LEFT END-POINT 
-  const Lhip = { x: center - HFhip + frontHipShift - hipOffset, y: frontHipLine };
+  const Lhip = { x: center - HFhip + frontHipShift - hipOffset - (HFhip - Hthigh), y: frontHipLine };
   const LhmidX = (frontHipCenterPoint.x + Lhip.x) / 2;
   const LhmidY = (frontHipCenterPoint.y + Lhip.y) / 2;
   const Lhdx = Lhip.x - frontHipCenterPoint.x;
@@ -406,7 +406,7 @@ function drawPattern(m) {
   const Lhdistance = Math.sqrt(Lhdx * Lhdx + Lhdy * Lhdy) / scale;
 
   //RIGHT END-POINT 
-  const Rhip = { x: center + HFhip + frontHipShift + hipOffset, y: frontHipLine };
+  const Rhip = { x: center + Hthigh + frontHipShift + hipOffset, y: frontHipLine };
   const RhmidX = (frontHipCenterPoint.x + Rhip.x) / 2;
   const RhmidY = (frontHipCenterPoint.y + Rhip.y) / 2;
   const Rhdx = Rhip.x - frontHipCenterPoint.x;
@@ -424,7 +424,7 @@ function drawPattern(m) {
   const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
 
   //RIGHT
-  const Rcrotch = { x: center + HRcrotch + crotchWidth, y: crotchLine };
+  const Rcrotch = { x: center + Hthigh + crotchWidth, y: crotchLine };
   const RcmidX = (frontCrotchCenterPoint.x + Rcrotch.x) / 2;
   const RcmidY = (frontCrotchCenterPoint.y + Rcrotch.y) / 2;
   const Rcdx = Rcrotch.x - frontCrotchCenterPoint.x;
