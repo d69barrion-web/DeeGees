@@ -333,7 +333,7 @@ function drawPattern(m) {
 
   
   //BACK PATTERN DRAWING 
-  const bp1 = {x: center, y: thighLine };
+  const bp1 = {x: center + (Hwaist * 2) +waistShip + waistOffset, y: frontWaistLine };
   const bp2 = {x: center + Hthigh + thighOffset + scale, y: thighLine};
   const bp3 = {x: center + Hknee + kneeOffset + scale, y: kneeLine };
   const bp4 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine1};
@@ -353,7 +353,7 @@ function drawPattern(m) {
     L ${bp7.x} ${bp7.y}
     L ${bp8.x} ${bp8.y}
     L ${bp9.x} ${bp9.y}
-    Z
+
     `;
   
   const topY = 0;
