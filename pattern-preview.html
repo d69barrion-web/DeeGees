@@ -242,7 +242,7 @@ function updatePattern() {
 
   document.getElementById("waistShiftVal").textContent = m.waist_shift;
   document.getElementById("hipShiftVal").textContent = m.hip_shift;
-  document.getElementById("crotchShiftVal").textContent = m.hip_shift;
+  document.getElementById("crotchShiftVal").textContent = m.crotch_shift;
   document.getElementById("crotchVal").textContent = m.crotch_depth;
   document.getElementById("thighVal").textContent = m.thigh_adj;
   document.getElementById("kneeVal").textContent = m.knee_adj;
@@ -412,7 +412,7 @@ function drawPattern(m) {
   //CROTCH TIP computation 
   const frontCrotchCenterPoint = { x: center, y: crotchLine };
   //LEFT + CROTCHTIP +- CROTCHDEPTH
-  const Lcrotch = { x: center - Hcrotch - crotchDepth, y: crotchLine };
+  const Lcrotch = { x: center - Hcrotch - crotchDepth + crotchShift, y: crotchLine };
   const LcmidX = (frontCrotchCenterPoint.x + Lcrotch.x) / 2;
   const LcmidY = (frontCrotchCenterPoint.y + Lcrotch.y) / 2;
   const Lcdx = Lcrotch.x - frontCrotchCenterPoint.x;
