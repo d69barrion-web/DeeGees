@@ -252,7 +252,25 @@ function updatePattern() {
 
   drawPattern(m);
 }
+  
+function getPointAtY(p1, p2, y) 
+{
+   const t = (y - p1.y) / (p2.y - p1.y);
 
+   return {
+     x: p1.x + (p2.x - p1.x) * t,
+     y: y
+   };
+}
+  //Usage of function getPointAyY(p1, p2, y)
+  //const p1 = { x: 50, y: 50 };
+  //const p2 = { x: 10, y: 100 };
+
+  //const px = getPointAtY(p1, p2, 75);
+
+// result:
+// { x: 30, y: 75 }
+  
 function drawPattern(m) {
   const svgFront = document.getElementById("svgCanvasFront");
   const svgBack = document.getElementById("svgCanvasBack");
@@ -326,11 +344,6 @@ function drawPattern(m) {
     L ${fp15.x} ${fp15.y}
     Z
   `;
-
-  const thighPoint = {x: center + Hthigh, y: thighLine};
-  const crotchPoint = {x: center + Hcrotch, y: crotchLine};
-  const hipPoint = {x: center + Hcrotch, y: frontHipLine};
-
   
   //BACK PATTERN DRAWING 
   const bp1 = {x: center + (Hwaist * 2) + waistShift + waistOffset, y: frontWaistLine };
