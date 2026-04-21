@@ -262,6 +262,15 @@ function getPointAtY(p1, p2, y)
      y: y
    };
 }
+  function getPointAtX(p1, p2, x) 
+{
+   const t = (x - p1.x) / (p2.x - p1.x);
+
+   return {
+     x: x
+     y: p1.y + (p2.y - p1.y) * t,
+   };
+}
   //Usage of function getPointAyY(p1, p2, y)
   //const p1 = { x: 50, y: 50 };
   //const p2 = { x: 10, y: 100 };
