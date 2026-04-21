@@ -279,6 +279,17 @@ function getPointAtY(p1, p2, y)
 
 // result:
 // { x: 30, y: 75 }
+function getPointAtDistance(p1, y2, d, side = "left") {
+  const dy = y2 - p1.y;
+  const dx = Math.sqrt(d * d - dy * dy);
+
+  return {
+    x: side === "right" ? p1.x + dx : p1.x - dx,
+    y: y2
+  };
+}
+  //Usage
+//const p2 = getPointAtDistance(p1, 50, 60, "left");
   
 function drawPattern(m) {
   const svgFront = document.getElementById("svgCanvasFront");
@@ -309,6 +320,7 @@ function drawPattern(m) {
   const bottomLine0 = bottomLine1 + (2 * scale);
 
   const Hwaist = (m.waist / 8) * scale;
+  const BHwaist = ((m.waist / 2) * scale) - (Hwaist * 2);
   const HFhip = (m.hip / 8) * scale;
   const Hthigh = (m.thigh / 4) * scale;
   const Hknee = (m.knee / 4) * scale;
@@ -355,15 +367,16 @@ function drawPattern(m) {
   `;
   
   //BACK PATTERN DRAWING 
-  const bp1 = {x: center + (Hwaist * 2) + waistShift + waistOffset, y: frontWaistLine };
-  const bp2 = {x: center + Hthigh + thighOffset + scale, y: thighLine};
-  const bp3 = {x: center + Hknee + kneeOffset + scale, y: kneeLine };
-  const bp4 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine1};
-  const bp5 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine0};
-  const bp6 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine0};
-  const bp7 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine1};
-  const bp8 = {x: center - Hknee - kneeOffset - scale, y: kneeLine };
-  const bp9 = { x: center - Hthigh - thighOffset - scale, y: thighLine };
+  const bp2 = {x: center + (Hwaist * 2) + waistShift + waistOffset, y: frontWaistLine };
+  const bp1 = getPointAtDistance(bp1, backWaistLine, BHwaist, "left");
+  const bp3 = {x: center + Hthigh + thighOffset + scale, y: thighLine};
+  const bp4 = {x: center + Hknee + kneeOffset + scale, y: kneeLine };
+  const bp5 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine1};
+  const bp6 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine0};
+  const bp7 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine0};
+  const bp8 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine1};
+  const bp9 = {x: center - Hknee - kneeOffset - scale, y: kneeLine };
+  const bp10 = { x: center - Hthigh - thighOffset - scale, y: thighLine };
 
   const bpath = `
     M ${bp1.x} ${bp1.y}
@@ -375,6 +388,7 @@ function drawPattern(m) {
     L ${bp7.x} ${bp7.y}
     L ${bp8.x} ${bp8.y}
     L ${bp9.x} ${bp9.y}
+    L ${bp10.x} ${bp10.y}
 
     `;
   
