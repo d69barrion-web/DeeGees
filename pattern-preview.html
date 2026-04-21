@@ -253,44 +253,6 @@ function updatePattern() {
   drawPattern(m);
 }
   
-function getPointAtY(p1, p2, y) 
-{
-   const t = (y - p1.y) / (p2.y - p1.y);
-
-   return {
-     x: p1.x + (p2.x - p1.x) * t,
-     y: y
-   };
-}
-  function getPointAtX(p1, p2, x) 
-{
-   const t = (x - p1.x) / (p2.x - p1.x);
-
-   return {
-     x: x
-     y: p1.y + (p2.y - p1.y) * t,
-   };
-}
-  //Usage of function getPointAyY(p1, p2, y)
-  //const p1 = { x: 50, y: 50 };
-  //const p2 = { x: 10, y: 100 };
-
-  //const px = getPointAtY(p1, p2, 75);
-
-// result:
-// { x: 30, y: 75 }
-function getPointAtDistance(p1, y2, d, side = "left") {
-  const dy = y2 - p1.y;
-  const dx = Math.sqrt(d * d - dy * dy);
-
-  return {
-    x: side === "right" ? p1.x + dx : p1.x - dx,
-    y: y2
-  };
-}
-  //Usage
-//const p2 = getPointAtDistance(p1, 50, 60, "left");
-  
 function drawPattern(m) {
   const svgFront = document.getElementById("svgCanvasFront");
   const svgBack = document.getElementById("svgCanvasBack");
@@ -367,8 +329,8 @@ function drawPattern(m) {
   `;
   
   //BACK PATTERN DRAWING 
-  const bp2 = {x: center + (Hwaist * 2) + waistShift + waistOffset, y: frontWaistLine };
-  const bp1 = getPointAtDistance(bp2, backWaistLine, BHwaist, "left");
+  const bp1 = {x: center + (Hwaist * 2) + waistShift + waistOffset, y: frontWaistLine };
+  //const bp1 = getPointAtDistance(bp2, backWaistLine, BHwaist, "left");
   const bp3 = {x: center + Hthigh + thighOffset + scale, y: thighLine};
   const bp4 = {x: center + Hknee + kneeOffset + scale, y: kneeLine };
   const bp5 = {x: center + Hbottom + bottomOffset + scale, y: bottomLine1};
@@ -388,7 +350,7 @@ function drawPattern(m) {
     L ${bp7.x} ${bp7.y}
     L ${bp8.x} ${bp8.y}
     L ${bp9.x} ${bp9.y}
-    L ${bp10.x} ${bp10.y}
+  //  L ${bp10.x} ${bp10.y}
 
     `;
   
