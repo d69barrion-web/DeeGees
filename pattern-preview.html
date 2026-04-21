@@ -372,6 +372,8 @@ function drawPattern(m) {
   const bottomLine1Xi = 300;
   const bottomLine0Xo = 0; 
   const bottomLine0Xi = 300;
+  const backWaistLineXo = 0;
+  const backWaistLineXi = 300;
   
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: frontWaistLine };
@@ -763,6 +765,15 @@ svgBack.innerHTML =
     fill="none" 
     stroke="#38bdf8" 
     stroke-width="2"
+  />
+  <line 
+    x1="${backWaistLineXo}" 
+    y1="${backWaistLine}" 
+    x2="${backWaistLineXi}" 
+    y2="${backWaistLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
   />
   <path 
     d="${bpath}" 
