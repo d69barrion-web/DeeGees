@@ -402,8 +402,12 @@ function drawPattern(m) {
   const bottomY = bottomLine0 + 20; // konting allowance
   const waistLineXo = 0;
   const waistLineXi = 300;
+  const backWaistLineXo = 0;
+  const backWaistLineXi = 300;
   const frontHipLineXo = 0;
   const frontHipLineXi = 300;
+  const backHipLineXo = 0;
+  const backHipLineXi = 300;
   const crotchLineXo = 0;
   const crotchLineXi = 300;
   const thighLineXo = 0;
@@ -414,8 +418,7 @@ function drawPattern(m) {
   const bottomLine1Xi = 300;
   const bottomLine0Xo = 0; 
   const bottomLine0Xi = 300;
-  const backWaistLineXo = 0;
-  const backWaistLineXi = 300;
+  
   
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: frontWaistLine };
@@ -829,6 +832,15 @@ svgBack.innerHTML =
     y1="${frontWaistLine}" 
     x2="${waistLineXi}" 
     y2="${frontWaistLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${backHipLineXo}" 
+    y1="${backHipLine}" 
+    x2="${backHipLineXi}" 
+    y2="${backHipLine}" 
     stroke="red" 
     stroke-width="1"
     stroke-dasharray="5,5"
