@@ -376,7 +376,7 @@ function drawPattern(m) {
   const bp10 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine1};
   const bp11 = {x: center - Hknee - kneeOffset - (1.125 * scale), y: kneeLine };
   const bp12 = {x: center - Hthigh - thighOffset - (1.25 * scale), y: thighLine };
-  const bpx =  {x: center - Hcrotch - crotchDepth + crotchShift - (scale/2), y: crotchLine};
+  const bpx =  {x: center - Hcrotch - crotchDepth + crotchShift - (scale * 1.375), y: crotchLine};
   const bp13 = getPointAtY(bpx, bp12, crotchLine + (scale/2));
   
   const bpath = `
