@@ -375,8 +375,10 @@ function drawPattern(m) {
   const bp9 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine0};
   const bp10 = {x: center - Hbottom - bottomOffset - scale, y: bottomLine1};
   const bp11 = {x: center - Hknee - kneeOffset - (1.125 * scale), y: kneeLine };
-  const bp12 = { x: center - Hthigh - thighOffset - (1.25 * scale), y: thighLine };
-
+  const bp12 = {x: center - Hthigh - thighOffset - (1.25 * scale), y: thighLine };
+  const bpx =  {x: fp13.x - (1.375 * scale), y: fp13.y};
+  const bp13 = getPointAtY(fp13, bpx, fp13.y + (scale/2));
+  
   const bpath = `
     M ${bp1.x} ${bp1.y}
     L ${bp2.x} ${bp2.y}
@@ -390,6 +392,7 @@ function drawPattern(m) {
     L ${bp10.x} ${bp10.y}
     L ${bp11.x} ${bp11.y}
     L ${bp12.x} ${bp12.y}
+    L ${bp13.x} ${bp13.y}
     `;
   
   const topY = 0;
