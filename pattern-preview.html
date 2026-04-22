@@ -445,13 +445,13 @@ function drawPattern(m) {
   const Lbwdistance = Math.sqrt(Lbwdx * Lbwdx + Lbwdy * Lbwdy) / scale;
 
   //RIGHT END-POINT 
-  const Rbwaist = { x: center -  scale + BHwaist, y: frontWaistLine };
+  const Rbwaist = {x: center -  scale + BHwaist, y: frontWaistLine };
   const RbwmidX = (backWaistCenterPoint.x + Rbwaist.x) / 2;
   const RbwmidY = (backWaistCenterPoint.y + Rbwaist.y) / 2;
   const Rbwdx = Rbwaist.x - backWaistCenterPoint.x;
   const Rbwdy = Rbwaist.y - backWaistCenterPoint.y;
   const Rbwdistance = Math.sqrt(Rbwdx * Rbwdx + Rbwdy * Rbwdy) / scale;
-                  
+   console.log(bpath);               
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: frontWaistLine };
   //LEFT END-POINT 
@@ -964,7 +964,7 @@ svgBack.innerHTML =
     stroke-dasharray="5,5"
   />
 `;
-console.log(bpath);
+
 }
   // init
 loadData();
