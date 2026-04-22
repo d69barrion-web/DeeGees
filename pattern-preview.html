@@ -419,7 +419,7 @@ function drawPattern(m) {
   const bottomLine0Xo = 0; 
   const bottomLine0Xi = 300;
   
-  //DISTANCE FROM CENTER TO WAIST END-POINTS 
+  //DISTANCE FROM CENTER TO BACK WAIST END-POINTS 
   const backWaistCenterPoint = { {x: center, y: backWaistLine}; };
   //LEFT END-POINT 
   const Lbwaist = {x: center - scale, y: backWaistLine};
@@ -433,8 +433,8 @@ function drawPattern(m) {
   const Rbwaist = { x: center -  scale + BHwaist, y: backWaistLine };
   const RbwmidX = (backWaistCenterPoint.x + Rbwaist.x) / 2;
   const RbwmidY = (backWaistCenterPoint.y + Rbwaist.y) / 2;
-  const Rbwdx = Rwaist.x - backWaistCenterPoint.x;
-  const Rbwdy = Rwaist.y - backWaistCenterPoint.y;
+  const Rbwdx = Rbwaist.x - backWaistCenterPoint.x;
+  const Rbwdy = Rbwaist.y - backWaistCenterPoint.y;
   const Rbwdistance = Math.sqrt(Rbwdx * Rbwdx + Rbwdy * Rbwdy) / scale;
                   
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
@@ -862,16 +862,6 @@ svgBack.innerHTML =
     stroke-width="1"
     stroke-dasharray="5,5"
   />
-  
-  <line 
-    x1="${backHipLineXo}" 
-    y1="${backHipLine}" 
-    x2="${backHipLineXi}" 
-    y2="${backHipLine}" 
-    stroke="red" 
-    stroke-width="1"
-    stroke-dasharray="5,5"
-  />
   <line 
     x1="${backWaistCenterPoint.x}" 
     y1="${backWaistCenterPoint.y}" 
@@ -892,6 +882,16 @@ svgBack.innerHTML =
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
+  <line 
+    x1="${backHipLineXo}" 
+    y1="${backHipLine}" 
+    x2="${backHipLineXi}" 
+    y2="${backHipLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  
   <line 
     x1="${frontHipLineXo}" 
     y1="${frontHipLine}" 
