@@ -299,7 +299,13 @@ function getPointAtX(p1, p2, x)
   document.getElementById("frontHipVal").textContent = m.frontHip_adj;
   document.getElementById("frontWaistVal").textContent = m.frontWaist_adj;
 
+  
+    try {
   drawPattern(m);
+} catch (e) {
+  alert("Error: " + e.message);
+}
+    drawPattern(m);
     }
 }
   
