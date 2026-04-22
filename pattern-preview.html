@@ -217,6 +217,16 @@ kneeSlider.addEventListener("input", updatePattern);
 bottomSlider.addEventListener("input", updatePattern);
 frontHipSlider.addEventListener("input", updatePattern);
 frontWaistSlider.addEventListener("input", updatePattern);
+
+function getPointAtDistance(p1, y2, d, side = "left") {
+  const dy = y2 - p1.y;
+  const dx = Math.sqrt(d * d - dy * dy);
+
+  return {
+    x: side === "right" ? p1.x + dx : p1.x - dx,
+    y: y2
+  };
+}
   
 function updatePattern() {
   const m = {
