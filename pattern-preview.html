@@ -227,6 +227,16 @@ function getPointAtDistance(p1, y2, d, side = "left") {
     y: y2
   };
 }
+
+function getPointAtY(p1, p2, y) 
+{
+   const t = (y - p1.y) / (p2.y - p1.y);
+
+   return {
+     x: p1.x + (p2.x - p1.x) * t,
+     y: y
+   };
+}
   
 function updatePattern() {
   const m = {
