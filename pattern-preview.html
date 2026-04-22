@@ -249,8 +249,23 @@ function getPointAtY(p1, p2, y)
   //const p2 = { x: 10, y: 100 };
 
   //const px = getPointAtY(p1, p2, 75);
-  
-function updatePattern() {
+
+function getPointAtX(p1, p2, x) 
+{
+   const t = (x - p1.x) / (p2.x - p1.x);
+
+   return {
+     x: x
+     y: p1.y + (p2.y - p1.y) * t,
+   };
+}
+  //Usage of function getPointAyY(p1, p2, y)
+  //const p1 = { x: 50, y: 50 };
+  //const p2 = { x: 10, y: 100 };
+
+  //const px = getPointAtY(p1, p2, 75);
+
+  function updatePattern() {
   const m = {
     waist: parseFloat(document.getElementById("waist").value) || 0,
     hip: parseFloat(document.getElementById("hip").value) || 0,
@@ -420,6 +435,7 @@ function drawPattern(m) {
   const bottomLine0Xi = 300;
   
   //DISTANCE FROM CENTER TO BACK WAIST END-POINTS 
+  const bp14 = getPointAtX(bp2, bp5, center);
   const backWaistCenterPoint = {x: center, y: backWaistLine };
   //LEFT END-POINT 
   const Lbwaist = {x: center - scale, y: backWaistLine};
@@ -430,7 +446,7 @@ function drawPattern(m) {
   const Lbwdistance = Math.sqrt(Lbwdx * Lbwdx + Lbwdy * Lbwdy) / scale;
 
   //RIGHT END-POINT 
-  const Rbwaist = { x: center -  scale + BHwaist, y: backWaistLine };
+  const Rbwaist = { x: center -  scale + BHwaist, y: frontWaistLine };
   const RbwmidX = (backWaistCenterPoint.x + Rbwaist.x) / 2;
   const RbwmidY = (backWaistCenterPoint.y + Rbwaist.y) / 2;
   const Rbwdx = Rbwaist.x - backWaistCenterPoint.x;
