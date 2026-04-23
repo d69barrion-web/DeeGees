@@ -549,6 +549,11 @@ function drawPattern(m) {
  
   svgFront.innerHTML = 
   `
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="white" />
+    </marker>
+  </defs>
   <line 
     x1="${center}" 
     y1="${topY}" 
@@ -686,11 +691,7 @@ function drawPattern(m) {
     ${Rbdistance.toFixed(1)} "
   </text>
   
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-      <path d="M0,0 L10,5 L0,10 Z" fill="white" />
-    </marker>
-  </defs>
+  
 
   <line 
     x1="${waistCenterPoint.x}" 
