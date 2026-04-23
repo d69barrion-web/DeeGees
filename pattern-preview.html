@@ -362,11 +362,8 @@ function drawPattern(m) {
   const waistOffset = m.frontWaist_adj;
   const Length = m.outseam * scale;
   const frontWaistLine = 50;
-  const backWaistLine = frontWaistLine - (2 * scale);
   const crotchLine = frontWaistLine + ((m.rise - 1) * scale);
-  const backCrotchLine = crotchLine + (scale/2);
   const frontHipLine = crotchLine - (2 * scale);
-  const backHipLine = backWaistLine + (frontHipLine - frontWaistLine);
   const thighLine = crotchLine + (4 * scale);
   const kneeLine = crotchLine + (((m.outseam - m.rise) / 2) * scale);
   const bottomLine1 = frontWaistLine + (Length - scale);
@@ -816,6 +813,10 @@ function drawPattern(m) {
 `;
 
 //BACK PATTERN DRAWING 
+  const backWaistLine = frontWaistLine - (2 * scale);
+  const backCrotchLine = crotchLine + (scale/2);
+  const backHipLine = backWaistLine + (frontHipLine - frontWaistLine);
+  
   const backWaistLineXo = 0;
   const backWaistLineXi = 300;
   const backHipLineXo = 0;
