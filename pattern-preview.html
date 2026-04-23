@@ -813,17 +813,6 @@ function drawPattern(m) {
   <text x="${RbmidX}" y="${RbmidY}" fill="yellow" font-size="12">
     ${Rbdistance.toFixed(1)} "
   </text>
-  
-  
-  
-  
-
-
-  
-  
-
-   
-
   `;
   
   ////////BACK PATTERN DRAWING//////////////////// 
@@ -881,12 +870,6 @@ svgBack.innerHTML =
     stroke-width="1"
     stroke-dasharray="5,5"
   />
-  <path 
-    d="${fpath}" 
-    fill="none" 
-    stroke="#38bdf8" 
-    stroke-width="2"
-  />
   <line 
     x1="${backWaistLineXo}" 
     y1="${backWaistLine - backWaistUp }" 
@@ -896,13 +879,6 @@ svgBack.innerHTML =
     stroke-width="1"
     stroke-dasharray="5,5"
   />
-  <path 
-    d="${bpath}" 
-    fill="none" 
-    stroke="#38bdf8" 
-    stroke-width="2"
-  />
-  
   <line 
     x1="${waistLineXo}" 
     y1="${frontWaistLine}" 
@@ -977,13 +953,24 @@ svgBack.innerHTML =
     stroke-width="1"
     stroke-dasharray="5,5"
   />
+  
+  <path 
+    d="${fpath}" 
+    fill="none" 
+    stroke="#38bdf8" 
+    stroke-width="2"
+  />
+  
+  <path 
+    d="${bpath}" 
+    fill="none" 
+    stroke="#38bdf8" 
+    stroke-width="2"
+  /> 
 `;
 }
   // init
 loadData();
-
-
-  
 
 </script>
 
