@@ -333,7 +333,7 @@ function getPointAtX(p1, p2, x)
     frontWaist_adj: parseInt(frontWaistSlider.value)
   };
 
-  debug("get Sliders textcontent...");
+  
   document.getElementById("backHipLineVal").textContent = m.backWaist_up;
   document.getElementById("waistShiftVal").textContent = m.waist_shift;
   document.getElementById("hipShiftVal").textContent = m.hip_shift;
@@ -390,7 +390,7 @@ function drawPattern(m) {
 
   const crotchDepth = m.crotch_depth || 0;
 
-  debug("creating FRONT PART PATTERN...");
+  
   //FRONT PATTERN DRAWING 
   const fp1 = { x: center + waistShift - waistOffset, y: frontWaistLine };
   const fp2 = { x: center + Hwaist + waistShift + waistOffset + (Hwaist - (3 * scale)), y: frontWaistLine };
