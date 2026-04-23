@@ -549,70 +549,6 @@ function drawPattern(m) {
  
   svgFront.innerHTML = 
   `
-  <text x="${center - 18}" y="${20}" fill="yellow" font-size="12">
-    center
-  </text>
-  <text x="${200}" y="${LwmidY}" fill="white" font-size="12">
-    front waistLine
-  </text>
-  <text x="${LwmidX}" y="${LwmidY}" fill="yellow" font-size="12">
-    ${Lwdistance.toFixed(1)} "
-  </text>
-  <text x="${RwmidX}" y="${RwmidY}" fill="yellow" font-size="12">
-    ${Rwdistance.toFixed(1)} "
-  </text>
-  <text x="${200}" y="${LhmidY}" fill="white" font-size="12">
-    front hipLine
-  </text>
-  <text x="${LhmidX}" y="${LhmidY}" fill="yellow" font-size="12">
-    ${Lhdistance.toFixed(1)} "
-  </text>
-  <text x="${RhmidX}" y="${RhmidY}" fill="yellow" font-size="12">
-    ${Rhdistance.toFixed(1)} "
-  </text>
-  <text x="${200}" y="${LcmidY}" fill="white" font-size="12">
-    crotchLine
-  </text>
-  <text x="${LcmidX}" y="${LcmidY}" fill="yellow" font-size="12">
-    ${Lcdistance.toFixed(1)} "
-  </text>
-  <text x="${RcmidX}" y="${RcmidY}" fill="yellow" font-size="12">
-    ${Rcdistance.toFixed(1)} "
-  </text>
-  <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
-    thighLine
-  </text>
-  <text x="${LtmidX}" y="${LtmidY}" fill="yellow" font-size="12">
-    ${Ltdistance.toFixed(1)} "
-  </text>
-  <text x="${RtmidX}" y="${RtmidY}" fill="yellow" font-size="12">
-    ${Rtdistance.toFixed(1)} "
-  </text>
-  <text x="${200}" y="${LkmidY}" fill="white" font-size="12">
-    kneeLine
-  </text>
-  <text x="${LkmidX}" y="${LkmidY}" fill="yellow" font-size="12">
-    ${Lkdistance.toFixed(1)} "
-  </text>
-  <text x="${RkmidX}" y="${RkmidY}" fill="yellow" font-size="12">
-    ${Rkdistance.toFixed(1)} "
-  </text>
-  <text x="${200}" y="${LbmidY}" fill="white" font-size="12">
-    leg-opening Line
-  </text>
-  <text x="${LbmidX}" y="${LbmidY}" fill="yellow" font-size="12">
-    ${Lbdistance.toFixed(1)} "
-  </text>
-  <text x="${RbmidX}" y="${RbmidY}" fill="yellow" font-size="12">
-    ${Rbdistance.toFixed(1)} "
-  </text>
-  
-  
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-      <path d="M0,0 L10,5 L0,10 Z" fill="white" />
-    </marker>
-  </defs>
   <line 
     x1="${center}" 
     y1="${topY}" 
@@ -685,15 +621,19 @@ function drawPattern(m) {
     stroke-width="1"
     stroke-dasharray="5,5"
   />
-
+  
   <path 
     d="${fpath}" 
     fill="none" 
     stroke="#38bdf8" 
     stroke-width="2"
   />
-  
-  
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="white" />
+    </marker>
+  </defs>
 
   <line 
     x1="${waistCenterPoint.x}" 
@@ -797,7 +737,7 @@ function drawPattern(m) {
   />
   <line 
     x1="${frontBottomCenterPoint.x}" 
-    y1="${frontBottomCenterPoint.y}" 
+    y1="${frontBottomCenterPoint.y}"
     x2="${Lbottom.x}" 
     y2="${Lbottom.y}"  
     stroke="white"
@@ -815,6 +755,75 @@ function drawPattern(m) {
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
+  
+  <text x="${center - 18}" y="${20}" fill="yellow" font-size="12">
+    center
+  </text>
+  <text x="${200}" y="${LwmidY}" fill="white" font-size="12">
+    front waistLine
+  </text>
+  <text x="${LwmidX}" y="${LwmidY}" fill="yellow" font-size="12">
+    ${Lwdistance.toFixed(1)} "
+  </text>
+  <text x="${RwmidX}" y="${RwmidY}" fill="yellow" font-size="12">
+    ${Rwdistance.toFixed(1)} "
+  </text>
+  <text x="${200}" y="${LhmidY}" fill="white" font-size="12">
+    front hipLine
+  </text>
+  <text x="${LhmidX}" y="${LhmidY}" fill="yellow" font-size="12">
+    ${Lhdistance.toFixed(1)} "
+  </text>
+  <text x="${RhmidX}" y="${RhmidY}" fill="yellow" font-size="12">
+    ${Rhdistance.toFixed(1)} "
+  </text>
+  <text x="${200}" y="${LcmidY}" fill="white" font-size="12">
+    crotchLine
+  </text>
+  <text x="${LcmidX}" y="${LcmidY}" fill="yellow" font-size="12">
+    ${Lcdistance.toFixed(1)} "
+  </text>
+  <text x="${RcmidX}" y="${RcmidY}" fill="yellow" font-size="12">
+    ${Rcdistance.toFixed(1)} "
+  </text>
+  <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
+    thighLine
+  </text>
+  <text x="${LtmidX}" y="${LtmidY}" fill="yellow" font-size="12">
+    ${Ltdistance.toFixed(1)} "
+  </text>
+  <text x="${RtmidX}" y="${RtmidY}" fill="yellow" font-size="12">
+    ${Rtdistance.toFixed(1)} "
+  </text>
+  <text x="${200}" y="${LkmidY}" fill="white" font-size="12">
+    kneeLine
+  </text>
+  <text x="${LkmidX}" y="${LkmidY}" fill="yellow" font-size="12">
+    ${Lkdistance.toFixed(1)} "
+  </text>
+  <text x="${RkmidX}" y="${RkmidY}" fill="yellow" font-size="12">
+    ${Rkdistance.toFixed(1)} "
+  </text>
+  <text x="${200}" y="${LbmidY}" fill="white" font-size="12">
+    leg-opening Line
+  </text>
+  <text x="${LbmidX}" y="${LbmidY}" fill="yellow" font-size="12">
+    ${Lbdistance.toFixed(1)} "
+  </text>
+  <text x="${RbmidX}" y="${RbmidY}" fill="yellow" font-size="12">
+    ${Rbdistance.toFixed(1)} "
+  </text>
+  
+  
+  
+  
+
+
+  
+  
+
+   
+
   `;
   
   ////////BACK PATTERN DRAWING//////////////////// 
