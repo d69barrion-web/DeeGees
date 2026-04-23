@@ -203,6 +203,26 @@
 
 <script>
 
+window.onerror = function (message, source, lineno, colno, error) {
+  debug("❌ ERROR: " + message);
+  debug("📄 File: " + source);
+  debug("📍 Line: " + lineno + ":" + colno);
+
+  if (error && error.stack) {
+    debug("📚 Stack: " + error.stack);
+  }
+
+  return true; // para hindi na default browser error lang
+};
+
+function debug(msg) {
+  const panel = document.getElementById("debugPanel");
+  if (panel) {
+    panel.innerHTML += msg + "<br>";
+    panel.scrollTop = panel.scrollHeight;
+  }
+}
+
 // Load from URL
 const params = new URLSearchParams(window.location.search);
 
@@ -937,6 +957,9 @@ svgBack.innerHTML =
 }
   // init
 loadData();
+
+
+  
 
 </script>
 
