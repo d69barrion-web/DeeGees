@@ -305,7 +305,6 @@ function getPointAtX(p1, p2, x)
   //const px = getPointAtY(p1, p2, 75);
 
   function updatePattern() {
-    debug("updatePattern called");
   const m = {
     waist: parseFloat(document.getElementById("waist").value) || 0,
     hip: parseFloat(document.getElementById("hip").value) || 0,
@@ -343,11 +342,9 @@ function getPointAtX(p1, p2, x)
   } 
   
 function drawPattern(m) {
-  debug("drawPattern started");
   
   const svgFront = document.getElementById("svgCanvasFront");
   const svgBack = document.getElementById("svgCanvasBack");
-
 
   const scale = 10;
   const center = 100;
@@ -786,7 +783,9 @@ function drawPattern(m) {
   <text x="${RcmidX}" y="${RcmidY}" fill="yellow" font-size="12">
     ${Rcdistance.toFixed(1)} "
   </text>
-  
+  <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
+    thighLine
+  </text>
   <text x="${LtmidX}" y="${LtmidY}" fill="yellow" font-size="12">
     ${Ltdistance.toFixed(1)} "
   </text>
@@ -1051,6 +1050,15 @@ svgBack.innerHTML =
   </text>
   <text x="${RbtmidX}" y="${RbtmidY}" fill="yellow" font-size="12">
     ${Rbtdistance.toFixed(1)} "
+  </text>
+  <text x="${200}" y="${LbkmidY}" fill="white" font-size="12">
+    kneeLine
+  </text>
+  <text x="${LbkmidX}" y="${LbkmidY}" fill="yellow" font-size="12">
+    ${Lbkdistance.toFixed(1)} "
+  </text>
+  <text x="${RbkmidX}" y="${RbkmidY}" fill="yellow" font-size="12">
+    ${Rbkdistance.toFixed(1)} "
   </text>
 `;
 }
