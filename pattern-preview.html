@@ -859,6 +859,24 @@ function drawPattern(m) {
     L ${bp14.x} ${bp14.y}
     Z
     `;
+
+  //DISTANCE FROM CENTER TO FRONT THIGH END-POINTS 
+  const backThighCenterPoint = { x: center, y: thighLine };
+  //LEFT END-POINT 
+  const Lbthigh = { x: center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
+  const LbtmidX = (backThighCenterPoint.x + Lbthigh.x) / 2;
+  const LbtmidY = (backThighCenterPoint.y + Lbthigh.y) / 2;
+  const Lbtdx = Lbthigh.x - backThighCenterPoint.x;
+  const Lbtdy = Lbthigh.y - backThighCenterPoint.y;
+  const Lbtdistance = Math.sqrt(Lbtdx * Lbtdx + Lbtdy * Lbtdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rbthigh = { x: center + Hthigh + thighOffset, y: thighLine };
+  const RbtmidX = (backThighCenterPoint.x + Rbthigh.x) / 2;
+  const RbtmidY = (backThighCenterPoint.y + Rbthigh.y) / 2;
+  const Rbtdx = Rbthigh.x - backThighCenterPoint.x;
+  const Rbtdy = Rbthigh.y - backThighCenterPoint.y;
+  const Rbtdistance = Math.sqrt(Rbtdx * Rbtdx + Rbtdy * Rbtdy) / scale;
   
 svgBack.innerHTML = 
   `  <line 
