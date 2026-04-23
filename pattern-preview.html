@@ -425,12 +425,8 @@ function drawPattern(m) {
   const bottomY = bottomLine0 + 20; // konting allowance
   const waistLineXo = 0;
   const waistLineXi = 300;
-  const backWaistLineXo = 0;
-  const backWaistLineXi = 300;
   const frontHipLineXo = 0;
   const frontHipLineXi = 300;
-  const backHipLineXo = 0;
-  const backHipLineXi = 300;
   const crotchLineXo = 0;
   const crotchLineXi = 300;
   const thighLineXo = 0;
@@ -820,6 +816,11 @@ function drawPattern(m) {
 `;
 
 //BACK PATTERN DRAWING 
+  const backWaistLineXo = 0;
+  const backWaistLineXi = 300;
+  const backHipLineXo = 0;
+  const backHipLineXi = 300;
+  
   const bp1 = {x: center - scale, y: backWaistLine};
   const bp2 = getPointAtDistance(bp1, frontWaistLine, (BHwaist - waistOffset), "right");
   const bp5 = {x: center + Hthigh + thighOffset + (1.25 * scale) , y: thighLine};
