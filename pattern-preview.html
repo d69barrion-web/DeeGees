@@ -224,11 +224,11 @@ function debug(msg) {
 }
 
 // Load from URL
-  debug("loading params..");
+  debug("params");
 const params = new URLSearchParams(window.location.search);
 
 function loadData() {
-  debug("loading Data..");
+  debug("loadData");
   document.getElementById("waist").value = params.get("waist") || "";
   document.getElementById("hip").value = params.get("hip") || "";
   document.getElementById("rise").value = params.get("rise") || "";
@@ -240,7 +240,7 @@ function loadData() {
 
  updatePattern();
 }
-debug("setting up sliders..");
+
 // Sliders
 const backWaistSlider = document.getElementById("backWaistUpShift");
 const waistSlider = document.getElementById("waistShift");
@@ -252,8 +252,7 @@ const kneeSlider = document.getElementById("kneeAdj");
 const bottomSlider = document.getElementById("bottomAdj");
 const frontHipSlider = document.getElementById("frontHipAdj");
 const frontWaistSlider = document.getElementById("frontWaistAdj");
-
-
+                
 backWaistSlider.addEventListener("input", updatePattern);
 waistSlider.addEventListener("input", updatePattern);
 hipSlider.addEventListener("input", updatePattern);
@@ -266,7 +265,6 @@ frontHipSlider.addEventListener("input", updatePattern);
 frontWaistSlider.addEventListener("input", updatePattern);
 
 function getPointAtDistance(p1, y2, d, side = "left") {
-  
   const dy = y2 - p1.y;
   const dx = Math.sqrt(d * d - dy * dy);
 
@@ -278,7 +276,6 @@ function getPointAtDistance(p1, y2, d, side = "left") {
 
 function getPointAtY(p1, p2, y) 
 {
-  
    const t = (y - p1.y) / (p2.y - p1.y);
 
    return {
@@ -294,7 +291,6 @@ function getPointAtY(p1, p2, y)
 
 function getPointAtX(p1, p2, x) 
 {
-  
    const t = (x - p1.x) / (p2.x - p1.x);
 
    return {
@@ -309,7 +305,7 @@ function getPointAtX(p1, p2, x)
   //const px = getPointAtY(p1, p2, 75);
 
   function updatePattern() {
-    
+    debug("updatePattern called");
   const m = {
     waist: parseFloat(document.getElementById("waist").value) || 0,
     hip: parseFloat(document.getElementById("hip").value) || 0,
@@ -332,7 +328,6 @@ function getPointAtX(p1, p2, x)
     frontWaist_adj: parseInt(frontWaistSlider.value)
   };
 
-  
   document.getElementById("backHipLineVal").textContent = m.backWaist_up;
   document.getElementById("waistShiftVal").textContent = m.waist_shift;
   document.getElementById("hipShiftVal").textContent = m.hip_shift;
@@ -348,7 +343,7 @@ function getPointAtX(p1, p2, x)
   } 
   
 function drawPattern(m) {
-  debug("drawPattern");
+  debug("drawPattern started");
   const svgFront = document.getElementById("svgCanvasFront");
   const svgBack = document.getElementById("svgCanvasBack");
 
@@ -388,8 +383,7 @@ function drawPattern(m) {
   const HRcrotch = (m.hip / 6) * scale;
 
   const crotchDepth = m.crotch_depth || 0;
-
-  
+      
   //FRONT PATTERN DRAWING 
   const fp1 = { x: center + waistShift - waistOffset, y: frontWaistLine };
   const fp2 = { x: center + Hwaist + waistShift + waistOffset + (Hwaist - (3 * scale)), y: frontWaistLine };
@@ -428,7 +422,7 @@ function drawPattern(m) {
   //BACK PATTERN DRAWING 
   const bp1 = {x: center - scale, y: backWaistLine};
   const bp2 = getPointAtDistance(bp1, frontWaistLine, (BHwaist - waistOffset), "right");
-  const bp5 = {x: center + Hthigh - thighOffset + (1.25 * scale) , y: thighLine};
+  const bp5 = {x: center + Hthigh + thighOffset + (1.25 * scale) , y: thighLine};
   const bp3 = getPointAtY(bp2, bp5, frontHipLine);
   const bp4 = getPointAtY(bp2, bp5, backCrotchLine);
   const bp6 = {x: center + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
@@ -480,24 +474,8 @@ function drawPattern(m) {
   const bottomLine1Xi = 300;
   const bottomLine0Xo = 0; 
   const bottomLine0Xi = 300;
-
-  //DISTANCE FROM CENTER TO BACK WAIST END-POINTS 
-  const backWaistCenterPoint = getPointAtX(bp2, bp1 , center);
-  //LEFT END-POINT 
-  const Lbwaist = {x: backWaistCenterPoint.x - scale, y: backWaistCenterPoint.y};
-  const LbwmidX = (backWaistCenterPoint.x + Lbwaist.x) / 2;
-  const LbwmidY = (backWaistCenterPoint.y + Lbwaist.y) / 2;
-  const Lbwdx = Lbwaist.x - backWaistCenterPoint.x;
-  const Lbwdy = Lbwaist.y - backWaistCenterPoint.y;
-  const Lbwdistance = Math.sqrt(Lbwdx * Lbwdx + Lbwdy * Lbwdy) / scale;
-
-  //RIGHT END-POINT 
-  const Rbwaist = {x: backWaistCenterPoint.x + BHwaist - scale, y: frontWaistLine };
-  const RbwmidX = (backWaistCenterPoint.x + Rbwaist.x) / 2;
-  const RbwmidY = (backWaistCenterPoint.y + Rbwaist.y) / 2;
-  const Rbwdx = Rbwaist.x - backWaistCenterPoint.x;
-  const Rbwdy = Rbwaist.y - backWaistCenterPoint.y;
-  const Rbwdistance = Math.sqrt(Rbwdx * Rbwdx + Rbwdy * Rbwdy) / scale;
+  
+  
                   
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: frontWaistLine };
@@ -571,24 +549,6 @@ function drawPattern(m) {
   const Rtdy = Rthigh.y - frontThighCenterPoint.y;
   const Rtdistance = Math.sqrt(Rtdx * Rtdx + Rtdy * Rtdy) / scale;
 
-  //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
-  const backThighCenterPoint = { x: center, y: thighLine };
-  //LEFT END-POINT 
-  const Lbthigh = { center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
-  const LbtmidX = (backThighCenterPoint.x + Lbthigh.x) / 2;
-  const LbtmidY = (backThighCenterPoint.y + Lbthigh.y) / 2;
-  const Lbtdx = Lbthigh.x - backThighCenterPoint.x;
-  const Lbtdy = Lbthigh.y - backThighCenterPoint.y;
-  const Lbtdistance = Math.sqrt(Lbtdx * Lbtdx + Lbtdy * Lbtdy) / scale;
-
-  //RIGHT END-POINT 
-  const Rbthigh = { x: center + Hthigh + thighOffset + (1.25 * scale), y: thighLine };
-  const RbtmidX = (backThighCenterPoint.x + Rbthigh.x) / 2;
-  const RbtmidY = (backThighCenterPoint.y + Rbthigh.y) / 2;
-  const Rbtdx = Rbthigh.x - backThighCenterPoint.x;
-  const Rbtdy = Rbthigh.y - backThighCenterPoint.y;
-  const Rbtdistance = Math.sqrt(Rbtdx * Rbtdx + Rbtdy * Rbtdy) / scale;
-                  
   //DISTANCE FROM CENTER TO FRONT KNEE END-POINTS 
   const frontkneeCenterPoint = { x: center, y: kneeLine };
   //LEFT END-POINT 
@@ -891,15 +851,8 @@ function drawPattern(m) {
     marker-end="url(#arrow)"
   />
 `;
-  
 svgBack.innerHTML = 
-  ` 
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-      <path d="M0,0 L10,5 L0,10 Z" fill="white" />
-    </marker>
-  </defs>
-   <line 
+  `  <line 
     x1="${center}" 
     y1="${topY}" 
     x2="${center}" 
@@ -914,7 +867,6 @@ svgBack.innerHTML =
     stroke="#38bdf8" 
     stroke-width="2"
   />
-  
   <line 
     x1="${backWaistLineXo}" 
     y1="${backWaistLine - backWaistUp }" 
@@ -929,39 +881,6 @@ svgBack.innerHTML =
     fill="none" 
     stroke="#38bdf8" 
     stroke-width="2"
-  />
-
-  <text x="${200}" y="${LbwmidY}" fill="white" font-size="12">
-    back waistLine
-  </text>
-  <text x="${200}" y="${LwmidY}" fill="white" font-size="12">
-    front waistLine
-  </text>
-  <text x="${LbwmidX}" y="${LbwmidY}" fill="yellow" font-size="12">
-    ${Lbwdistance.toFixed(1)} "
-  </text>
-<text x="${RbwmidX}" y="${RbwmidY}" fill="yellow" font-size="12">
-    ${Rbwdistance.toFixed(1)} "
-  </text>
-  <line 
-    x1="${backWaistCenterPoint.x}" 
-    y1="${backWaistCenterPoint.y}" 
-    x2="${Lbwaist.x}" 
-    y2="${Lbwaist.y}"  
-    stroke="white"
-    stroke-width="0.5"
-    marker-start="url(#arrow)"
-    marker-end="url(#arrow)"
-  />
-  <line 
-    x1="${backWaistCenterPoint.x}" 
-    y1="${backWaistCenterPoint.y}" 
-    x2="${Rbwaist.x}" 
-    y2="${Rbwaist.y}"  
-    stroke="white"
-    stroke-width="0.5"
-    marker-start="url(#arrow)"
-    marker-end="url(#arrow)"
   />
   
   <line 
@@ -1001,36 +920,6 @@ svgBack.innerHTML =
     stroke="red" 
     stroke-width="1"
     stroke-dasharray="5,5"
-  />
-  
-  <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
-    thighLine
-  </text>
-  <text x="${LbtmidX}" y="${LbtmidY}" fill="yellow" font-size="12">
-    ${Lbtdistance.toFixed(1)} "
-  </text>
-<text x="${RbtmidX}" y="${RbtmidY}" fill="yellow" font-size="12">
-    ${Rbtdistance.toFixed(1)} "
-  </text>
-  <line 
-    x1="${backThighCenterPoint.x}" 
-    y1="${backThighCenterPoint.y}" 
-    x2="${Lbthigh.x}" 
-    y2="${Lbthigh.y}"  
-    stroke="white"
-    stroke-width="0.5"
-    marker-start="url(#arrow)"
-    marker-end="url(#arrow)"
-  />
-  <line 
-    x1="${backThighCenterPoint.x}" 
-    y1="${backThighCenterPoint.y}" 
-    x2="${Rbthigh.x}" 
-    y2="${Rbthigh.y}"  
-    stroke="white"
-    stroke-width="0.5"
-    marker-start="url(#arrow)"
-    marker-end="url(#arrow)"
   />
     <line 
     x1="${thighLineXo}" 
