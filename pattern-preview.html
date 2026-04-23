@@ -857,7 +857,7 @@ function drawPattern(m) {
     Z
     `;
 
-  //DISTANCE FROM CENTER TO FRONT THIGH END-POINTS 
+  //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
   const backThighCenterPoint = { x: center, y: thighLine };
   //LEFT END-POINT 
   const Lbthigh = { x: center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
@@ -875,10 +875,10 @@ function drawPattern(m) {
   const Rbtdy = Rbthigh.y - backThighCenterPoint.y;
   const Rbtdistance = Math.sqrt(Rbtdx * Rbtdx + Rbtdy * Rbtdy) / scale;
 
-  //DISTANCE FROM CENTER TO FRONT THIGH END-POINTS
+  //DISTANCE FROM CENTER TO BACK KNEE END-POINTS
   const backKneeCenterPoint = { x: center, y: kneeLine };
   //LEFT END-POINT 
-  const Lbknee = { x: center - Hknee - kneeOffset, y: kneeLine };
+  const Lbknee = { x: center - Hknee + kneeOffset - (1.125 * scale), y: kneeLine };
   const LbkmidX = (backKneeCenterPoint.x + Lbknee.x) / 2;
   const LbkmidY = (backKneeCenterPoint.y + Lbknee.y) / 2;
   const Lbkdx = Lbknee.x - backKneeCenterPoint.x;
@@ -886,7 +886,7 @@ function drawPattern(m) {
   const Lbkdistance = Math.sqrt(Lbkdx * Lbkdx + Lbkdy * Lbkdy) / scale;
 
   //RIGHT END-POINT 
-  const Rbknee = { x: center + Hknee + kneeOffset, y: kneeLine };
+  const Rbknee = { x: center + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
   const RbkmidX = (backKneeCenterPoint.x + Rbknee.x) / 2;
   const RbkmidY = (backKneeCenterPoint.y + Rbknee.y) / 2;
   const Rbkdx = Rbknee.x - backKneeCenterPoint.x;
