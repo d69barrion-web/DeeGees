@@ -492,7 +492,7 @@ function drawPattern(m) {
   const Lbwdistance = Math.sqrt(Lbwdx * Lbwdx + Lbwdy * Lbwdy) / scale;
 
   //RIGHT END-POINT 
-  const Rbwaist = {x: backWaistCenterPoint.x + BHwaist, y: frontWaistLine - backWaistCenterPoint.y };
+  const Rbwaist = {x: backWaistCenterPoint.x + BHwaist, y: frontWaistLine };
   const RbwmidX = (backWaistCenterPoint.x + Rbwaist.x) / 2;
   const RbwmidY = (backWaistCenterPoint.y + Rbwaist.y) / 2;
   const Rbwdx = Rbwaist.x - backWaistCenterPoint.x;
