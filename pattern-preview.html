@@ -786,9 +786,7 @@ function drawPattern(m) {
   <text x="${RcmidX}" y="${RcmidY}" fill="yellow" font-size="12">
     ${Rcdistance.toFixed(1)} "
   </text>
-  <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
-    thighLine
-  </text>
+  
   <text x="${LtmidX}" y="${LtmidY}" fill="yellow" font-size="12">
     ${Ltdistance.toFixed(1)} "
   </text>
@@ -871,7 +869,7 @@ function drawPattern(m) {
   const Lbtdistance = Math.sqrt(Lbtdx * Lbtdx + Lbtdy * Lbtdy) / scale;
 
   //RIGHT END-POINT 
-  const Rbthigh = { x: center + Hthigh + thighOffset + (1.25 * scale), y: thighLine };
+  const Rbthigh = { x: center + Hthigh - thighOffset + (1.25 * scale), y: thighLine };
   const RbtmidX = (backThighCenterPoint.x + Rbthigh.x) / 2;
   const RbtmidY = (backThighCenterPoint.y + Rbthigh.y) / 2;
   const Rbtdx = Rbthigh.x - backThighCenterPoint.x;
@@ -1007,6 +1005,9 @@ svgBack.innerHTML =
     marker-end="url(#arrow)"
   />
 
+  <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
+    thighLine
+  </text>
   <text x="${LbtmidX}" y="${LbtmidY}" fill="yellow" font-size="12">
     ${Lbtdistance.toFixed(1)} "
   </text>
