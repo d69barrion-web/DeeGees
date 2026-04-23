@@ -591,7 +591,7 @@ function drawPattern(m) {
   const Rbdx = Rbottom.x - frontBottomCenterPoint.x;
   const Rbdy = Rbottom.y - frontBottomCenterPoint.y;
   const Rbdistance = Math.sqrt(Rbdx * Rbdx + Rbdy * Rbdy) / scale;
- debug("svgFront.innerHTML ...");
+ 
   svgFront.innerHTML = 
   `
   <line 
@@ -858,7 +858,7 @@ function drawPattern(m) {
     marker-end="url(#arrow)"
   />
 `;
-  debug("svgBack.innerHTML...");
+  
 svgBack.innerHTML = 
   `  <line 
     x1="${center}" 
