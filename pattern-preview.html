@@ -896,7 +896,7 @@ function drawPattern(m) {
   //DISTANCE FROM CENTER TO BACK LEG-OPENING END-POINTS 
   const backBottomCenterPoint = { x: center, y: bottomLine0 };
   //LEFT END-POINT 
-  const Lbbottom = { x: center - Hbottom - bottomOffset - scale, y: bottomLine0 };
+  const Lbbottom = { x: center - Hbottom + bottomOffset - scale, y: bottomLine0 };
   const LbbmidX = (backBottomCenterPoint.x + Lbottom.x) / 2;
   const LbbmidY = (backBottomCenterPoint.y + Lbottom.y) / 2;
   const Lbbdx = Lbbottom.x - backBottomCenterPoint.x;
@@ -904,7 +904,7 @@ function drawPattern(m) {
   const Lbbdistance = Math.sqrt(Lbbdx * Lbbdx + Lbbdy * Lbbdy) / scale;
 
   //RIGHT END-POINT 
-  const Rbbottom = { x: center + Hbottom + bottomOffset + scale, y: bottomLine0 };
+  const Rbbottom = { x: center + Hbottom - bottomOffset + scale, y: bottomLine0 };
   const RbbmidX = (backBottomCenterPoint.x + Rbbottom.x) / 2;
   const RbbmidY = (backBottomCenterPoint.y + Rbbottom.y) / 2;
   const Rbbdx = Rbbottom.x - backBottomCenterPoint.x;
