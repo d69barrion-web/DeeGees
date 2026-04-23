@@ -1065,26 +1065,6 @@ svgBack.innerHTML =
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
-
-  <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
-    thighLine
-  </text>
-  <text x="${LbtmidX}" y="${LbtmidY}" fill="yellow" font-size="12">
-    ${Lbtdistance.toFixed(1)} "
-  </text>
-  <text x="${RbtmidX}" y="${RbtmidY}" fill="yellow" font-size="12">
-    ${Rbtdistance.toFixed(1)} "
-  </text>
-  <text x="${200}" y="${LbkmidY}" fill="white" font-size="12">
-    kneeLine
-  </text>
-  <text x="${LbkmidX}" y="${LbkmidY}" fill="yellow" font-size="12">
-    ${Lbkdistance.toFixed(1)} "
-  </text>
-  <text x="${RbkmidX}" y="${RbkmidY}" fill="yellow" font-size="12">
-    ${Rbkdistance.toFixed(1)} "
-  </text>
-  
   <line 
     x1="${backBottomCenterPoint.x}" 
     y1="${backBottomCenterPoint.y}"
@@ -1105,6 +1085,36 @@ svgBack.innerHTML =
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
+
+  <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
+    thighLine
+  </text>
+  <text x="${LbtmidX}" y="${LbtmidY}" fill="yellow" font-size="12">
+    ${Lbtdistance.toFixed(1)} "
+  </text>
+  <text x="${RbtmidX}" y="${RbtmidY}" fill="yellow" font-size="12">
+    ${Rbtdistance.toFixed(1)} "
+  </text>
+  <text x="${200}" y="${LbkmidY}" fill="white" font-size="12">
+    kneeLine
+  </text>
+  <text x="${LbkmidX}" y="${LbkmidY}" fill="yellow" font-size="12">
+    ${Lbkdistance.toFixed(1)} "
+  </text>
+  <text x="${RbkmidX}" y="${RbkmidY}" fill="yellow" font-size="12">
+    ${Rbkdistance.toFixed(1)} "
+  </text>
+  <text x="${200}" y="${LbbmidY}" fill="white" font-size="12">
+    kneeLine
+  </text>
+  </text>
+  <text x="${LbbmidX}" y="${LbbmidY}" fill="yellow" font-size="12">
+    ${Lbbdistance.toFixed(1)} "
+  </text>
+  <text x="${RbbmidX}" y="${RbbmidY}" fill="yellow" font-size="12">
+    ${Rbbdistance.toFixed(1)} "
+  </text>
+  
 `;
 }
   // init
