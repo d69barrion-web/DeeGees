@@ -892,7 +892,25 @@ function drawPattern(m) {
   const Rbkdx = Rbknee.x - backKneeCenterPoint.x;
   const Rbkdy = Rbknee.y - backKneeCenterPoint.y;
   const Rbkdistance = Math.sqrt(Rbkdx * Rbkdx + Rbkdy * Rbkdy) / scale;
-                           
+
+  //DISTANCE FROM CENTER TO BACK LEG-OPENING END-POINTS 
+  const backBottomCenterPoint = { x: center, y: bottomLine0 };
+  //LEFT END-POINT 
+  const Lbbottom = { x: center - Hbottom - bottomOffset, y: bottomLine0 };
+  const LbbmidX = (backBottomCenterPoint.x + Lbottom.x) / 2;
+  const LbbmidY = (backBottomCenterPoint.y + Lbottom.y) / 2;
+  const Lbbdx = Lbbottom.x - backBottomCenterPoint.x;
+  const Lbbdy = Lbbottom.y - backBottomCenterPoint.y;
+  const Lbbdistance = Math.sqrt(Lbbdx * Lbbdx + Lbdby * Lbbdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rbbottom = { x: center + Hbottom + bottomOffset, y: bottomLine0 };
+  const RbbmidX = (backBottomCenterPoint.x + Rbbottom.x) / 2;
+  const RbbmidY = (backBottomCenterPoint.y + Rbbottom.y) / 2;
+  const Rbdbx = Rbbottom.x - backBottomCenterPoint.x;
+  const Rbbdy = Rbbottom.y - backBottomCenterPoint.y;
+  const Rbbdistance = Math.sqrt(Rbbdx * Rbbdx + Rbbdy * Rbbdy) / scale;
+ 
 svgBack.innerHTML = 
   `  <line 
     x1="${center}" 
@@ -1060,6 +1078,27 @@ svgBack.innerHTML =
   <text x="${RbkmidX}" y="${RbkmidY}" fill="yellow" font-size="12">
     ${Rbkdistance.toFixed(1)} "
   </text>
+  
+  <line 
+    x1="${backBottomCenterPoint.x}" 
+    y1="${backBottomCenterPoint.y}"
+    x2="${Lbbottom.x}" 
+    y2="${Lbbottom.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${backBottomCenterPoint.x}" 
+    y1="${backBottomCenterPoint.y}" 
+    x2="${Rbbottom.x}" 
+    y2="${Rbbottom.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
 `;
 }
   // init
