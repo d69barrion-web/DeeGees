@@ -224,11 +224,11 @@ function debug(msg) {
 }
 
 // Load from URL
-  debug("params");
+  debug("loading params..");
 const params = new URLSearchParams(window.location.search);
 
 function loadData() {
-  debug("loadData");
+  debug("loading Data..");
   document.getElementById("waist").value = params.get("waist") || "";
   document.getElementById("hip").value = params.get("hip") || "";
   document.getElementById("rise").value = params.get("rise") || "";
@@ -240,7 +240,7 @@ function loadData() {
 
  updatePattern();
 }
-
+debug(setting up Sliders..");
 // Sliders
 const backWaistSlider = document.getElementById("backWaistUpShift");
 const waistSlider = document.getElementById("waistShift");
@@ -252,7 +252,8 @@ const kneeSlider = document.getElementById("kneeAdj");
 const bottomSlider = document.getElementById("bottomAdj");
 const frontHipSlider = document.getElementById("frontHipAdj");
 const frontWaistSlider = document.getElementById("frontWaistAdj");
-                
+
+debug("adding EventListeners to Sliders..");
 backWaistSlider.addEventListener("input", updatePattern);
 waistSlider.addEventListener("input", updatePattern);
 hipSlider.addEventListener("input", updatePattern);
@@ -265,6 +266,7 @@ frontHipSlider.addEventListener("input", updatePattern);
 frontWaistSlider.addEventListener("input", updatePattern);
 
 function getPointAtDistance(p1, y2, d, side = "left") {
+  debug("function getPointAtDistance...");
   const dy = y2 - p1.y;
   const dx = Math.sqrt(d * d - dy * dy);
 
@@ -276,6 +278,7 @@ function getPointAtDistance(p1, y2, d, side = "left") {
 
 function getPointAtY(p1, p2, y) 
 {
+  debug("function getPointAtY...");
    const t = (y - p1.y) / (p2.y - p1.y);
 
    return {
@@ -291,6 +294,7 @@ function getPointAtY(p1, p2, y)
 
 function getPointAtX(p1, p2, x) 
 {
+  debug("function getPointAtX...");
    const t = (x - p1.x) / (p2.x - p1.x);
 
    return {
@@ -316,6 +320,7 @@ function getPointAtX(p1, p2, x)
     knee: parseFloat(document.getElementById("knee").value) || 0,
     leg_opening: parseFloat(document.getElementById("leg_opening").value) || 0,
 
+    debug("parsing Sliders values...");
     backWaist_up: parseInt(backWaistSlider.value),
     waist_shift: parseInt(waistSlider.value),
     hip_shift: parseInt(hipSlider.value),
@@ -328,6 +333,7 @@ function getPointAtX(p1, p2, x)
     frontWaist_adj: parseInt(frontWaistSlider.value)
   };
 
+  debug("get Sliders textcontent...");
   document.getElementById("backHipLineVal").textContent = m.backWaist_up;
   document.getElementById("waistShiftVal").textContent = m.waist_shift;
   document.getElementById("hipShiftVal").textContent = m.hip_shift;
@@ -383,7 +389,8 @@ function drawPattern(m) {
   const HRcrotch = (m.hip / 6) * scale;
 
   const crotchDepth = m.crotch_depth || 0;
-      
+
+  debug("creating FRONT PART PATTERN...");
   //FRONT PATTERN DRAWING 
   const fp1 = { x: center + waistShift - waistOffset, y: frontWaistLine };
   const fp2 = { x: center + Hwaist + waistShift + waistOffset + (Hwaist - (3 * scale)), y: frontWaistLine };
@@ -418,7 +425,7 @@ function drawPattern(m) {
     L ${fp15.x} ${fp15.y}
     Z
   `;
-  
+  debug("creating BACK PART...");
   //BACK PATTERN DRAWING 
   const bp1 = {x: center - scale, y: backWaistLine};
   const bp2 = getPointAtDistance(bp1, frontWaistLine, (BHwaist - waistOffset), "right");
@@ -453,7 +460,7 @@ function drawPattern(m) {
     L ${bp14.x} ${bp14.y}
     Z
     `;
-  
+  debug("calculating distances between points...");
   const topY = 0;
   const bottomY = bottomLine0 + 20; // konting allowance
   const waistLineXo = 0;
@@ -584,7 +591,7 @@ function drawPattern(m) {
   const Rbdx = Rbottom.x - frontBottomCenterPoint.x;
   const Rbdy = Rbottom.y - frontBottomCenterPoint.y;
   const Rbdistance = Math.sqrt(Rbdx * Rbdx + Rbdy * Rbdy) / scale;
- 
+ debug("svgFront.innerHTML ...");
   svgFront.innerHTML = 
   `
   <line 
@@ -851,6 +858,7 @@ function drawPattern(m) {
     marker-end="url(#arrow)"
   />
 `;
+  debug("svgBack.innerHTML...");
 svgBack.innerHTML = 
   `  <line 
     x1="${center}" 
