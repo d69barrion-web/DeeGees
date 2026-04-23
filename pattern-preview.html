@@ -266,7 +266,7 @@ frontHipSlider.addEventListener("input", updatePattern);
 frontWaistSlider.addEventListener("input", updatePattern);
 
 function getPointAtDistance(p1, y2, d, side = "left") {
-  debug("getPointAtDistance...");
+  
   const dy = y2 - p1.y;
   const dx = Math.sqrt(d * d - dy * dy);
 
@@ -309,7 +309,7 @@ function getPointAtX(p1, p2, x)
   //const px = getPointAtY(p1, p2, 75);
 
   function updatePattern() {
-    debug("updatePattern called");
+    
   const m = {
     waist: parseFloat(document.getElementById("waist").value) || 0,
     hip: parseFloat(document.getElementById("hip").value) || 0,
@@ -348,7 +348,7 @@ function getPointAtX(p1, p2, x)
   } 
   
 function drawPattern(m) {
-  debug("drawPattern started");
+  
   const svgFront = document.getElementById("svgCanvasFront");
   const svgBack = document.getElementById("svgCanvasBack");
 
