@@ -571,6 +571,24 @@ function drawPattern(m) {
   const Rtdy = Rthigh.y - frontThighCenterPoint.y;
   const Rtdistance = Math.sqrt(Rtdx * Rtdx + Rtdy * Rtdy) / scale;
 
+  //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
+  const backThighCenterPoint = { x: center, y: thighLine };
+  //LEFT END-POINT 
+  const Lbthigh = { center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
+  const LbtmidX = (backThighCenterPoint.x + Lbthigh.x) / 2;
+  const LbtmidY = (backThighCenterPoint.y + Lbthigh.y) / 2;
+  const Lbtdx = Lbthigh.x - backThighCenterPoint.x;
+  const Lbtdy = Lbthigh.y - backThighCenterPoint.y;
+  const Lbtdistance = Math.sqrt(Lbtdx * Lbtdx + Lbtdy * Lbtdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rbthigh = { x: center + Hthigh + thighOffset, y: thighLine };
+  const RbtmidX = (backThighCenterPoint.x + Rbthigh.x) / 2;
+  const RbtmidY = (backThighCenterPoint.y + Rbthigh.y) / 2;
+  const Rbtdx = Rbthigh.x - backThighCenterPoint.x;
+  const Rbtdy = Rbthigh.y - backThighCenterPoint.y;
+  const Rbtdistance = Math.sqrt(Rbtdx * Rbtdx + Rbtdy * Rbtdy) / scale;
+                  
   //DISTANCE FROM CENTER TO FRONT KNEE END-POINTS 
   const frontkneeCenterPoint = { x: center, y: kneeLine };
   //LEFT END-POINT 
@@ -977,6 +995,34 @@ svgBack.innerHTML =
     stroke="red" 
     stroke-width="1"
     stroke-dasharray="5,5"
+  />
+    front waistLine
+  </text>
+  <text x="${LbtmidX}" y="${LbtmidY}" fill="yellow" font-size="12">
+    ${Lbtdistance.toFixed(1)} "
+  </text>
+<text x="${RbtmidX}" y="${RbtmidY}" fill="yellow" font-size="12">
+    ${Rbtdistance.toFixed(1)} "
+  </text>
+  <line 
+    x1="${backThighCenterPoint.x}" 
+    y1="${backThighCenterPoint.y}" 
+    x2="${Lbthigh.x}" 
+    y2="${Lbthigh.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${backThighCenterPoint.x}" 
+    y1="${backThighCenterPoint.y}" 
+    x2="${Rbthigh.x}" 
+    y2="${Rbthigh.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
   />
     <line 
     x1="${thighLineXo}" 
