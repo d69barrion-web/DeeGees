@@ -199,7 +199,7 @@ function loadData() {
   document.getElementById("knee").value = params.get("knee") || "";
   document.getElementById("leg_opening").value = params.get("leg_opening") || "";
 
-//  updatePattern();
+ updatePattern();
 }
 
 // Sliders
@@ -299,7 +299,7 @@ function getPointAtX(p1, p2, x)
   document.getElementById("frontHipVal").textContent = m.frontHip_adj;
   document.getElementById("frontWaistVal").textContent = m.frontWaist_adj;
 
-// drawPattern(m);
+ drawPattern(m);
   } 
   
 function drawPattern(m) {
