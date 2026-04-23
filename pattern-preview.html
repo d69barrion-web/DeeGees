@@ -455,12 +455,12 @@ function drawPattern(m) {
   const Rwdistance = Math.sqrt(Rwdx * Rwdx + Rwdy * Rwdy) / scale;
 
   //DISTANCE FROM WAIST TO HIP END-POINTS 
-  const waistToHipCenterPoint = { x: 200, y: frontWaistLine + (frontHipLine - frontWaistLine / 2) };
+  const waistToHipCenterPoint = { x: 180, y: frontWaistLine + (frontHipLine - frontWaistLine / 2) };
   //LEFT END-POINT 
-  const WtoH = { x: 200, y: frontHipLine };
-  const WtoHmidX = (waistToHipCenterPoint.x + WtoH.x) / 2;
+  const WtoH = { x: 180, y: frontWaistLine + (frontHipLine - frontWaistLine / 2) };
+  const WtoHmidX = (waistToHipCenterPoint.y + WtoH.y) / 2;
   const WtoHmidY = (waistToHipCenterPoint.y + WtoH.y) / 2;
-  const WtoHdx = WtoH.x - waistToHipCenterPoint.x;
+  const WtoHdx = WtoH.y - waistToHipCenterPoint.x;
   const WtoHdy = WtoH.y - waistToHipCenterPoint.y;
   const WtoHdistance = Math.sqrt(WtoHdx * WtoHdx + WtoHdy * WtoHdy) / scale;
 
