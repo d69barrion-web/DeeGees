@@ -227,6 +227,7 @@ function debug(msg) {
 const params = new URLSearchParams(window.location.search);
 
 function loadData() {
+  debug("loadData");
   document.getElementById("waist").value = params.get("waist") || "";
   document.getElementById("hip").value = params.get("hip") || "";
   document.getElementById("rise").value = params.get("rise") || "";
