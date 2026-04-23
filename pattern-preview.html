@@ -425,7 +425,7 @@ function drawPattern(m) {
     L ${fp15.x} ${fp15.y}
     Z
   `;
-  debug("creating BACK PART...");
+  
   //BACK PATTERN DRAWING 
   const bp1 = {x: center - scale, y: backWaistLine};
   const bp2 = getPointAtDistance(bp1, frontWaistLine, (BHwaist - waistOffset), "right");
@@ -460,7 +460,7 @@ function drawPattern(m) {
     L ${bp14.x} ${bp14.y}
     Z
     `;
-  debug("calculating distances between points...");
+  
   const topY = 0;
   const bottomY = bottomLine0 + 20; // konting allowance
   const waistLineXo = 0;
