@@ -893,7 +893,13 @@ function drawPattern(m) {
 `;
   
 svgBack.innerHTML = 
-  `  <line 
+  ` 
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="white" />
+    </marker>
+  </defs>
+   <line 
     x1="${center}" 
     y1="${topY}" 
     x2="${center}" 
