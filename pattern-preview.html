@@ -871,7 +871,7 @@ function drawPattern(m) {
   const Lbtdistance = Math.sqrt(Lbtdx * Lbtdx + Lbtdy * Lbtdy) / scale;
 
   //RIGHT END-POINT 
-  const Rbthigh = { x: center + Hthigh + thighOffset, y: thighLine };
+  const Rbthigh = { x: center + Hthigh + thighOffset + (1.25 * scale), y: thighLine };
   const RbtmidX = (backThighCenterPoint.x + Rbthigh.x) / 2;
   const RbtmidY = (backThighCenterPoint.y + Rbthigh.y) / 2;
   const Rbtdx = Rbthigh.x - backThighCenterPoint.x;
