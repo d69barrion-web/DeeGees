@@ -344,6 +344,7 @@ function getPointAtX(p1, p2, x)
   
 function drawPattern(m) {
   debug("drawPattern started");
+  
   const svgFront = document.getElementById("svgCanvasFront");
   const svgBack = document.getElementById("svgCanvasBack");
 
@@ -381,7 +382,8 @@ function drawPattern(m) {
 
   const crotchDepth = m.crotch_depth || 0;
       
-  //FRONT PATTERN DRAWING 
+  ////////FRONT PATTERN DRAWING////////////////
+  
   const fp1 = { x: center + waistShift - waistOffset, y: frontWaistLine };
   const fp2 = { x: center + Hwaist + waistShift + waistOffset + (Hwaist - (3 * scale)), y: frontWaistLine };
   const fp3 = { x: center + Hthigh + frontHipShift + thighOffset, y: frontHipLine };
@@ -810,9 +812,10 @@ function drawPattern(m) {
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
-`;
-
-//BACK PATTERN DRAWING 
+  `;
+  
+  ////////BACK PATTERN DRAWING//////////////////// 
+  
   const backWaistLine = frontWaistLine - (2 * scale);
   const backCrotchLine = crotchLine + (scale/2);
   const backHipLine = backWaistLine + (frontHipLine - frontWaistLine);
