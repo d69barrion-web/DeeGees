@@ -240,7 +240,7 @@ function loadData() {
 
  updatePattern();
 }
-debug("setting up Sliders..");
+
 // Sliders
 const backWaistSlider = document.getElementById("backWaistUpShift");
 const waistSlider = document.getElementById("waistShift");
@@ -253,7 +253,7 @@ const bottomSlider = document.getElementById("bottomAdj");
 const frontHipSlider = document.getElementById("frontHipAdj");
 const frontWaistSlider = document.getElementById("frontWaistAdj");
 
-debug("adding EventListeners to Sliders..");
+
 backWaistSlider.addEventListener("input", updatePattern);
 waistSlider.addEventListener("input", updatePattern);
 hipSlider.addEventListener("input", updatePattern);
@@ -266,7 +266,7 @@ frontHipSlider.addEventListener("input", updatePattern);
 frontWaistSlider.addEventListener("input", updatePattern);
 
 function getPointAtDistance(p1, y2, d, side = "left") {
-  debug("function getPointAtDistance...");
+  
   const dy = y2 - p1.y;
   const dx = Math.sqrt(d * d - dy * dy);
 
@@ -278,7 +278,7 @@ function getPointAtDistance(p1, y2, d, side = "left") {
 
 function getPointAtY(p1, p2, y) 
 {
-  debug("function getPointAtY...");
+  
    const t = (y - p1.y) / (p2.y - p1.y);
 
    return {
@@ -294,7 +294,7 @@ function getPointAtY(p1, p2, y)
 
 function getPointAtX(p1, p2, x) 
 {
-  debug("function getPointAtX...");
+  
    const t = (x - p1.x) / (p2.x - p1.x);
 
    return {
