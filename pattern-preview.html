@@ -875,7 +875,25 @@ function drawPattern(m) {
   const Rbtdx = Rbthigh.x - backThighCenterPoint.x;
   const Rbtdy = Rbthigh.y - backThighCenterPoint.y;
   const Rbtdistance = Math.sqrt(Rbtdx * Rbtdx + Rbtdy * Rbtdy) / scale;
-  
+
+  //DISTANCE FROM CENTER TO FRONT THIGH END-POINTS
+  const backKneeCenterPoint = { x: center, y: kneeLine };
+  //LEFT END-POINT 
+  const Lbknee = { x: center - Hknee - kneeOffset, y: kneeLine };
+  const bLkmidX = (backKneeCenterPoint.x + Lbknee.x) / 2;
+  const LbkmidY = (backKneeCenterPoint.y + Lbknee.y) / 2;
+  const Lbkdx = Lbknee.x - backKneeCenterPoint.x;
+  const Lbkdy = Lbknee.y - backKneeCenterPoint.y;
+  const Lbkdistance = Math.sqrt(Lbkdx * Lbkdx + Lbkdy * Lbkdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rbknee = { x: center + Hknee + kneeOffset, y: kneeLine };
+  const RbkmidX = (backKneeCenterPoint.x + Rbknee.x) / 2;
+  const RbkmidY = (backKneeCenterPoint.y + Rbknee.y) / 2;
+  const Rbkdx = Rbknee.x - backKneeCenterPoint.x;
+  const Rbkdy = Rbknee.y - backKneeCenterPoint.y;
+  const Rbkdistance = Math.sqrt(Rbkdx * Rbkdx + Rbkdy * Rbkdy) / scale;
+                           
 svgBack.innerHTML = 
   `  <line 
     x1="${center}" 
