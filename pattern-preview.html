@@ -480,8 +480,24 @@ function drawPattern(m) {
   const bottomLine1Xi = 300;
   const bottomLine0Xo = 0; 
   const bottomLine0Xi = 300;
-  
-  
+
+  //DISTANCE FROM CENTER TO BACK WAIST END-POINTS 
+  const backWaistCenterPoint = getPointAtX(bp2, bp1 , center);
+  //LEFT END-POINT 
+  const Lbwaist = {x: backWaistCenterPoint.x - scale, y: backWaistCenterPoint.y};
+  const LbwmidX = (backWaistCenterPoint.x + Lbwaist.x) / 2;
+  const LbwmidY = (backWaistCenterPoint.y + Lbwaist.y) / 2;
+  const Lbwdx = Lbwaist.x - backWaistCenterPoint.x;
+  const Lbwdy = Lbwaist.y - backWaistCenterPoint.y;
+  const Lbwdistance = Math.sqrt(Lbwdx * Lbwdx + Lbwdy * Lbwdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rbwaist = {x: backWaistCenterPoint.x + BHwaist, y: frontWaistLine - backWaistCenterPoint.y };
+  const RbwmidX = (backWaistCenterPoint.x + Rbwaist.x) / 2;
+  const RbwmidY = (backWaistCenterPoint.y + Rbwaist.y) / 2;
+  const Rbwdx = Rbwaist.x - backWaistCenterPoint.x;
+  const Rbwdy = Rbwaist.y - backWaistCenterPoint.y;
+  const Rbwdistance = Math.sqrt(Rbwdx * Rbwdx + Rbwdy * Rbwdy) / scale;
                   
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: frontWaistLine };
