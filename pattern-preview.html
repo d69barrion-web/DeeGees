@@ -454,16 +454,6 @@ function drawPattern(m) {
   const Rwdy = Rwaist.y - waistCenterPoint.y;
   const Rwdistance = Math.sqrt(Rwdx * Rwdx + Rwdy * Rwdy) / scale;
 
-  //DISTANCE FROM WAIST TO HIP END-POINTS 
-  const waistToHipCenterPoint = { x: 180, y: frontWaistLine + (frontHipLine - frontWaistLine / 2) };
-  //LEFT END-POINT 
-  const WtoH = { x: 180, y: frontWaistLine + (frontHipLine - frontWaistLine / 2) };
-  const WtoHmidX = (waistToHipCenterPoint.y + WtoH.y) / 2;
-  const WtoHmidY = (waistToHipCenterPoint.y + WtoH.y) / 2;
-  const WtoHdx = WtoH.y - waistToHipCenterPoint.x;
-  const WtoHdy = WtoH.y - waistToHipCenterPoint.y;
-  const WtoHdistance = Math.sqrt(WtoHdx * WtoHdx + WtoHdy * WtoHdy) / scale;
-
   //DISTANCE FROM CENTER TO FRONTHIP END-POINTS 
   const frontHipCenterPoint = { x: center, y: frontHipLine };
   //LEFT END-POINT 
@@ -663,16 +653,6 @@ function drawPattern(m) {
     marker-end="url(#arrow)"
   />
   <line 
-    x1="${waistToHipCenterPoint.x}" 
-    y1="${waistToHipCenterPoint.y}" 
-    x2="${WtoH.x}" 
-    y2="${WtoH.y}"  
-    stroke="white"
-    stroke-width="0.5"
-    marker-start="url(#arrow)"
-    marker-end="url(#arrow)"
-  />
-  <line 
     x1="${frontHipCenterPoint.x}" 
     y1="${frontHipCenterPoint.y}" 
     x2="${Lhip.x}" 
@@ -784,9 +764,6 @@ function drawPattern(m) {
   </text>
   <text x="${RwmidX}" y="${RwmidY}" fill="yellow" font-size="12">
     ${Rwdistance.toFixed(1)} "
-  </text>
-  <text x="${180}" y="${WtoHmidY}" fill="yellow" font-size="12">
-    ${WtoHdistance.toFixed(1)} "
   </text>
   <text x="${200}" y="${LhmidY}" fill="white" font-size="12">
     front hipLine
