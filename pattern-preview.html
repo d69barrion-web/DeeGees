@@ -945,8 +945,9 @@ function drawPattern(m) {
     Z
     `;
   const totFrontHeightCenterPoint = ((m.outseam + 2) / 2) * scale;
-  const backWaistToBackHipCenterPoint = backWaistLine + ((backHipLine - backWaistLine) / 2)
-  const frontWaistToBackHipCenterPoint = frontWaistLine + ((backHipLine - frontWaistLine) / 2)
+  const backWaistToBackHipCenterPoint = backWaistLine + ((backHipLine - backWaistLine) / 2);
+  const frontWaistToBackHipCenterPoint = frontWaistLine + ((backHipLine - frontWaistLine) / 2);
+  const pantsLengthCenterPoint = frontWaistLine + ((bottomLine1 - frontWaistLine) / 2);
   
   //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
   const backThighCenterPoint = { x: center, y: thighLine };
@@ -1146,6 +1147,16 @@ svgBack.innerHTML =
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
+  <line 
+    x1="${260}" 
+    y1="${frontWaistLine}" 
+    x2="${260}" 
+    y2="${bottomLine1}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
   
   <line 
     x1="${backThighCenterPoint.x}" 
@@ -1246,6 +1257,9 @@ svgBack.innerHTML =
   
   <text x="${200}" y="${frontWaistToBackHipCenterPoint}" fill="yellow" font-size="12">
     ${((backHipLine - frontWaistLine) / scale).toFixed(1)} "
+  </text>
+  <text x="${260}" y="${pantsLengthCenterPoint}" fill="yellow" font-size="12">
+    ${((bottomLine1 - frontWaistLine) / scale).toFixed(1)} "
   </text>
 `;
 }
