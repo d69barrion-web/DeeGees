@@ -119,7 +119,7 @@
     <div class="card">
       <h2>(FRONT PART)</h2>
       <svg id="svgCanvasFront"></svg> 
-      <button onclick="downloadSVG()">Download SVG</button>
+      <button onclick="downloadPNG()">Download SVG</button>
     </div>
 
     <!-- FRONT & BACK PART -->
@@ -1349,28 +1349,37 @@ svgBack.innerHTML =
   // init
 loadData();
 
-function downloadSVG() {
-  const svg = document.getElementById("svgCanvasFront"); // or kung alin gusto mo
+function downloadPNG() {
+  const svg = document.getElementById("svgCanvasFront");
   const serializer = new XMLSerializer();
-  let source = serializer.serializeToString(svg);
+  const source = serializer.serializeToString(svg);
 
-  // Add XML declaration (optional but good practice)
-  if (!source.match(/^<\?xml/)) {
-    source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+  const img = new Image();
+  const svgBlob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(svgBlob);
+
+  img.onload = function () {
+    const canvas = document.createElement("canvas");
+    canvas.width = svg.clientWidth;
+    canvas.height = svg.clientHeight;
+
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    URL.revokeObjectURL(url);
+
+    const imgURI = canvas.toDataURL("image/png");
+
+    const a = document.createElement("a");
+    a.href = imgURI;
+    a.download = "pattern.png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  img.src = url;
   }
-
-  const blob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "pattern.svg";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  URL.revokeObjectURL(url);
-    }
 
 </script>
 
