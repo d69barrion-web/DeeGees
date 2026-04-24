@@ -959,10 +959,10 @@ function drawPattern(m) {
   const RbEdy = RbEhip.y - backHipEndPoint.y;
   const RbEdistance = Math.sqrt(RbEdx * RbEdx + RbEdy * RbEdy) / scale;
   
-  //DISTANCE FROM CENTER TO BACK HIP END-POINTS 
+  //DISTANCE FROM CENTER TO BACK HIP END-POINT
   const backHipCenterPoint = { x: center, y: frontHipLine };
   //RIGHT END-POINT 
-  const Rbhip = { x: center + bp3.x, y: frontHipLine };
+  const Rbhip = { x: bp3.x, y: frontHipLine };
   const RbhmidX = (backHipCenterPoint.x + Rbhip.x) / 2;
   const RbhmidY = (backHipCenterPoint.y + Rbhip.y) / 2;
   const Rbhdx = Rbhip.x - backHipCenterPoint.x;
