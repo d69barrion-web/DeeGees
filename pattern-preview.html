@@ -949,8 +949,8 @@ function drawPattern(m) {
   const frontWaistToBackHipCenterPoint = frontWaistLine + ((backHipLine - frontWaistLine) / 2);
   const pantsLengthCenterPoint = frontWaistLine + ((bottomLine1 - frontWaistLine) / 2);
 
-  //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
-  const backHipCenterPoint = { x: center, y: backHipLine };
+  //DISTANCE FROM CENTER TO BACK HIP END-POINTS 
+  const backHipCenterPoint = { x: center, y: frontWaistLine };
   //RIGHT END-POINT 
   const Rbhip = { x: bp3.x , y: bp3.y };
   const RbhmidX = (backHipCenterPoint.x + Rbhip.x) / 2;
@@ -1240,7 +1240,7 @@ svgBack.innerHTML =
     marker-end="url(#arrow)"
   />
   
-  <text x="${RbhmidX}" y="${RbhmidY}" fill="white" font-size="12">
+  <text x="${RbhmidX}" y="${RbhmidY}" fill="yellow" font-size="12">
     ${Rbhdistance.toFixed(1)} "
   </text>
   <text x="${200}" y="${LhmidY}" fill="white" font-size="12">
