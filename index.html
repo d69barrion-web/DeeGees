@@ -120,6 +120,16 @@
     <a href="get-started.html" class="btn">Start your 7 days free trial</a>
 
   </div>
+<script>
+function handleStart() {
+  const userLoggedIn = false; // TEMP lang muna
 
+  if (userLoggedIn) {
+    window.location.href = "pattern-preview.html";
+  } else {
+    window.location.href = "auth-required.html";
+  }
+}
+</script>
 </body>
 </html>
