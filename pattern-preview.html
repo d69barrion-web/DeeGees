@@ -945,7 +945,8 @@ function drawPattern(m) {
     Z
     `;
   const totFrontHeightCenterPoint = ((m.outseam + 2) / 2) * scale;
-   
+  const backWaistToBackHipCenterPoint = backWaistLine + ((backHipLine - backWaistLine) / 2)
+  
   //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
   const backThighCenterPoint = { x: center, y: thighLine };
   //LEFT END-POINT 
@@ -1218,6 +1219,10 @@ svgBack.innerHTML =
   <text x="${10}" y="${totFrontHeightCenterPoint}" fill="yellow" font-size="12">
     ${(m.outseam + 1).toFixed(1)} "
   </text>
+  <text x="${20}" y="${backWaistToBackHipCenterPoint}" fill="yellow" font-size="12">
+    ${((backHipLine - backWaistLine) / scale).toFixed(1)} "
+  </text>
+  
 `;
 }
   // init
