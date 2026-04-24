@@ -119,13 +119,14 @@
     <div class="card">
       <h2>(FRONT PART)</h2>
       <svg id="svgCanvasFront"></svg> 
-      <button onclick="downloadPNG()">Download SVG</button>
+      <button onclick="downloadFront()">Download as PNG</button>
     </div>
 
     <!-- FRONT & BACK PART -->
     <div class="card">
       <h2>(W/BACK PART)</h2>
-      <svg id="svgCanvasBack"></svg> 
+      <svg id="svgCanvasBack"></svg>
+      <button onclick="downloadBack()">Download as PNG</button>
     </div>
 
     <!-- ADJUSTMENT CONTROLS -->
@@ -1349,7 +1350,7 @@ svgBack.innerHTML =
   // init
 loadData();
 
-function downloadPNG() {
+function downloadFront() {
   const svg = document.getElementById("svgCanvasFront");
   const serializer = new XMLSerializer();
   const source = serializer.serializeToString(svg);
@@ -1380,6 +1381,38 @@ function downloadPNG() {
 
   img.src = url;
   }
+
+  function downloadBack() {
+  const svg = document.getElementById("svgCanvasBack");
+  const serializer = new XMLSerializer();
+  const source = serializer.serializeToString(svg);
+
+  const img = new Image();
+  const svgBlob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(svgBlob);
+
+  img.onload = function () {
+    const canvas = document.createElement("canvas");
+    canvas.width = svg.clientWidth;
+    canvas.height = svg.clientHeight;
+
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    URL.revokeObjectURL(url);
+
+    const imgURI = canvas.toDataURL("image/png");
+
+    const a = document.createElement("a");
+    a.href = imgURI;
+    a.download = "pattern.png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  img.src = url;
+    }
 
 </script>
 
