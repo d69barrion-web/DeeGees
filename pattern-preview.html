@@ -963,10 +963,10 @@ function drawPattern(m) {
   const backHipCenterPoint = { x: center, y: frontHipLine };
   //RIGHT END-POINT 
   const LbEhigh = { x: center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
-  const LbEmidX = (backThighCenterPoint.x + Lbthigh.x) / 2;
-  const LbEmidY = (backThighCenterPoint.y + Lbthigh.y) / 2;
-  const LbEdx = Lbthigh.x - backThighCenterPoint.x;
-  const LbEdy = Lbthigh.y - backThighCenterPoint.y;
+  const LbEmidX = (backHipCenterPoint.x + Lbthigh.x) / 2;
+  const LbEmidY = (backHipCenterPoint.y + Lbthigh.y) / 2;
+  const LbEdx = Lbthigh.x - backHipCenterPoint.x;
+  const LbEdy = Lbthigh.y - backHipCenterPoint.y;
   const LbEdistance = Math.sqrt(Lbtdx * Lbtdx + Lbtdy * Lbtdy) / scale;
 
   //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
