@@ -944,7 +944,8 @@ function drawPattern(m) {
     L ${bp14.x} ${bp14.y}
     Z
     `;
-  
+  const totFrontHeightCenterPoint = ((m.outseam + 2) / 2) * scale;
+   
   //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
   const backThighCenterPoint = { x: center, y: thighLine };
   //LEFT END-POINT 
@@ -1114,6 +1115,17 @@ svgBack.innerHTML =
   </defs>
 
   <line 
+    x1="${20}" 
+    y1="${frontWaistline}" 
+    x2="${20}" 
+    y2="${bottomLine0}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+
+  <line 
     x1="${backThighCenterPoint.x}" 
     y1="${backThighCenterPoint.y}" 
     x2="${Lbthigh.x}" 
@@ -1203,6 +1215,9 @@ svgBack.innerHTML =
     ${Rbbdistance.toFixed(1)} "
   </text>
   
+  <text x="${20}" y="${totFrontHeightCenterPoint}" fill="yellow" font-size="12">
+    ${((m.outseam + 1) / 2).toFixed(1)} "
+  </text>
 `;
 }
   // init
