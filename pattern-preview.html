@@ -435,10 +435,14 @@ function drawPattern(m) {
   const bottomLine0Xi = 300;
   
   
-  //DISTANCE FROM WAIST TO HIP END-POINTS 
+  //DISTANCE FROM WAIST TO HIP
   const waistToHipCenterPoint = frontWaistLine + ((frontHipLine - frontWaistLine) / 2);
   const hipY = (frontHipLine - frontWaistLine) / scale;
-                
+
+  //DISTANCE FROM WAIST TO CROTCH
+  const waistToCrotchCenterPoint = frontWaistLine + ((crotchLine - frontWaistLine) / 2);
+  const hipY = (crotchLine - frontWaistLine) / scale;
+
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: frontWaistLine };
   //LEFT END-POINT 
@@ -635,6 +639,27 @@ function drawPattern(m) {
     </marker>
   </defs>
 
+  <line
+    x1="${180}" 
+    y1="${frontWaistLine}" 
+    x2="${180}" 
+    y2="${frontHipLine}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line
+    x1="${50}" 
+    y1="${frontWaistLine}" 
+    x2="${50}" 
+    y2="${crotchLine}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  
   <line 
     x1="${waistCenterPoint.x}" 
     y1="${waistCenterPoint.y}" 
@@ -674,18 +699,7 @@ function drawPattern(m) {
     stroke-width="0.5"
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
-  />
-  <line
-    x1="${180}" 
-    y1="${frontWaistLine}" 
-    x2="${180}" 
-    y2="${frontHipLine}"  
-    stroke="white"
-    stroke-width="0.5"
-    marker-start="url(#arrow)"
-    marker-end="url(#arrow)"
-  />
-         
+  />      
   <line 
     x1="${frontCrotchCenterPoint.x}" 
     y1="${frontCrotchCenterPoint.y}" 
