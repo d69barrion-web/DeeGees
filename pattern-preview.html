@@ -857,8 +857,8 @@ function drawPattern(m) {
     Z
     `;
   //DISTANCE FROM WAIST TO HIP END-POINTS 
-  const waistToHipCenterPoint = { x: 180, y: frontWaistLine + (frontHipLine - frontWaistLine) };
-
+  const waistToHipCenterPoint = frontWaistLine + (frontHipLine - frontWaistLine);
+  const hipY = (frontHipLine - frontWaistLine) / scale;
   //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
   const backThighCenterPoint = { x: center, y: thighLine };
   //LEFT END-POINT 
@@ -1029,9 +1029,9 @@ svgBack.innerHTML =
 
   <line
     x1="${180}" 
-    y1="${frontHipLine}" 
+    y1="${frontWaistLine}" 
     x2="${180}" 
-    y2="${frontWaistLine}"  
+    y2="${frontHipLine}"  
     stroke="white"
     stroke-width="0.5"
     marker-start="url(#arrow)"
@@ -1099,6 +1099,9 @@ svgBack.innerHTML =
     marker-end="url(#arrow)"
   />
 
+  <text x="${180}" y="${waistToHipCenterPoint">
+   ${hipY.toFixed(1)} "
+  </text>
   <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
     thighLine
   </text>
