@@ -1352,6 +1352,13 @@ svgBack.innerHTML =
 
 function downloadFront() {
   const svg = document.getElementById("svgCanvasFront");
+
+  // ✅ CHECK KUNG WALANG LAMAN
+  if (!svg || svg.children.length === 0) {
+    alert("Walang pattern na naka-draw.");
+    return;
+  }
+
   const serializer = new XMLSerializer();
   const source = serializer.serializeToString(svg);
 
@@ -1380,7 +1387,7 @@ function downloadFront() {
   };
 
   img.src = url;
-  }
+}
 
   function downloadBack() {
   const svg = document.getElementById("svgCanvasBack");
