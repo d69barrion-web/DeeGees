@@ -856,6 +856,8 @@ function drawPattern(m) {
     L ${bp14.x} ${bp14.y}
     Z
     `;
+  //DISTANCE FROM WAIST TO HIP END-POINTS 
+  const waistToHipCenterPoint = { x: 180, y: frontWaistLine + (frontHipLine - frontWaistLine) };
 
   //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
   const backThighCenterPoint = { x: center, y: thighLine };
@@ -1025,8 +1027,19 @@ svgBack.innerHTML =
     </marker>
   </defs>
 
+  <line
+    x=1"${waistToHipCenterPoint.x}" 
+    y1="${waistToHipCenterPoint.y}" 
+    x2="${180}" 
+    y2="${frontWaistLine}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+
   <line 
-    x1="${backThighCenterPoint.x}" 
+    x=1"${backThighCenterPoint.x}" 
     y1="${backThighCenterPoint.y}" 
     x2="${Lbthigh.x}" 
     y2="${Lbthigh.y}"  
