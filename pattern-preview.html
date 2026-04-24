@@ -950,6 +950,16 @@ function drawPattern(m) {
   const pantsLengthCenterPoint = frontWaistLine + ((bottomLine1 - frontWaistLine) / 2);
 
   //BACK HIP LENGTH
+  const backWaistEndPoint = { x: bp3.x , y: frontHipLine };
+  //RIGHT END-POINT 
+  const Rbwaist = { x: bp14.x , y: bp14.y };
+  const RbwmidX = (backWaistEndPoint.x + Rbwaist.x) / 2;
+  const RbwmidY = (backWaistEndPoint.y + Rbwaist.y) / 2;
+  const Rbwdx = Rbwaist.x - backWaistEndPoint.x;
+  const Rbwdy = Rbwaist.y - backWaistEndPoint.y;
+  const Rbwdistance = Math.sqrt(Rbwdx * Rbwdx + Rbwdy * Rbwdy) / scale;
+  
+  //BACK HIP LENGTH
   const backHipEndPoint = { x: bp3.x , y: frontHipLine };
   //RIGHT END-POINT 
   const RbEhip = { x: bp14.x , y: bp14.y };
@@ -1179,6 +1189,16 @@ svgBack.innerHTML =
   />
   
   <line 
+    x1="${backWaistEndPoint.x}" 
+    y1="${backWaistEndPoint.y}" 
+    x2="${Rbwaist.x}" 
+    y2="${Rbwaist.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
     x1="${backHipEndPoint.x}" 
     y1="${backHipEndPoint.y}" 
     x2="${RbEhip.x}" 
@@ -1259,6 +1279,9 @@ svgBack.innerHTML =
     marker-end="url(#arrow)"
   />
 
+  <text x="${RbwmidX}" y="${RbwmidY}" fill="yellow" font-size="12">
+    ${Rbwdistance.toFixed(2)} "
+  </text>
   <text x="${RbEmidX}" y="${RbEmidY}" fill="yellow" font-size="12">
     ${RbEdistance.toFixed(2)} "
   </text>
