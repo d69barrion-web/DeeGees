@@ -1125,7 +1125,17 @@ svgBack.innerHTML =
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
-
+  <line 
+    x1="${30}" 
+    y1="${backWaistLine}" 
+    x2="${30}" 
+    y2="${backHipLine}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  
   <line 
     x1="${backThighCenterPoint.x}" 
     y1="${backThighCenterPoint.y}" 
@@ -1186,7 +1196,7 @@ svgBack.innerHTML =
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
-
+  
   <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
     thighLine
   </text>
@@ -1219,7 +1229,7 @@ svgBack.innerHTML =
   <text x="${10}" y="${totFrontHeightCenterPoint}" fill="yellow" font-size="12">
     ${(m.outseam + 1).toFixed(1)} "
   </text>
-  <text x="${20}" y="${backWaistToBackHipCenterPoint}" fill="yellow" font-size="12">
+  <text x="${30}" y="${backWaistToBackHipCenterPoint}" fill="yellow" font-size="12">
     ${((backHipLine - backWaistLine) / scale).toFixed(1)} "
   </text>
   
