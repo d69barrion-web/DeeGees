@@ -1349,6 +1349,29 @@ svgBack.innerHTML =
   // init
 loadData();
 
+function downloadSVG() {
+  const svg = document.getElementById("svgCanvasFront"); // or kung alin gusto mo
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svg);
+
+  // Add XML declaration (optional but good practice)
+  if (!source.match(/^<\?xml/)) {
+    source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+  }
+
+  const blob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "pattern.svg";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+    }
+
 </script>
 
 </body>
