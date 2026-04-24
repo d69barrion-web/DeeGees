@@ -930,7 +930,7 @@ function drawPattern(m) {
   const bpa = getPointAtY(bp13, bp16, frontHipLine);
   const bp15 = {x: bpa.x + backCrotchCurve, y: bpa.y};
   const bpb = getPointAtY(bp13, bp15, frontHipLine + ((crotchLine - frontHipLine) /2));
-  const bp14 = {x: bpb.x + backCrotchCurve, y: bpb.y};
+  const bp14 = {x: bpb.x + (backCrotchCurve / 2), y: bpb.y};
   
   const bpath = `
     M ${bp1.x} ${bp1.y}
@@ -944,9 +944,9 @@ function drawPattern(m) {
     L ${bp9.x} ${bp9.y}
     L ${bp10.x} ${bp10.y}
     L ${bp11.x} ${bp11.y}
-    L ${bp12.x} ${bp12.y} ${bp13.x} ${bp13.y}
-    Q ${bp13.x} ${bp13.y} ${bp14.x} ${bp14.y}
-    Q ${bp14.x} ${bp14.y} ${bp15.x} ${bp15.y}
+    L ${bp12.x} ${bp12.y} 
+    L ${bp13.x} ${bp13.y} 
+    L ${bp14.x} ${bp14.y} 
     L ${bp15.x} ${bp15.y}
     L ${bp16.x} ${bp16.y}
     Z
