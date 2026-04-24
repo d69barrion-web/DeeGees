@@ -857,7 +857,7 @@ function drawPattern(m) {
     Z
     `;
   //DISTANCE FROM WAIST TO HIP END-POINTS 
-  const waistToHipCenterPoint = frontWaistLine + (frontHipLine - frontWaistLine);
+  const waistToHipCenterPoint = frontWaistLine + ((frontHipLine - frontWaistLine) / 2;
   const hipY = (frontHipLine - frontWaistLine) / scale;
  
   //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
