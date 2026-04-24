@@ -926,9 +926,11 @@ function drawPattern(m) {
   const bp12 = {x: center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
   const bpx =  {x: center - Hcrotch - crotchDepth + crotchShift - (scale * 1.375), y: crotchLine};
   const bp13 = getPointAtY(bpx, bp12, crotchLine + (scale/2));
-  const bp15 = getPointAtDistance(bp3, backHipLine, BHhip - hipOffset , "left");
-  const bpc = getPointAtY(bp13, bp15, frontHipLine);
-  const bp14 = {x: bpc.x + backCrotchCurve, y: bpc.y};
+  const bp16 = getPointAtDistance(bp3, backHipLine, BHhip - hipOffset , "left");
+  const bpa = getPointAtY(bp13, bp15, frontHipLine);
+  const bp15 = {x: bpa.x + backCrotchCurve, y: bpa.y};
+  const bpb = getPointAtY(bp13, bp14, frontHipLine + ((crotchLine - frontHipLine) /2);
+  const bp14 = {x: bpb.x + backCrotchCurve, y: bpb.y};
   
   const bpath = `
     M ${bp1.x} ${bp1.y}
@@ -946,6 +948,7 @@ function drawPattern(m) {
     Q ${bp13.x} ${bp13.y} ${bp14.x} ${bp14.y}
     Q ${bp14.x} ${bp14.y} ${bp15.x} ${bp15.y}
     L ${bp15.x} ${bp15.y}
+    L ${bp16.x} ${bp16.y}
     Z
     `;
   const totFrontHeightCenterPoint = ((m.outseam + 2) / 2) * scale;
@@ -966,7 +969,7 @@ function drawPattern(m) {
   //BACK HIP LENGTH
   const backHipEndPoint = { x: bp3.x , y: frontHipLine };
   //RIGHT END-POINT 
-  const RbEhip = { x: bp15.x , y: bp15.y };
+  const RbEhip = { x: bp16.x , y: bp16.y };
   const RbEmidX = (backHipEndPoint.x + RbEhip.x) / 2;
   const RbEmidY = (backHipEndPoint.y + RbEhip.y) / 2;
   const RbEdx = RbEhip.x - backHipEndPoint.x;
