@@ -435,7 +435,10 @@ function drawPattern(m) {
   const bottomLine0Xi = 300;
   
   
-                  
+  //DISTANCE FROM WAIST TO HIP END-POINTS 
+  const waistToHipCenterPoint = frontWaistLine + ((frontHipLine - frontWaistLine) / 2);
+  const hipY = (frontHipLine - frontWaistLine) / scale;
+                
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: frontWaistLine };
   //LEFT END-POINT 
@@ -672,6 +675,17 @@ function drawPattern(m) {
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
+  <line
+    x1="${180}" 
+    y1="${frontWaistLine}" 
+    x2="${180}" 
+    y2="${frontHipLine}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+         
   <line 
     x1="${frontCrotchCenterPoint.x}" 
     y1="${frontCrotchCenterPoint.y}" 
@@ -767,6 +781,9 @@ function drawPattern(m) {
   </text>
   <text x="${200}" y="${LhmidY}" fill="white" font-size="12">
     front hipLine
+  <text x="${180}" y="${waistToHipCenterPoint}" fill="yellow" font-size="12">
+   ${hipY.toFixed(1)} "
+  </text>
   </text>
   <text x="${LhmidX}" y="${LhmidY}" fill="yellow" font-size="12">
     ${Lhdistance.toFixed(1)} "
@@ -856,10 +873,7 @@ function drawPattern(m) {
     L ${bp14.x} ${bp14.y}
     Z
     `;
-  //DISTANCE FROM WAIST TO HIP END-POINTS 
-  const waistToHipCenterPoint = frontWaistLine + ((frontHipLine - frontWaistLine) / 2);
-  const hipY = (frontHipLine - frontWaistLine) / scale;
- 
+  
   //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
   const backThighCenterPoint = { x: center, y: thighLine };
   //LEFT END-POINT 
@@ -1028,17 +1042,6 @@ svgBack.innerHTML =
     </marker>
   </defs>
 
-  <line
-    x1="${180}" 
-    y1="${frontWaistLine}" 
-    x2="${180}" 
-    y2="${frontHipLine}"  
-    stroke="white"
-    stroke-width="0.5"
-    marker-start="url(#arrow)"
-    marker-end="url(#arrow)"
-  />
-
   <line 
     x1="${backThighCenterPoint.x}" 
     y1="${backThighCenterPoint.y}" 
@@ -1100,9 +1103,6 @@ svgBack.innerHTML =
     marker-end="url(#arrow)"
   />
 
-  <text x="${180}" y="${waistToHipCenterPoint}" fill="yellow" font-size="12">
-   ${hipY.toFixed(1)} "
-  </text>
   <text x="${200}" y="${LtmidY}" fill="white" font-size="12">
     thighLine
   </text>
