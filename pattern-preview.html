@@ -450,6 +450,10 @@ function drawPattern(m) {
   //DISTANCE FROM THIGH TO KNEE
   const thighToKneeCenterPoint = thighLine + ((kneeLine - thighLine) / 2);
   const kneeY = (kneeLine - thighLine) / scale;
+
+  //DISTANCE FROM KNEE TO LEG OPENING 
+  const kneeToBottomCenterPoint = kneeLine + ((bottomLine0 - kneeLine) / 2);
+  const bottomY = (bottomLine0 - kneeLine) / scale;
   
   //DISTANCE FROM CENTER TO WAIST END-POINTS 
   const waistCenterPoint = { x: center, y: frontWaistLine };
@@ -687,6 +691,16 @@ function drawPattern(m) {
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
+  <line
+    x1="${20}" 
+    y1="${kneeLine}" 
+    x2="${20}" 
+    y2="${bottomLine0}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
   
   <line 
     x1="${waistCenterPoint.x}" 
@@ -864,6 +878,10 @@ function drawPattern(m) {
   <text x="${20}" y="${thighToKneeCenterPoint}" fill="yellow" font-size="12">
     ${kneeY.toFixed(1)} "
   </text>
+  <text x="${20}" y="${kneeToBottomCenterPoint}" fill="yellow" font-size="12">
+    ${bottomY.toFixed(1)} "
+  </text>
+  
   <text x="${200}" y="${LkmidY}" fill="white" font-size="12">
     kneeLine
   </text>
