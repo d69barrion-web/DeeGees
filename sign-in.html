@@ -146,7 +146,30 @@ function login() {
       window.location.href = "pattern-preview.html";
     })
     .catch(error => {
-      alert(error.message);
+  let message = "";
+
+  switch (error.code) {
+    case "auth/user-not-found":
+      message = "Walang account na gumagamit ng email na ito.";
+      break;
+
+    case "auth/wrong-password":
+      message = "Maling password. Subukan muli.";
+      break;
+
+    case "auth/invalid-email":
+      message = "Hindi valid ang email format.";
+      break;
+
+    case "auth/too-many-requests":
+      message = "Masyadong maraming attempts. Subukan ulit mamaya.";
+      break;
+
+    default:
+      message = "May error. Subukan muli.";
+  }
+
+  alert(message);
     });
 }
 </script>
