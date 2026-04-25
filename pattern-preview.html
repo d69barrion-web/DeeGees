@@ -1428,6 +1428,25 @@ function downloadFront() {
   img.src = url;
 }
 </script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "deegees-a23ec.firebaseapp.com",
+  projectId: "deegees-a23ec",
+  appId: "1:8167..."
+};
+
+firebase.initializeApp(firebaseConfig);
+
+// 🔒 PROTECTION
+firebase.auth().onAuthStateChanged(function(user) {
+  if (!user) {
+    window.location.href = "signin.html";
+  }
+});
+</script>
 </body>
 </html>
