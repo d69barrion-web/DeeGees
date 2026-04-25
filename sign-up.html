@@ -120,6 +120,21 @@
   </div>
 </div>
 
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "deegees-a23ec.firebaseapp.com",
+  projectId: "deegees-a23ec",
+  appId: "1:8167..."
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+</script>
 <script>
 function signup() {
   const email = document.getElementById("email").value;
@@ -145,21 +160,9 @@ function signup() {
       alert(error.message);
     });
 }
-</script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+   </script>
 
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSy...",
-  authDomain: "deegees-a23ec.firebaseapp.com",
-  projectId: "deegees-a23ec",
-  appId: "1:8167..."
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-</script>
+ 
 </body>
 </html>
 
