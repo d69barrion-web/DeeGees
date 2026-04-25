@@ -227,19 +227,26 @@ function debug(msg) {
 
 // Load from URL
   debug("params");
-const params = new URLSearchParams(window.location.search);
+const fields = ["waist", "hip", "rise", "outseam", "inseam", "thigh", "knee", "leg_opening"];
 
-function loadData() {
+fields.forEach(id => {
+  const input = document.getElementById(id);
+
+  input.addEventListener("input", function() {
+    localStorage.setItem(id, this.value);
+  });
+});
+  
+  function loadData() {
   debug("loadData");
-  document.getElementById("waist").value = params.get("waist") || "";
-  document.getElementById("hip").value = params.get("hip") || "";
-  document.getElementById("rise").value = params.get("rise") || "";
-  document.getElementById("outseam").value = params.get("outseam") || "";
-  document.getElementById("inseam").value = params.get("inseam") || "";
-  document.getElementById("thigh").value = params.get("thigh") || "";
-  document.getElementById("knee").value = params.get("knee") || "";
-  document.getElementById("leg_opening").value = params.get("leg_opening") || "";
-
+  document.getElementById("waist").value = localStorage.getItem("waist") || "";
+  document.getElementById("hip").value = localStorage.getItem("hip") || "";
+  document.getElementById("rise").value = localStorage.getItem("rise") || "";
+  document.getElementById("outseam").value = localStorage.getItem("outseam") || "";
+  document.getElementById("inseam").value = localStorage.getItem("inseam") || "";
+  document.getElementById("thigh").value = localStorage.getItem("thigh") || "";
+  document.getElementById("knee").value = localStorage.getItem("knee") || "";
+  document.getElementById("leg_opening").value = localStorage.getItem("leg_opening") || "";
  updatePattern();
 }
 
