@@ -146,31 +146,32 @@ function login() {
       window.location.href = "pattern-preview.html";
     })
     .catch(error => {
+  console.log(error); // para makita mo sa console
+
   let message = "";
 
-  switch (error.code) {
-    case "auth/user-not-found":
-      message = "Walang account na gumagamit ng email na ito.";
-      break;
+  const code = error.code || "";
+  const msg = error.message || "";
 
-    case "auth/wrong-password":
-      message = "Maling password. Subukan muli.";
-      break;
-
-    case "auth/invalid-email":
-      message = "Hindi valid ang email format.";
-      break;
-
-    case "auth/too-many-requests":
-      message = "Masyadong maraming attempts. Subukan ulit mamaya.";
-      break;
-
-    default:
-      message = "May error. Subukan muli.";
+  if (
+    code === "auth/user-not-found" ||
+    code === "auth/wrong-password" ||
+    msg.includes("INVALID_LOGIN_CREDENTIALS")
+  ) {
+    message = "Maling email o password.";
+  } 
+  else if (code === "auth/invalid-email") {
+    message = "Hindi valid ang email format.";
+  } 
+  else if (code === "auth/too-many-requests") {
+    message = "Masyadong maraming attempts. Subukan ulit mamaya.";
+  } 
+  else {
+    message = "Hindi makapag-login. Subukan muli.";
   }
 
   alert(message);
-    });
+});
 }
 </script>
  
