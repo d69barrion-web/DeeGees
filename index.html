@@ -6,12 +6,22 @@
   <title>DeeGees - Pattern Generator</title>
 
   <style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #0f172a;
       color: #e2e8f0;
       line-height: 1.6;
+
+      display: flex;
+      align-items: center;     /* vertical center */
+      justify-content: center; /* horizontal center */
+      min-height: 100vh;
     }
 
     .container {
@@ -20,6 +30,73 @@
       padding: 60px 20px;
       text-align: center;
     }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 500px 1fr ;
+    gap: 20px;
+    margin-top: 20px;
+    align-items: center;
+  }
+
+/* ✅ MOBILE FIX */
+  @media (max-width: 768px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+
+    svg {
+      height: 500px;
+    }
+  }
+
+form-group {
+    margin-top: 20px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-top: 5px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+
+  input::placeholder {
+    color: #ccc;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #6c63ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  button:hover {
+    background: #5750d6;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .footer a {
+    color: #6c63ff;
+    text-decoration: none;
+  }
+
 
     h1 {
       font-size: 48px;
@@ -79,11 +156,12 @@
 <body>
 
   <div class="container">
-
+  <div class="layout">
+   <div class="card">
     <h1>DeeGees</h1>
     <h2>Precision Starts with the Right Pattern</h2>
 
-    <div class="card">
+    
       <p>
         Ilang beses mo nang naranasan na sa pattern pa lang… alam mo nang may mali?
         Sayang sa oras. Sayang sa tela.
@@ -112,14 +190,33 @@
       </ul>
 
       <p class="footer-note">
-        Hindi nito pinapalitan ang galing mo bilang mananahi—pinapabilis lang.
+        Ang galing mo bilang mananahi hindi pinapalitan—pinapabilis lang.
       </p>
 
-    </div>
-    <button onclick="handleStart()" class="btn">Get Started</button>
+    
+   <button onclick="handleStart()" class="btn">Get Started</button>
     
 
+   </div>
+<div>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="Enter your email">
   </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Enter your password">
+  </div>
+
+<button onclick="login()">Sign In</button>
+
+  <div class="footer">
+    Don’t have an account? <a href="sign-up.html">Sign up</a>
+  </div>
+</div>
+
+
 <script>
 function handleStart() {
   const userLoggedIn = false; // TEMP lang muna
@@ -131,5 +228,6 @@ function handleStart() {
   }
 }
 </script>
+
 </body>
-</html>
+  </html>
