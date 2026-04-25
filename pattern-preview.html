@@ -314,7 +314,18 @@ frontWaistSlider.addEventListener("input", function() {
   localStorage.setItem("frontWaistAdj", this.value);
   updatePattern();
 });
-  
+
+backCrotchSlider.addEventListener("input", updatePattern);
+waistSlider.addEventListener("input", updatePattern);
+hipSlider.addEventListener("input", updatePattern);
+crotchShiftSlider.addEventListener("input", updatePattern);
+crotchSlider.addEventListener("input", updatePattern);
+thighSlider.addEventListener("input", updatePattern);
+kneeSlider.addEventListener("input", updatePattern);
+bottomSlider.addEventListener("input", updatePattern);
+frontHipSlider.addEventListener("input", updatePattern);
+frontWaistSlider.addEventListener("input", updatePattern);
+
 
 function getPointAtDistance(p1, y2, d, side = "left") {
   const dy = y2 - p1.y;
