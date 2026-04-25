@@ -227,6 +227,19 @@ function handleStart() {
     window.location.href = "auth-required.html";
   }
 }
+
+function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  // TEMPORARY (palitan natin ito ng Firebase later)
+  if (email && password) {
+   // alert("Login success (demo)");
+    window.location.href = "pattern-preview.html";
+  } else {
+    alert("Please enter email and password");
+  }
+  }
 </script>
 
 </body>
