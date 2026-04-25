@@ -136,9 +136,14 @@ function signup() {
     return;
   }
 
-  // TEMPORARY (demo only)
-  alert("Account created (demo)");
-  window.location.href = "sign-in.html";
+  auth.createUserWithEmailAndPassword(email, password)
+    .then(() => {
+      alert("Account created!");
+      window.location.href = "pattern-preview.html";
+    })
+    .catch(error => {
+      alert(error.message);
+    });
 }
 </script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
