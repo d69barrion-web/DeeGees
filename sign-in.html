@@ -129,7 +129,45 @@ function login() {
   }
 }
 </script>
+<!-- existing HTML mo -->
 
+<!-- Firebase SDK (ilagay muna ito) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<!-- Firebase config + init -->
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAdQ7By9HrCbNhy2pT9cEVVcD-YCdHEuSs",
+  authDomain: "deegees-a23ec.firebaseapp.com",
+  projectId: "deegees-a23ec",
+  storageBucket: "deegees-a23ec.firebasestorage.app",
+  messagingSenderId: "8167578850",
+  appId: "1:8167578850:web:a5d3dd989aec5bd83d92bb"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+</script>
+
+<!-- existing script mo (login/signup functions) -->
+<script>
+function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      window.location.href = "pattern-preview.html";
+    })
+    .catch(error => {
+      alert(error.message);
+    });
+}
+</script>
+
+</body>
+</html>
 </body>
 </html>
 
