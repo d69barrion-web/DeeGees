@@ -106,8 +106,8 @@
   <div class="form-group">
     <label>Password</label>
     <div style="position: relative;">
-    <input type="password" id="password" placeholder="Create a password" />
-    <button type="button" id="togglePassword"
+    <input type="password" id="createPassword" placeholder="Create a password" />
+    <button type="button" id="toggleCreatePassword"
     style="position: absolute; right: 0px; top: 0%; width: 50px; transform: translateY(-50%);">
     👁️
     </button>
@@ -117,7 +117,7 @@
     <label>Confirm Password</label>
     <div style="position: relative;">
     <input type="password" id="confirmPassword" placeholder="Confirm your password" />
-    <button type="button" id="togglePassword"
+    <button type="button" id="toggleConfirmPassword"
     style="position: absolute; right: 0px; top: 0%; width: 50px; transform: translateY(-50%);">
     👁️
     </button>
@@ -135,8 +135,6 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
 <script>
-
-
  const firebaseConfig = {
   apiKey: "AIzaSyAdQ7By9HrCbNhy2pT9cEVVcD-YCdHEuSs",
   authDomain: "deegees-a23ec.firebaseapp.com",
@@ -150,7 +148,33 @@
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 </script>
-<script>
+  <script>
+const createPasswordInput = document.getElementById("createPassword");
+const createToggleBtn = document.getElementById("toggleCreatePassword");
+
+createToggleBtn.addEventListener("click", function () {
+  if (createPasswordInput.type === "password") {
+    createPasswordInput.type = "text";
+    this.textContent = "🙈";
+  } else {
+    createPasswordInput.type = "password";
+    this.textContent = "👁️";
+  }
+});
+
+const confirmPasswordInput = document.getElementById("confirmPassword");
+const confirmToggleBtn = document.getElementById("toggleConfirmPassword");
+
+confirmToggleBtn.addEventListener("click", function () {
+  if (confirmPasswordInput.type === "password") {
+    confirmPasswordInput.type = "text";
+    this.textContent = "🙈";
+  } else {
+    confirmPasswordInput.type = "password";
+    this.textContent = "👁️";
+  }
+});
+   
 function signup() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -175,10 +199,8 @@ function signup() {
       alert(error.message);
     });
 }
-   </script>
+  </script>
 
  
 </body>
-</html>
-
-
+  </html>
