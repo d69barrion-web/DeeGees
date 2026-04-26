@@ -263,18 +263,58 @@ const bottomSlider = document.getElementById("bottomAdj");
 const frontHipSlider = document.getElementById("frontHipAdj");
 const frontWaistSlider = document.getElementById("frontWaistAdj");
 
-
-backCrotchSlider.addEventListener("input", updatePattern);
-waistSlider.addEventListener("input", updatePattern);
-hipSlider.addEventListener("input", updatePattern);
-crotchShiftSlider.addEventListener("input", updatePattern);
-crotchSlider.addEventListener("input", updatePattern);
-thighSlider.addEventListener("input", updatePattern);
-kneeSlider.addEventListener("input", updatePattern);
-bottomSlider.addEventListener("input", updatePattern);
-frontHipSlider.addEventListener("input", updatePattern);
-frontWaistSlider.addEventListener("input", updatePattern);
-
+backCrotchSlider.value = Number(localStorage.getItem("backCrotchCurve")) || 0;
+waistSlider.value = Number(localStorage.getItem("waistShift")) || 0;
+hipSlider.value = Number(localStorage.getItem("hipShift")) || 0;
+crotchShiftSlider.value = Number(localStorage.getItem("crotchShift")) || 0;
+crotchSlider.value = Number(localStorage.getItem("crotchDepth")) || 0;
+thighSlider.value = Number(localStorage.getItem("thighAdj")) || 0;
+kneeSlider.value = Number(localStorage.getItem("kneeAdj"")) || 0;
+bottomSlider.value = Number(localStorage.getItem("bottomAdj")) || 0;
+frontHipSlider.value = Number(localStorage.getItem("frontHipAdj")) || 0;
+frontWaistSlider.value = Number(localStorage.getItem("frontWaistAdj")) || 0;
+  
+backCrotchSlider.addEventListener("input", function() {
+  localStorage.setItem("backCrotchCurve", this.value);
+  updatePattern();
+});
+waistSlider.addEventListener("input", function() {
+  localStorage.setItem("waistShift", this.value);
+  updatePattern();
+});
+hipSlider.addEventListener("input", function() {
+  localStorage.setItem("hipShift", this.value);
+  updatePattern();
+});
+crotchShiftSlider.addEventListener("input", function() {
+  localStorage.setItem("crotchShift", this.value);
+  updatePattern();
+});
+crotchSlider.addEventListener("input", function() {
+  localStorage.setItem("crotchDepth", this.value);
+  updatePattern();
+});
+thighSlider.addEventListener("input", function() {
+  localStorage.setItem("thighAdj", this.value);
+  updatePattern();
+});
+kneeSlider.addEventListener("input", function() {
+  localStorage.setItem("kneeAdj", this.value);
+  updatePattern();
+});
+bottomSlider.addEventListener("input", function() {
+  localStorage.setItem("bottomAdj", this.value);
+  updatePattern();
+});
+frontHipSlider.addEventListener("input", function() {
+  localStorage.setItem("frontHipAdj", this.value);
+  updatePattern();
+});
+frontWaistSlider.addEventListener("input", function() {
+  localStorage.setItem("frontWaistAdj", this.value);
+  updatePattern();
+});
+  
 
 function getPointAtDistance(p1, y2, d, side = "left") {
   const dy = y2 - p1.y;
