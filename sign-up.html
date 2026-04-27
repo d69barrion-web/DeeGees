@@ -176,6 +176,7 @@ confirmToggleBtn.addEventListener("click", function () {
 });
    
 function signup() {
+function signup() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
@@ -190,7 +191,7 @@ function signup() {
     return;
   }
 
-  auth.createUserWithEmailAndPasswordd(email, password)
+  auth.createUserWithEmailAndPassword(email, password)
     .then(() => {
       alert("Account created!");
       window.location.href = "pattern-preview.html";
