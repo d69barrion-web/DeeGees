@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+m<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -276,10 +276,11 @@
     <h2>(FRONT PART)</h2>
 
     <div class="header-buttons">
+      <label style="margin-left:10px;"><input type="checkbox" id="toggleFront">back</label>
       <button id="savePatternBtn">💾</button>
       <button id="loadPatternBtn">📂</button>
       <button id="deleteBtn" onclick="openDeleteModal()">Delete</button>
-    </div>
+     </div>
     <!-- MODAL -->
 <div id="deleteModal" class="modal">
   <div class="modal-content">
@@ -382,9 +383,17 @@ function debug(msg) {
     panel.scrollTop = panel.scrollHeight;
   }
 }
+  
 
+  
 let selectedCreatedAt = null;
-
+let showFrontMeasurements = false;
+let isBackVisible = false;
+toggleFront.addEventListener("change", function () {
+  showFrontMeasurements = this.checked;
+  isBackVisible = this.checked;
+  updatePattern();
+});
   
 /////////////////////////////////////////////////
 // Load from URL
@@ -720,6 +729,7 @@ function getPointAtX(p1, p2, x)
  drawPattern(m);
   } 
   
+  
 function drawPattern(m) {
   
   const svgFront = document.getElementById("svgCanvasFront");
@@ -952,11 +962,143 @@ function drawPattern(m) {
   const Rbdistance = Math.sqrt(Rbdx * Rbdx + Rbdy * Rbdy) / scale;
 
 ////////BACK PATTERN DRAWING//////////////////// 
-  
   const backCrotchCurve = m.backCrotch_curve;
   const backWaistLine = frontWaistLine - (2 * scale);
   const backCrotchLine = crotchLine + (scale/2);
   const backHipLine = backWaistLine + (frontHipLine - frontWaistLine);
+  const mbackWaistLineXo = 0;
+  const mbackWaistLineXi = 300;
+  const mbackHipLineXo = 0;
+  const mbackHipLineXi = 300;
+  const totFrontHeightCenterPoint = ((m.outseam + 2) / 2) * scale;
+  const backWaistToBackHipCenterPoint = backWaistLine + ((backHipLine - backWaistLine) / 2);
+  const frontWaistToBackHipCenterPoint = frontWaistLine + ((backHipLine - frontWaistLine) / 2);
+  const pantsLengthCenterPoint = frontWaistLine + ((bottomLine1 - frontWaistLine) / 2);
+    
+  //mBack
+  const mbp1 = {x: center - scale, y: backWaistLine};
+  const mbp2 = getPointAtDistance(mbp1, frontWaistLine, (BHwaist - waistOffset), "right");
+  const mbp5 = {x: center + Hthigh - thighOffset + (1.25 * scale) , y: thighLine};
+  const mbp3 = getPointAtY(mbp2, mbp5, frontHipLine);
+  const mbp4 = getPointAtY(mbp2, mbp5, backCrotchLine);
+  const mbp6 = {x: center + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
+  const mbp7 = {x: center + Hbottom - bottomOffset + scale, y: bottomLine1};
+  const mbp8 = {x: center + Hbottom - bottomOffset + scale, y: bottomLine0};
+  const mbp9 = {x: center - Hbottom + bottomOffset - scale, y: bottomLine0};
+  const mbp10 = {x: center - Hbottom + bottomOffset - scale, y: bottomLine1};
+  const mbp11 = {x: center - Hknee + kneeOffset - (1.125 * scale), y: kneeLine };
+  const mbp12 = {x: center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
+  const mbpx =  {x: center - Hcrotch - crotchDepth + crotchShift - (scale * 1.375), y: crotchLine};
+  const mbp13 = getPointAtY(mbpx, mbp12, crotchLine + (scale/2));
+  const mbp16 = getPointAtDistance(mbp3, backHipLine, BHhip - hipOffset , "left");
+  const mbpa = getPointAtY(mbp13, mbp16, frontHipLine);
+  const mbp15 = {x: mbpa.x + backCrotchCurve, y: mbpa.y};
+  const mbpb = getPointAtY(mbp13, mbp15, frontHipLine + ((crotchLine - frontHipLine) /2));
+  const mbp14 = {x: mbpb.x + (backCrotchCurve / 2), y: mbpb.y};
+  
+  const mbpath = `
+    M ${mbp1.x} ${mbp1.y}
+    L ${mbp2.x} ${mbp2.y}
+    L ${mbp3.x} ${mbp3.y}
+    L ${mbp4.x} ${mbp4.y}
+    L ${mbp5.x} ${mbp5.y}
+    L ${mbp6.x} ${mbp6.y}
+    L ${mbp7.x} ${mbp7.y}
+    L ${mbp8.x} ${mbp8.y}
+    L ${mbp9.x} ${mbp9.y}
+    L ${mbp10.x} ${mbp10.y}
+    L ${mbp11.x} ${mbp11.y}
+    L ${mbp12.x} ${mbp12.y} 
+    L ${mbp13.x} ${mbp13.y} 
+    L ${mbp14.x} ${mbp14.y} 
+    L ${mbp15.x} ${mbp15.y}
+    L ${mbp16.x} ${mbp16.y}
+    Z
+    `;
+  //BACK HIP LENGTH
+  const mbackWaistEndPoint = { x: mbp2.x , y: frontWaistLine };
+  //RIGHT END-POINT 
+  const mRbwaist = { x: mbp1.x , y: mbp1.y };
+  const mRbwmidX = (mbackWaistEndPoint.x + mRbwaist.x) / 2;
+  const mRbwmidY = (mbackWaistEndPoint.y + mRbwaist.y) / 2;
+  const mRbwdx = mRbwaist.x - mbackWaistEndPoint.x;
+  const mRbwdy = mRbwaist.y - mbackWaistEndPoint.y;
+  const mRbwdistance = Math.sqrt(mRbwdx * mRbwdx + mRbwdy * mRbwdy) / scale;
+  
+  //BACK HIP LENGTH
+  const mbackHipEndPoint = { x: mbp3.x , y: frontHipLine };
+  //RIGHT END-POINT 
+  const mRbEhip = { x: mbp16.x , y: mbp16.y };
+  const mRbEmidX = (mbackHipEndPoint.x + mRbEhip.x) / 2;
+  const mRbEmidY = (mbackHipEndPoint.y + mRbEhip.y) / 2;
+  const mRbEdx = mRbEhip.x - mbackHipEndPoint.x;
+  const mRbEdy = mRbEhip.y - mbackHipEndPoint.y;
+  const mRbEdistance = Math.sqrt(mRbEdx * mRbEdx + mRbEdy * mRbEdy) / scale;
+  
+  //DISTANCE FROM CENTER TO BACK HIP END-POINT
+  const mbackHipCenterPoint = { x: center, y: frontHipLine };
+  //RIGHT END-POINT 
+  const mRbhip = { x: mbp3.x, y: frontHipLine };
+  const mRbhmidX = (mbackHipCenterPoint.x + mRbhip.x) / 2;
+  const mRbhmidY = (mbackHipCenterPoint.y + mRbhip.y) / 2;
+  const mRbhdx = mRbhip.x - mbackHipCenterPoint.x;
+  const mRbhdy = mRbhip.y - mbackHipCenterPoint.y;
+  const mRbhdistance = Math.sqrt(mRbhdx * mRbhdx + mRbhdy * mRbhdy) / scale;
+
+  //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
+  const mbackThighCenterPoint = { x: center, y: thighLine };
+  //LEFT END-POINT 
+  const mLbthigh = { x: center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
+  const mLbtmidX = (mbackThighCenterPoint.x + mLbthigh.x) / 2;
+  const mLbtmidY = (mbackThighCenterPoint.y + mLbthigh.y) / 2;
+  const mLbtdx = mLbthigh.x - mbackThighCenterPoint.x;
+  const mLbtdy = mLbthigh.y - mbackThighCenterPoint.y;
+  const mLbtdistance = Math.sqrt(mLbtdx * mLbtdx + mLbtdy * mLbtdy) / scale;
+
+  //RIGHT END-POINT 
+  const mRbthigh = { x: center + Hthigh - thighOffset + (1.25 * scale), y: thighLine };
+  const mRbtmidX = (mbackThighCenterPoint.x + mRbthigh.x) / 2;
+  const mRbtmidY = (mbackThighCenterPoint.y + mRbthigh.y) / 2;
+  const mRbtdx = mRbthigh.x - mbackThighCenterPoint.x;
+  const mRbtdy = mRbthigh.y - mbackThighCenterPoint.y;
+  const mRbtdistance = Math.sqrt(mRbtdx * mRbtdx + mRbtdy * mRbtdy) / scale;
+
+  //DISTANCE FROM CENTER TO BACK KNEE END-POINTS
+  const mbackKneeCenterPoint = { x: center, y: kneeLine };
+  //LEFT END-POINT 
+  const mLbknee = { x: center - Hknee + kneeOffset - (1.125 * scale), y: kneeLine };
+  const mLbkmidX = (mbackKneeCenterPoint.x + mLbknee.x) / 2;
+  const mLbkmidY = (mbackKneeCenterPoint.y + mLbknee.y) / 2;
+  const mLbkdx = mLbknee.x - mbackKneeCenterPoint.x;
+  const mLbkdy = mLbknee.y - mbackKneeCenterPoint.y;
+  const mLbkdistance = Math.sqrt(mLbkdx * mLbkdx + mLbkdy * mLbkdy) / scale;
+
+  //RIGHT END-POINT 
+  const mRbknee = { x: center + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
+  const mRbkmidX = (mbackKneeCenterPoint.x + mRbknee.x) / 2;
+  const mRbkmidY = (mbackKneeCenterPoint.y + mRbknee.y) / 2;
+  const mRbkdx = mRbknee.x - mbackKneeCenterPoint.x;
+  const mRbkdy = mRbknee.y - mbackKneeCenterPoint.y;
+  const mRbkdistance = Math.sqrt(mRbkdx * mRbkdx + mRbkdy * mRbkdy) / scale;
+
+  //DISTANCE FROM CENTER TO BACK LEG-OPENING END-POINTS 
+  const mbackBottomCenterPoint = { x: center, y: bottomLine0 };
+  //LEFT END-POINT 
+  const mLbbottom = { x: center - Hbottom + bottomOffset - scale, y: bottomLine0 };
+  const mLbbmidX = (mbackBottomCenterPoint.x + mLbbottom.x) / 2;
+  const mLbbmidY = (mbackBottomCenterPoint.y + mLbbottom.y) / 2;
+  const mLbbdx = mLbbottom.x - mbackBottomCenterPoint.x;
+  const mLbbdy = mLbbottom.y - mbackBottomCenterPoint.y;
+  const mLbbdistance = Math.sqrt(mLbbdx * mLbbdx + mLbbdy * mLbbdy) / scale;
+
+  //RIGHT END-POINT 
+  const mRbbottom = { x: center + Hbottom - bottomOffset + scale, y: bottomLine0 };
+  const mRbbmidX = (mbackBottomCenterPoint.x + mRbbottom.x) / 2;
+  const mRbbmidY = (mbackBottomCenterPoint.y + mRbbottom.y) / 2;
+  const mRbbdx = mRbbottom.x - mbackBottomCenterPoint.x;
+  const mRbbdy = mRbbottom.y - mbackBottomCenterPoint.y;
+  const mRbbdistance = Math.sqrt(mRbbdx * mRbbdx + mRbbdy * mRbbdy) / scale;
+ 
   
   const backWaistLineXo = 400;
   const backWaistLineXi = 700;
@@ -1002,12 +1144,9 @@ function drawPattern(m) {
     L ${bp16.x} ${bp16.y}
     Z
     `;
+  
 
-  const totFrontHeightCenterPoint = ((m.outseam + 2) / 2) * scale;
-  const backWaistToBackHipCenterPoint = backWaistLine + ((backHipLine - backWaistLine) / 2);
-  const frontWaistToBackHipCenterPoint = frontWaistLine + ((backHipLine - frontWaistLine) / 2);
-  const pantsLengthCenterPoint = frontWaistLine + ((bottomLine1 - frontWaistLine) / 2);
-
+  
   //BACK HIP LENGTH
   const backWaistEndPoint = { x: bp2.x , y: frontWaistLine };
   //RIGHT END-POINT 
@@ -1093,8 +1232,14 @@ function drawPattern(m) {
   const Rbbdistance = Math.sqrt(Rbbdx * Rbbdx + Rbbdy * Rbbdy) / scale;
  
   
-  svgFront.innerHTML = 
-  `
+  svgFront.innerHTML =  `
+<path 
+    d="${fpath}" 
+    fill="none" 
+    stroke="#38bdf8" 
+    stroke-width="2"
+  />
+  //front centerline
   <line 
     x1="${center}" 
     y1="${topY}" 
@@ -1103,17 +1248,8 @@ function drawPattern(m) {
     stroke="white"
     stroke-width="1"
     stroke-dasharray="5,5"
-  />
-  <line 
-    x1="${bCenter}" 
-    y1="${topY}" 
-    x2="${bCenter}" 
-    y2="${bottomY}" 
-    stroke="white"
-    stroke-width="1"
-    stroke-dasharray="5,5"
-  />
-  <line 
+/>
+<line 
     x1="${waistLineXo}" 
     y1="${frontWaistLine}" 
     x2="${waistLineXi}" 
@@ -1140,7 +1276,7 @@ function drawPattern(m) {
     stroke-width="1"
     stroke-dasharray="5,5"
   />
-    <line 
+  <line
     x1="${thighLineXo}" 
     y1="${thighLine}" 
     x2="${thighLineXi}" 
@@ -1176,46 +1312,26 @@ function drawPattern(m) {
     stroke-width="1"
     stroke-dasharray="5,5"
   />
+  <text x="${center - 8}" y="${20}" fill="yellow" font-size="10">
+    center
+  </text>
+  <text x="${300}" y="${LwmidY}" fill="white" font-size="10">
+    front waistLine
+  </text>
+  <text x="${300}" y="${LhmidY}" fill="white" font-size="10">
+    front hipLine
+  </text>
+  <text x="${300}" y="${LtmidY}" fill="white" font-size="10">
+    thighLine
+  </text>
+  <text x="${300}" y="${LkmidY}" fill="white" font-size="10">
+    kneeLine
+  </text>
+  <text x="${300}" y="${LbmidY}" fill="white" font-size="10">
+    leg-opening Line
+  </text>
 
-  <line 
-    x1="${backWaistLineXo}" 
-    y1="${backWaistLine}" 
-    x2="${backWaistLineXi}" 
-    y2="${backWaistLine}"
-    stroke="red" 
-    stroke-width="1"
-    stroke-dasharray="5,5"
-  />
-  <line 
-    x1="${backHipLineXo}" 
-    y1="${backHipLine}" 
-    x2="${backHipLineXi}" 
-    y2="${backHipLine}" 
-    stroke="red" 
-    stroke-width="1"
-    stroke-dasharray="5,5"
-  />
-  
-  <path 
-    d="${fpath}" 
-    fill="none" 
-    stroke="#38bdf8" 
-    stroke-width="2"
-  />
-
-  <path 
-    d="${bpath}" 
-    fill="none" 
-    stroke="white" 
-    stroke-width="2"
-  /> 
-
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-      <path d="M0,0 L10,5 L0,10 Z" fill="white" />
-    </marker>
-  </defs>
-
+<g id="showFrontMeasurements" opacity="${showFrontMeasurements ? 0 : 1}">
   <line
     x1="${230}" 
     y1="${frontWaistLine}" 
@@ -1266,7 +1382,6 @@ function drawPattern(m) {
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
-  
   <line 
     x1="${waistCenterPoint.x}" 
     y1="${waistCenterPoint.y}" 
@@ -1306,7 +1421,7 @@ function drawPattern(m) {
     stroke-width="0.5"
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
-  />      
+  />
   <line 
     x1="${frontCrotchCenterPoint.x}" 
     y1="${frontCrotchCenterPoint.y}" 
@@ -1387,26 +1502,22 @@ function drawPattern(m) {
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
-  
-  <text x="${center - 68}" y="${20}" fill="yellow" font-size="10">
-    center
-  </text>
-  <text x="${300}" y="${LwmidY}" fill="white" font-size="10">
-    front waistLine
-  </text>
+  <line 
+    x1="${260}" 
+    y1="${frontWaistLine}" 
+    x2="${260}" 
+    y2="${bottomLine1}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
   <text x="${LwmidX}" y="${LwmidY}" fill="yellow" font-size="10">
     ${Lwdistance.toFixed(2)} "
   </text>
   <text x="${RwmidX}" y="${RwmidY}" fill="yellow" font-size="10">
     ${Rwdistance.toFixed(2)} "
   </text>
-  <text x="${300}" y="${LhmidY}" fill="white" font-size="10">
-    front hipLine
-  </text>
-  <text x="${230}" y="${waistToHipCenterPoint}" fill="yellow" font-size="10">
-   ${hipY.toFixed(2)} "
-  </text>
-  
   <text x="${LhmidX}" y="${LhmidY}" fill="yellow" font-size="10">
     ${Lhdistance.toFixed(2)} "
   </text>
@@ -1422,12 +1533,11 @@ function drawPattern(m) {
   <text x="${RcmidX}" y="${RcmidY}" fill="yellow" font-size="10">
     ${Rcdistance.toFixed(2)} "
   </text>
-  
+  <text x="${230}" y="${waistToHipCenterPoint}" fill="yellow" font-size="10">
+   ${hipY.toFixed(2)} "
+  </text>
   <text x="${20}" y="${waistToCrotchCenterPoint}" fill="yellow" font-size="10">
     ${crotchY.toFixed(2)} "
-  </text>
-  <text x="${300}" y="${LtmidY}" fill="white" font-size="10">
-    thighLine
   </text>
   <text x="${LtmidX}" y="${LtmidY}" fill="yellow" font-size="10">
     ${Ltdistance.toFixed(2)} "
@@ -1444,18 +1554,11 @@ function drawPattern(m) {
   <text x="${20}" y="${kneeToBottomCenterPoint}" fill="yellow" font-size="10">
     ${bottomY0.toFixed(2)} "
   </text>
-  
-  <text x="${300}" y="${LkmidY}" fill="white" font-size="10">
-    kneeLine
-  </text>
   <text x="${LkmidX}" y="${LkmidY}" fill="yellow" font-size="10">
     ${Lkdistance.toFixed(2)} "
   </text>
   <text x="${RkmidX}" y="${RkmidY}" fill="yellow" font-size="10">
     ${Rkdistance.toFixed(2)} "
-  </text>
-  <text x="${300}" y="${LbmidY}" fill="white" font-size="10">
-    leg-opening Line
   </text>
   <text x="${LbmidX}" y="${LbmidY}" fill="yellow" font-size="10">
     ${Lbdistance.toFixed(2)} "
@@ -1463,9 +1566,236 @@ function drawPattern(m) {
   <text x="${RbmidX}" y="${RbmidY}" fill="yellow" font-size="10">
     ${Rbdistance.toFixed(2)} "
   </text>
+  <text x="${260}" y="${pantsLengthCenterPoint}" fill="yellow" font-size="10">
+    ${((bottomLine1 - frontWaistLine) / scale).toFixed(1)} "
+  </text>
+</g>
 
-
+<g id="isBackVisible" opacity="${isBackVisible ? 1 : 0}"> 
+  <path 
+    d="${mbpath}" 
+    fill="none" 
+    stroke="white" 
+    stroke-width="2"
+  /> 
+  <line
+    x1="${mbackWaistLineXo}" 
+    y1="${backWaistLine}" 
+    x2="${mbackWaistLineXi}" 
+    y2="${backWaistLine}"
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${mbackHipLineXo}" 
+    y1="${backHipLine}" 
+    x2="${mbackHipLineXi}" 
+    y2="${backHipLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${10}" 
+    y1="${frontWaistLine}" 
+    x2="${10}" 
+    y2="${bottomLine0}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${30}" 
+    y1="${backWaistLine}" 
+    x2="${30}" 
+    y2="${backHipLine}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${270}" 
+    y1="${frontWaistLine}" 
+    x2="${270}" 
+    y2="${backHipLine}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackWaistEndPoint.x}" 
+    y1="${mbackWaistEndPoint.y}" 
+    x2="${mRbwaist.x}" 
+    y2="${mRbwaist.y}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackHipEndPoint.x}" 
+    y1="${mbackHipEndPoint.y}" 
+    x2="${mRbEhip.x}" 
+    y2="${mRbEhip.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackHipCenterPoint.x}" 
+    y1="${mbackHipCenterPoint.y}" 
+    x2="${mRbhip.x}" 
+    y2="${mRbhip.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackThighCenterPoint.x}" 
+    y1="${mbackThighCenterPoint.y}" 
+    x2="${mLbthigh.x}" 
+    y2="${mLbthigh.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackThighCenterPoint.x}" 
+    y1="${mbackThighCenterPoint.y}" 
+    x2="${mRbthigh.x}" 
+    y2="${mRbthigh.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackKneeCenterPoint.x}" 
+    y1="${mbackKneeCenterPoint.y}" 
+    x2="${mLbknee.x}" 
+    y2="${mLbknee.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="$m{backKneeCenterPoint.x}" 
+    y1="${mbackKneeCenterPoint.y}" 
+    x2="${mRbknee.x}" 
+    y2="${mRbknee.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackBottomCenterPoint.x}" 
+    y1="${mbackBottomCenterPoint.y}"
+    x2="${mLbbottom.x}" 
+    y2="${mLbbottom.y}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackBottomCenterPoint.x}" 
+    y1="${mbackBottomCenterPoint.y}" 
+    x2="${mRbbottom.x}" 
+    y2="${mRbbottom.y}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <text x="${mRbwmidX}" y="${mRbwmidY}" fill="yellow" font-size="10">
+    ${mRbwdistance.toFixed(2)} "
+  </text>
+  <text x="${mRbhmidX}" y="${mRbhmidY}" fill="yellow" font-size="10">
+    ${mRbhdistance.toFixed(2)} "
+  </text>
+  <text x="${mRbEmidX}" y="${mRbEmidY}" fill="yellow" font-size="10">
+    ${mRbEdistance.toFixed(2)} "
+  </text>
+  <text x="${mLbtmidX}" y="${mLbtmidY}" fill="yellow" font-size="10">
+    ${mLbtdistance.toFixed(2)} "
+  </text>
+  <text x="${mRbtmidX}" y="${mRbtmidY}" fill="yellow" font-size="10">
+    ${mRbtdistance.toFixed(2)} "
+  </text>
+  <text x="${mLbkmidX}" y="${mLbkmidY}" fill="yellow" font-size="10">
+    ${mLbkdistance.toFixed(2)} "
+  </text>
+  <text x="${mRbkmidX}" y="${mRbkmidY}" fill="yellow" font-size="10">
+    ${mRbkdistance.toFixed(2)} "
+  </text>
+  <text x="${mLbbmidX}" y="${mLbbmidY}" fill="yellow" font-size="10">
+    ${mLbbdistance.toFixed(2)} "
+  </text>
+  <text x="${mRbbmidX}" y="${mRbbmidY}" fill="yellow" font-size="10">
+    ${mRbbdistance.toFixed(2)} "
+  </text>
+  <text x="${10}" y="${totFrontHeightCenterPoint}" fill="yellow" font-size="10">
+    ${(m.outseam + 1).toFixed(2)} "
+  </text>
+  <text x="${30}" y="${backWaistToBackHipCenterPoint}" fill="yellow" font-size="10">
+    ${((backHipLine - backWaistLine) / scale).toFixed(1)} "
+  </text>
   
+  <text x="${270}" y="${frontWaistToBackHipCenterPoint}" fill="yellow" font-size="10">
+    ${((backHipLine - frontWaistLine) / scale).toFixed(1)} "
+  </text>
+  
+</g>
+
+//desktop back
+<path 
+    d="${bpath}" 
+    fill="none" 
+    stroke="white" 
+    stroke-width="2"
+  /> 
+  //back centerline
+  <line 
+    x1="${bCenter}" 
+    y1="${topY}" 
+    x2="${bCenter}" 
+    y2="${bottomY}" 
+    stroke="white"
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${backWaistLineXo}" 
+    y1="${backWaistLine}" 
+    x2="${backWaistLineXi}" 
+    y2="${backWaistLine}"
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${backHipLineXo}" 
+    y1="${backHipLine}" 
+    x2="${backHipLineXi}" 
+    y2="${backHipLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="white" />
+    </marker>
+  </defs>
   <line 
     x1="${410}" 
     y1="${frontWaistLine}" 
@@ -1506,7 +1836,6 @@ function drawPattern(m) {
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
-  
   <line 
     x1="${backWaistEndPoint.x}" 
     y1="${backWaistEndPoint.y}" 
@@ -1597,8 +1926,6 @@ function drawPattern(m) {
     marker-start="url(#arrow)"
     marker-end="url(#arrow)"
   />
-  
-
   <text x="${RbwmidX}" y="${RbwmidY}" fill="yellow" font-size="10">
     ${Rbwdistance.toFixed(2)} "
   </text>
@@ -1635,31 +1962,29 @@ function drawPattern(m) {
   <text x="${600}" y="${LbbmidY}" fill="white" font-size="10">
     kneeLine
   </text>
-  </text>
   <text x="${LbbmidX}" y="${LbbmidY}" fill="yellow" font-size="10">
     ${Lbbdistance.toFixed(2)} "
   </text>
   <text x="${RbbmidX}" y="${RbbmidY}" fill="yellow" font-size="10">
     ${Rbbdistance.toFixed(2)} "
   </text>
-  
   <text x="${410}" y="${totFrontHeightCenterPoint}" fill="yellow" font-size="10">
     ${(m.outseam + 1).toFixed(2)} "
   </text>
   <text x="${430}" y="${backWaistToBackHipCenterPoint}" fill="yellow" font-size="10">
     ${((backHipLine - backWaistLine) / scale).toFixed(1)} "
   </text>
-  
   <text x="${600}" y="${frontWaistToBackHipCenterPoint}" fill="yellow" font-size="10">
     ${((backHipLine - frontWaistLine) / scale).toFixed(1)} "
   </text>
   <text x="${660}" y="${pantsLengthCenterPoint}" fill="yellow" font-size="10">
     ${((bottomLine1 - frontWaistLine) / scale).toFixed(1)} "
   </text>
-
   `;}
   // init
 loadData();
+
+  
 
 function downloadFront() {
   const svg = document.getElementById("svgCanvasFront");
@@ -1738,6 +2063,8 @@ function downloadFront() {
 
   img.src = url;
 }
+
+
 </script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
