@@ -490,6 +490,10 @@ function renderPatternList() {
     item.textContent = p.name;
 
     item.addEventListener("click", () => {
+      if (!isPremium) {
+    alert("Unlock premium to use this feature.");
+    return;
+  }
       loadPattern(p);
       container.style.display = "none";
     });
@@ -531,7 +535,7 @@ document.getElementById("leg_opening").value = d.Bottom;
 
   updatePattern(); // redraw
   }
-  ///////////////////////////////////////////
+  
   function getPatternData() {
   return {
     Client: document.getElementById("client").value,
@@ -559,9 +563,12 @@ document.getElementById("leg_opening").value = d.Bottom;
   }
 
   const saveBtn = document.getElementById("savePatternBtn");
-
+let isPremium = false;
 saveBtn.addEventListener("click", function () {
-
+if (!isPremium) {
+    alert("Unlock premium to use this feature.");
+    return;
+}
   const name = prompt("Pattern name?", document.getElementById("client").value);
   if (!name) return;
 
