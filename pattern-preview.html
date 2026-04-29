@@ -342,7 +342,7 @@
   </div>
       
   <button class="btn" onclick="downloadFront()">Download as PNG</button>
-
+<button onclick="logout()">Logout</button>
     </div>
 
     <!-- FRONT PART -->
@@ -2146,9 +2146,15 @@ firebase.initializeApp(firebaseConfig);
 // 🔒 PROTECTION
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
-    window.location.href = "sign-in.html";
+    window.location.href = "index.html";
   }
 });
+  function logout() {
+  firebase.auth().signOut()
+    .then(() => {
+      window.location.href = "index.html";
+    });
+  }
 </script>
 </body>
 </html>
