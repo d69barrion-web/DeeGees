@@ -111,10 +111,17 @@
     style="position: absolute; right: 0px; top: 0%; width: 50px; transform: translateY(-50%);">
     👁️
     </button>
+    <label>
+      <input type="checkbox" id="rememberMe"> Keep me logged in
+    </label>
   </div>
 
-<button onclick="login()">Sign In</button>
-
+      <button onclick="login()">Sign In</button>
+      <label>Or</label>
+      <button onclick="loginWithGoogle()" class="google-btn">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" style="vertical-align: middle; margin-right: 8px;">
+        Login with Google
+      </button>
   <div class="footer">
     Don’t have an account? <a href="sign-up.html">Sign up</a>
   </div>
@@ -125,8 +132,11 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
-<!-- Firebase config + init -->
+ 
+ 
+ <!-- Firebase config + init -->
 <script>
+
 const firebaseConfig = {
   apiKey: "AIzaSyAdQ7By9HrCbNhy2pT9cEVVcD-YCdHEuSs",
   authDomain: "deegees-a23ec.firebaseapp.com",
@@ -139,7 +149,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 </script>
-
+ <!-- existing script mo (login/signup functions) -->
 <!-- existing script mo (login/signup functions) -->
 <script>
 
@@ -155,45 +165,37 @@ toggleBtn.addEventListener("click", function () {
     this.textContent = "👁️";
   }
 });
- 
+  
 function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+  const remember = document.getElementById("rememberMe").checked;
 
-  auth.signInWithEmailAndPassword(email, password)
+  const persistence = remember
+    ? firebase.auth.Auth.Persistence.LOCAL
+    : firebase.auth.Auth.Persistence.SESSION;
+
+  auth.setPersistence(persistence)
+    .then(() => {
+      return auth.signInWithEmailAndPassword(email, password);
+    })
     .then(() => {
       window.location.href = "pattern-preview.html";
     })
     .catch(error => {
-  console.log(error); // para makita mo sa console
-
-  let message = "";
-
-  const code = error.code || "";
-  const msg = error.message || "";
-
-  if (
-    code === "auth/user-not-found" ||
-    code === "auth/wrong-password" ||
-    msg.includes("INVALID_LOGIN_CREDENTIALS")
-  ) {
-    message = "Maling email o password.";
+      alert(error.message);
+    });
+ }
+  const rememberMe = document.getElementById("rememberMe").checked;
+  firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    // naka-login pa
+    window.location.href = "pattern-preview.html";
   } 
-  else if (code === "auth/invalid-email") {
-    message = "Hindi valid ang email format.";
-  } 
-  else if (code === "auth/too-many-requests") {
-    message = "Masyadong maraming attempts. Subukan ulit mamaya.";
-  } 
-  else {
-    message = "Hindi makapag-login. Subukan muli.";
-  }
-
-  alert(message);
 });
-}
 </script>
- 
+
+
 </body>
 </html>
 </body>
