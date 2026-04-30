@@ -291,33 +291,14 @@ function login() {
   function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  // Optional: add scopes if needed
-  provider.addScope('email');
-  provider.addScope('profile');
-
-  firebase.auth().signInWithRedirect(provider);
-}
-
-
-// 🔁 Handle login result after redirect
-firebase.auth().getRedirectResult()
-  .then((result) => {
-    if (result.user) {
+  auth.signInWithPopup(provider)
+    .then(result => {
       const user = result.user;
-
-      console.log("Login successful:", user);
-
-      alert("Login with Google is successful");
-
-      // 👉 OPTIONAL: redirect after login
-      window.location.href = "/pattern-preview.html";
-    }
-  })
-  .catch((error) => {
-    console.error("Login error:", error);
-
-    alert("Login failed: " + error.message);
-  });
+      console.log(user);
+      
+    })
+    .catch(err => alert(err.message));
+  }
   
   const rememberMe = document.getElementById("rememberMe").checked;
   firebase.auth().onAuthStateChanged(user => {
