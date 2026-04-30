@@ -292,7 +292,18 @@
   </div>
 
   <!-- DELETE BUTTON -->
+<div id="premiumModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
 
+  <div style="background:white; padding:20px; border-radius:10px; text-align:center;">
+    <h3>Premium Required</h3>
+    <p>Unlock premium to use this feature.</p>
+
+    <button onclick="upgrade()" style="margin:5px;">Upgrade</button>
+    <button onclick="closeModal()" style="margin:5px;">Cancel</button>
+  </div>
+
+</div>
 
 
       
@@ -413,6 +424,14 @@ function debug(msg) {
     panel.innerHTML += msg + "<br>";
     panel.scrollTop = panel.scrollHeight;
   }
+}
+
+function showPremiumModal() {
+  document.getElementById("premiumModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("premiumModal").style.display = "none";
 }
   
 const radios = document.querySelectorAll('input[name="control"]');
@@ -567,7 +586,7 @@ document.getElementById("leg_opening").value = d.Bottom;
 let isPremium = false;
 saveBtn.addEventListener("click", function () {
 if (!isPremium) {
-    alert("Unlock premium to use this feature.");
+    showPremiumModal();
     return;
 }
   const name = prompt("Pattern name?", document.getElementById("client").value);
