@@ -11,9 +11,16 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// webhook
+// 👉 DITO MO ILALAGAY
 app.post("/webhook", (req, res) => {
-  console.log("Webhook received:", req.body);
+  const event = req.body;
+
+  console.log("Webhook received:", JSON.stringify(event, null, 2));
+
+  if (event.data && event.data.attributes.type === "payment.paid") {
+    console.log("✅ Payment successful!");
+  }
+
   res.sendStatus(200);
 });
 
