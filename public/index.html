@@ -294,11 +294,19 @@ function login() {
   auth.signInWithPopup(provider)
     .then(result => {
       const user = result.user;
-      console.log(user);
-      
+
+      console.log("Login successful:", user);
+
+      alert("Login with Google is successful");
+
+      // 👉 IMPORTANT: ilagay mo redirect or UI update
+      window.location.href = "/pattern-preview.html"; 
     })
-    .catch(err => alert(err.message));
-  }
+    .catch(err => {
+      console.error(err);
+      alert("Login failed: " + err.message);
+    });
+}
   
   const rememberMe = document.getElementById("rememberMe").checked;
   firebase.auth().onAuthStateChanged(user => {
