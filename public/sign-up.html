@@ -191,14 +191,27 @@ function signup() {
   }
 
   auth.createUserWithEmailAndPassword(email, createPassword)
-    .then(() => {
-      alert("Account created!");
-      window.location.href = "pattern-preview.html";
-    })
-    .catch(error => {
-      alert(error.message);
-    });
-}
+  .then(async (userCredential) => {
+
+    const user = userCredential.user;
+
+    // 👉 CREATE FIRESTORE USER DOCUMENT
+    await firebase.firestore()
+      .collection("users")
+      .doc(user.uid)
+      .set({
+        email: user.email,
+        isPremiumUser: false,
+        createdAt: new Date()
+      });
+
+    alert("Account created!");
+
+    window.location.href = "pattern-preview.html";
+  })
+  .catch(error => {
+    alert(error.message);
+  });
   </script>
 
  
