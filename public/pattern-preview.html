@@ -498,18 +498,31 @@ loadBtn.addEventListener("click", () => {
   renderPatternList();
 });
 /////////////////////////////////////////////////////
-function renderPatternList() {
+async function renderPatternList() {
   const list = document.getElementById("patternList");
+  list.innerHTML = "Loading...";
+
+  const user = firebase.auth().currentUser;
+
+  if (!user) {
+    list.innerHTML = "<p>Please log in</p>";
+    return;
+  }
+
+  const snapshot = await db.collection("patterns")
+    .where("uid", "==", user.uid)
+    .get();
+
   list.innerHTML = "";
 
-  const patterns = JSON.parse(localStorage.getItem("patterns")) || [];
-
-  if (patterns.length === 0) {
+  if (snapshot.empty) {
     list.innerHTML = "<p>No saved patterns</p>";
     return;
   }
 
-  patterns.forEach((p, index) => {
+  snapshot.forEach((doc) => {
+    const p = doc.data();
+
     const item = document.createElement("div");
 
     item.style.padding = "6px";
@@ -520,16 +533,19 @@ function renderPatternList() {
 
     item.addEventListener("click", () => {
       if (!isPremium) {
-    alert("Unlock premium to use this feature.");
-    return;
-  }
+        alert("Unlock premium to use this feature.");
+        return;
+      }
+
       loadPattern(p);
       container.style.display = "none";
     });
 
     list.appendChild(item);
   });
-}
+  }
+  
+  
 ///////////////////////////////////////////////
   function loadPattern(pattern) {
   const d = pattern.data;
