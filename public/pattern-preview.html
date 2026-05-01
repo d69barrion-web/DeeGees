@@ -754,14 +754,20 @@ function closeDeleteModal() {
   document.getElementById("deleteModal").style.display = "none";
 }
 
-function confirmDelete() {
-  let patterns = JSON.parse(localStorage.getItem("patterns")) || [];
+async function confirmDelete() {
+  if (!selectedPatternId) return;
 
-  patterns = patterns.filter(p => p.createdAt !== selectedCreatedAt);
+  try {
+    await db.collection("patterns").doc(selectedPatternId).delete();
 
-  localStorage.setItem("patterns", JSON.stringify(patterns));
+    alert("Deleted! 🗑️");
+    selectedPatternId = null;
 
-  selectedCreatedAt = null;
+  } catch (err) {
+    console.error("Delete error:", err);
+    alert("Error deleting pattern");
+  }
+}
 
   closeDeleteModal();
   alert("Deleted! 🗑️");
