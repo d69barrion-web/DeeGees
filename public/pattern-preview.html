@@ -624,9 +624,22 @@ if (exists) {
 
 patterns.push(pattern);
 
-  localStorage.setItem("patterns", JSON.stringify(patterns));
+const user = firebase.auth().currentUser;
 
-  alert("Saved! ✅");
+if (!user) {
+  alert("Not logged in");
+  return;
+}
+
+db.collection("patterns").add({
+  uid: user.uid,
+  name: name,
+  data: getPatternData(),
+  createdAt: Date.now()
+});
+
+alert("Saved to cloud! ☁️");
+  
 });
   /////////////////////////////////////////////
   function loadData() {
