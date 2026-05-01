@@ -750,11 +750,12 @@ function openDeleteModal() {
   document.getElementById("deleteModal").style.display = "flex";
 }
 
+
 function closeDeleteModal() {
   document.getElementById("deleteModal").style.display = "none";
 }
 
-function confirmDelete() {
+ function confirmDelete() {
   let patterns = JSON.parse(localStorage.getItem("patterns")) || [];
 
   patterns = patterns.filter(p => p.createdAt !== selectedCreatedAt);
@@ -762,13 +763,8 @@ function confirmDelete() {
   localStorage.setItem("patterns", JSON.stringify(patterns));
 
   selectedCreatedAt = null;
+    
 
-
-  closeDeleteModal();
-  alert("Deleted! 🗑️");
-
-  renderPatternList(); // optional kung may list UI ka
-                                   }
   
 //////////////////////////////////////////////
 function getPointAtDistance(p1, y2, d, side = "left") {
