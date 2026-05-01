@@ -750,7 +750,7 @@ function openDeleteModal() {
   
   async function confirmDelete() {
   console.log("Selected ID:", selectedPatternId);
-
+  debug(selectedPatternId);
   if (!selectedPatternId) {
     alert("No pattern selected");
     return;
