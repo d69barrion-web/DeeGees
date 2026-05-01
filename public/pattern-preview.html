@@ -559,7 +559,6 @@ function getPatternData() {
   };
   }
 //////////////LOADING SAVED PATTERN SYSTEM/////////////////////
-let selectedCreatedAt = null;
 const loadBtn = document.getElementById("loadPatternBtn");
 const container = document.getElementById("patternListContainer");
 
@@ -622,6 +621,7 @@ async function renderPatternList() {
   
   
 ///////////////////////////////////////////////
+let selectedCreatedAt = null;
 function loadPattern(pattern) {
 const d = pattern.data;
 
