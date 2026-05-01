@@ -275,8 +275,8 @@
       <label style="margin-left:10px;"><input type="checkbox" id="toggleFront">back</label>
       <button id="savePatternBtn">💾</button>
       <button id="loadPatternBtn">📂</button>
-      <button id="deleteBtn" onclick="openDeleteModal()">Delete</button>
-     </div>
+      <button onclick="openDeleteModal(pattern.createdAt)">Delete</button>
+    </div>
     <!-- MODAL -->
 <div id="deleteModal" class="modal">
   <div class="modal-content">
