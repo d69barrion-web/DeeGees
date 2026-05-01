@@ -763,7 +763,13 @@ function closeDeleteModal() {
   localStorage.setItem("patterns", JSON.stringify(patterns));
 
   selectedCreatedAt = null;
-    
+
+
+  closeDeleteModal();
+  alert("Deleted! 🗑️");
+
+  renderPatternList(); // optional kung may list UI ka
+  }
 
   
 //////////////////////////////////////////////
