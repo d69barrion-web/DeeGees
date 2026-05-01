@@ -605,7 +605,7 @@ loadBtn.addEventListener("click", () => {
     item.textContent = p.name;
 
     item.addEventListener("click", () => {
-      selectedPatternId = p.id
+      selectedPatternId = p.id;
       if (!isPremium) {
         alert("Unlock premium to use this feature.");
         return;
