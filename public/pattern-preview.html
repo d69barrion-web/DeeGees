@@ -515,7 +515,7 @@ if (!user) {
 }
 
 db.collection("patterns").add({
-  uid: patterns.id,
+  uid: user.id,
   name: name,
   data: getPatternData(),
   createdAt: Date.now()
@@ -583,7 +583,7 @@ loadBtn.addEventListener("click", () => {
   }
 
   const snapshot = await db.collection("patterns")
-    .where("uid", "==", patterns.id)
+    .where("uid", "==", user.uid)
     .get();
 
   list.innerHTML = "";
@@ -605,7 +605,7 @@ loadBtn.addEventListener("click", () => {
     item.textContent = p.name;
 
     item.addEventListener("click", () => {
-      selectedPatternId = p.uid;
+      selectedPatternId = p.id;
       if (!isPremium) {
         alert("Unlock premium to use this feature.");
         return;
