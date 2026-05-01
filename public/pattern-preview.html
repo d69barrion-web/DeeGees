@@ -569,8 +569,9 @@ loadBtn.addEventListener("click", () => {
 
   renderPatternList();
 });
-  
+
 //SHOWS ALL SAVED PATTERNS///////////////////
+let selectedPatternId = null;
 async function renderPatternList() {
   const list = document.getElementById("patternList");
   list.innerHTML = "Loading...";
@@ -605,6 +606,7 @@ async function renderPatternList() {
     item.textContent = p.name;
 
     item.addEventListener("click", () => {
+      selectedPatternId = p.id
       if (!isPremium) {
         alert("Unlock premium to use this feature.");
         return;
