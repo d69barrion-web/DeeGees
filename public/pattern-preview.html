@@ -755,21 +755,33 @@ function closeDeleteModal() {
   document.getElementById("deleteModal").style.display = "none";
 }
 
- function confirmDelete() {
-  let patterns = JSON.parse(localStorage.getItem("patterns")) || [];
-
-  patterns = patterns.filter(p => p.createdAt !== selectedCreatedAt);
-
-  localStorage.setItem("patterns", JSON.stringify(patterns));
-
-  selectedCreatedAt = null;
-
-
-  closeDeleteModal();
-  alert("Deleted! 🗑️");
-
-  renderPatternList(); // optional kung may list UI ka
+  async function confirmDelete() {
+  if (!selectedPatternId) {
+    alert("No pattern selected");
+    return;
   }
+
+  const confirmDelete = confirm("Delete this pattern?");
+  if (!confirmDelete) return;
+
+  try {
+    await db.collection("patterns").doc(selectedPatternId).delete();
+
+    alert("Deleted! 🗑️");
+
+    selectedPatternId = null;
+
+    closeDeleteModal(); // 👈 ibinalik
+
+    // optional kung hindi realtime
+    renderPatternList();
+
+  } catch (error) {
+    console.error("Delete error:", error);
+    alert("Failed to delete pattern");
+  }
+  }
+ 
 
   
 //////////////////////////////////////////////
