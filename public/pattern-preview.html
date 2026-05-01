@@ -589,16 +589,7 @@ document.getElementById("leg_opening").value = d.Bottom;
 
 let isPremium = false;
 
-firebase.auth().onAuthStateChanged(async (user) => {
-  if (!user) return;
 
-  const doc = await db.collection("users").doc(user.uid).get();
-
-  if (doc.exists) {
-    isPremium = doc.data().isPremiumUser || false;
-    console.log("Premium status:", isPremium);
-  }
-});
   
 saveBtn.addEventListener("click", function () {
 if (!isPremium) {
