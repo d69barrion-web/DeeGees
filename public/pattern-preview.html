@@ -748,17 +748,17 @@ frontWaistSlider.addEventListener("input", function() {
 //DELETE SAVED PATTERN SYSTEM
 function openDeleteModal(patternId) {
   selectedPatternId = patternId;
-  document.getElementById("deleteModal").style.display = "block";
-  }
-
   
-  
-  async function confirmDelete() {
   if (!selectedPatternId) {
     alert("No pattern selected");
     return;
   }
+  
+  document.getElementById("deleteModal").style.display = "block";
+  }
 
+  async function confirmDelete() {
+  
   const user = firebase.auth().currentUser;
 
   if (!user) {
