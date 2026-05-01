@@ -778,7 +778,8 @@ function openDeleteModal(patternId) {
     localStorage.setItem("patterns", JSON.stringify(patterns));
 
     alert("Deleted successfully 🗑️");
-
+    selectedCreatedAt = null;
+    
     closeDeleteModal();
 
   } catch (error) {
