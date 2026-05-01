@@ -1,21 +1,33 @@
 const express = require("express");
 const axios = require("axios");
-const app = express();
 const path = require("path");
+const admin = require("firebase-admin");
 
-app.use(express.json());
+const app = express();
 
-// serve frontend
-app.use(express.static("public"));
+// 🔥 Firebase Admin init
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
 });
 
+const db = admin.firestore();
+
+// ⚠️ IMPORTANT: PayMongo needs raw body for webhook
+app.use("/webhook", express.raw({ type: "application/json" }));
+app.use(express.json());
+app.use(express.static("public"));
+
 const PAYMONGO_SECRET = process.env.PAYMONGO_SECRET;
-// 🔥 CREATE CHECKOUT SESSION
+
+// ============================
+// CREATE CHECKOUT
+// ============================
 app.post("/create-checkout", async (req, res) => {
   try {
+    const { userId } = req.body;
+
     const response = await axios.post(
       "https://api.paymongo.com/v1/checkout_sessions",
       {
@@ -31,7 +43,10 @@ app.post("/create-checkout", async (req, res) => {
             ],
             payment_method_types: ["gcash", "card"],
             success_url: "https://deegees.onrender.com/success.html",
-            cancel_url: "https://deegees.onrender.com/unlock.html"
+            cancel_url: "https://deegees.onrender.com/unlock.html",
+            metadata: {
+              userId: userId
+            }
           }
         }
       },
@@ -48,31 +63,45 @@ app.post("/create-checkout", async (req, res) => {
     res.json({
       checkout_url: response.data.data.attributes.checkout_url
     });
-
   } catch (err) {
     console.error(err.response?.data || err.message);
-    res.status(500).send("Error creating checkout");
+    res.status(500).send("Checkout error");
   }
 });
 
-// 🔥 WEBHOOK (FIXED)
-app.post("/webhook", (req, res) => {
-  const event = req.body;
+// ============================
+// WEBHOOK (PAYMENT CONFIRMATION)
+// ============================
+app.post("/webhook", async (req, res) => {
+  try {
+    const event = JSON.parse(req.body.toString());
 
-  console.log("Webhook received:", JSON.stringify(event, null, 2));
+    const type = event.data.attributes.type;
 
-  if (
-    event.data &&
-    event.data.attributes.type === "checkout_session.payment.paid"
-  ) {
-    console.log("✅ Payment successful!");
+    if (type === "checkout_session.payment.paid") {
+      console.log("✅ Payment confirmed!");
 
-    // 👉 dito mo ilalagay Firestore update later
+      const userId =
+        event.data.attributes.data.attributes.metadata.userId;
+
+      if (userId) {
+        await db.collection("users").doc(userId).update({
+          isPremium: true,
+          paidAt: new Date()
+        });
+
+        console.log("🔥 User upgraded to premium:", userId);
+      }
+    }
+
+    res.sendStatus(200);
+  } catch (err) {
+    console.error("Webhook error:", err.message);
+    res.sendStatus(500);
   }
-
-  res.sendStatus(200);
 });
 
+// ============================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Server running on port " + PORT);
