@@ -593,9 +593,8 @@ document.getElementById("leg_opening").value = d.Bottom;
 
   const saveBtn = document.getElementById("savePatternBtn");
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
+
+
 let isPremium = false;
 
 firebase.auth().onAuthStateChanged(async (user) => {
@@ -2184,7 +2183,8 @@ function downloadFront() {
 };
 
 firebase.initializeApp(firebaseConfig);
-
+const db = firebase.firestore();
+const auth = firebase.auth();
 
 // 🔒 PROTECTION
 firebase.auth().onAuthStateChanged(function(user) {
