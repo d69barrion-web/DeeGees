@@ -43,7 +43,7 @@ app.post("/create-checkout", async (req, res) => {
             ],
             payment_method_types: ["gcash", "card"],
             success_url: "https://deegees.onrender.com/success.html",
-            cancel_url: "https://deegees.onrender.com/unlock.html",
+            cancel_url: "https://deegees.onrender.com/unlockv2.html",
             metadata: {
               userId: userId
             }
