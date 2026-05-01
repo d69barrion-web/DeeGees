@@ -754,9 +754,9 @@ function openDeleteModal() {
 
 
   async function confirmDelete() {
-  console.log("Selected ID:", selectedPatternId);
+  console.log("Selected ID:", selectedCreatedAt);
 
-  if (!selectedPatternId) {
+  if (!selectedCreatedAt) {
     alert("No pattern selected");
     return;
   }
@@ -765,11 +765,11 @@ function openDeleteModal() {
   if (!confirmDelete) return;
 
   try {
-    await db.collection("patterns").doc(selectedPatternId).delete();
+    await db.collection("patterns").doc(selectedCreatedAt).delete();
 
     alert("Deleted! 🗑️");
 
-    selectedPatternId = null;
+    selectedCreatedAt = null;
 
     closeDeleteModal();
 
