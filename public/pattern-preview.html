@@ -765,8 +765,7 @@ function openDeleteModal() {
   if (!confirmDelete) return;
 
   try {
-    await db.collection("patterns").doc(selectedCreatedAt).delete();
-
+    await db.collection("patterns").doc(selectedPatternId).delete();
     alert("Deleted! 🗑️");
 
     selectedCreatedAt = null;
