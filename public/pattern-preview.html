@@ -593,6 +593,7 @@ document.getElementById("leg_opening").value = d.Bottom;
 
   const saveBtn = document.getElementById("savePatternBtn");
 
+firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 let isPremium = false;
