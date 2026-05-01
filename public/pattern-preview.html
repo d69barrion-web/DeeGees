@@ -754,6 +754,8 @@ function openDeleteModal() {
 
 
   async function confirmDelete() {
+  console.log("Selected ID:", selectedPatternId);
+
   if (!selectedPatternId) {
     alert("No pattern selected");
     return;
@@ -769,16 +771,15 @@ function openDeleteModal() {
 
     selectedPatternId = null;
 
-    closeDeleteModal(); // 👈 ibinalik
+    closeDeleteModal();
 
-    // optional kung hindi realtime
-    
+    renderPatternList(); // refresh
 
   } catch (error) {
-    console.error("Delete error:", error);
-    alert("Failed to delete pattern");
+    console.error("FULL ERROR:", error);
+    alert(error.message);
   }
-  }
+}
  
 function closeDeleteModal() {
   document.getElementById("deleteModal").style.display = "none";
