@@ -297,7 +297,7 @@ background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
 
   <div style="background:white; padding:20px; border-radius:10px; text-align:center;">
     <h3>Premium Required</h3>
-    <p>Unlock premium to use this feature.</p>
+    <p>Unlock premium to save your pattern.</p>
 
     <button onclick="upgrade()" style="margin:5px;">Unlock</button>
     <button onclick="closeModal()" style="margin:5px;">Cancel</button>
@@ -433,16 +433,7 @@ function debug(msg) {
   }
 }
 
-  
-  
-function showPremiumModal() {
-  document.getElementById("premiumModal").style.display = "flex";
-}
-
-function closeModal() {
-  document.getElementById("premiumModal").style.display = "none";
-}
-  
+//RADIO BUTTONS CODE
 const radios = document.querySelectorAll('input[name="control"]');
 const groups = document.querySelectorAll('.slider-group');
 
@@ -466,8 +457,8 @@ radios.forEach(radio => {
 
   });
 });
-  
-let selectedCreatedAt = null;
+
+// THIS CODE SHOW/HIDE BACK PART
 let showFrontMeasurements = false;
 let isBackVisible = false;
 toggleFront.addEventListener("change", function () {
@@ -476,8 +467,8 @@ toggleFront.addEventListener("change", function () {
   updatePattern();
 });
   
-/////////////////////////////////////////////////
-// Load from URL
+///////////////////////////////////////////////
+//////// LOCALSTORAGE SAVING FOR REFRESH LOADING////////////////
 const fields = ["client", "waist", "hip", "rise", "outseam", "inseam", "thigh", "knee", "leg_opening"];
 
 fields.forEach(id => {
@@ -487,8 +478,89 @@ fields.forEach(id => {
     localStorage.setItem(id, this.value);
   });
 });
-/////////////////////////////////////////////////
-  const loadBtn = document.getElementById("loadPatternBtn");
+//////SAVE PATTERN SYSTEM/////////  
+const saveBtn = document.getElementById("savePatternBtn");
+saveBtn.addEventListener("click", function () {
+if (!isPremium) {
+    showPremiumModal();
+    return;
+}
+  const name = prompt("Pattern name?", document.getElementById("client").value);
+  if (!name) return;
+
+  const pattern = {
+    name: name,
+    data: getPatternData(),
+    createdAt: Date.now()
+  };
+
+  let patterns = JSON.parse(localStorage.getItem("patterns")) || [];
+
+// check duplicate
+const exists = patterns.some(p => p.name === name);
+
+if (exists) {
+  if (!confirm("Pattern exists. Overwrite?")) return;
+
+  patterns = patterns.filter(p => p.name !== name);
+}
+
+patterns.push(pattern);
+
+const user = firebase.auth().currentUser;
+
+if (!user) {
+  alert("Not logged in");
+  return;
+}
+
+db.collection("patterns").add({
+  uid: user.uid,
+  name: name,
+  data: getPatternData(),
+  createdAt: Date.now()
+});
+
+alert("Saved to cloud! ☁️");
+  
+});
+
+function showPremiumModal() {
+  document.getElementById("premiumModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("premiumModal").style.display = "none";
+}
+
+function getPatternData() {
+  return {
+    Client: document.getElementById("client").value,
+    Waist: Number(document.getElementById("waist").value),
+    Hip: Number(document.getElementById("hip").value),
+    Crotch: Number(document.getElementById("rise").value),
+    Length: Number(document.getElementById("outseam").value),
+    Inseam: Number(document.getElementById("inseam").value),
+    Thigh: Number(document.getElementById("thigh").value),
+    Knee: Number(document.getElementById("knee").value),
+    Bottom: Number(document.getElementById("leg_opening").value),
+
+    frontCrotch: Number(frontCrotchSlider.value),
+    backCrotch: Number(backCrotchSlider.value),
+    waistShift: Number(waistSlider.value),
+    hipShift: Number(hipSlider.value),
+    crotchShift: Number(crotchShiftSlider.value),
+    crotchDepth: Number(crotchSlider.value),
+    frontWaistAdj: Number(frontWaistSlider.value),
+    frontHipAdj: Number(frontHipSlider.value),
+    thighAdj: Number(thighSlider.value),
+    kneeAdj: Number(kneeSlider.value),
+    bottomAdj: Number(bottomSlider.value)
+  };
+  }
+//////////////LOADING SAVED PATTERN SYSTEM/////////////////////
+let selectedCreatedAt = null;
+const loadBtn = document.getElementById("loadPatternBtn");
 const container = document.getElementById("patternListContainer");
 
 loadBtn.addEventListener("click", () => {
@@ -497,7 +569,8 @@ loadBtn.addEventListener("click", () => {
 
   renderPatternList();
 });
-/////////////////////////////////////////////////////
+  
+//SHOWS ALL SAVED PATTERNS///////////////////
 async function renderPatternList() {
   const list = document.getElementById("patternList");
   list.innerHTML = "Loading...";
@@ -547,8 +620,8 @@ async function renderPatternList() {
   
   
 ///////////////////////////////////////////////
-  function loadPattern(pattern) {
-  const d = pattern.data;
+function loadPattern(pattern) {
+const d = pattern.data;
 
 selectedCreatedAt = pattern.createdAt; // ⭐ important
 
@@ -576,88 +649,11 @@ document.getElementById("leg_opening").value = d.Bottom;
   kneeSlider.value = d.kneeAdj;
   bottomSlider.value = d.bottomAdj;
     
-  
-
-  updatePattern(); // redraw
+  updatePattern(); // to redraw selected saved pattern
   }
   
-  function getPatternData() {
-  return {
-    Client: document.getElementById("client").value,
-    Waist: Number(document.getElementById("waist").value),
-    Hip: Number(document.getElementById("hip").value),
-    Crotch: Number(document.getElementById("rise").value),
-    Length: Number(document.getElementById("outseam").value),
-    Inseam: Number(document.getElementById("inseam").value),
-    Thigh: Number(document.getElementById("thigh").value),
-    Knee: Number(document.getElementById("knee").value),
-    Bottom: Number(document.getElementById("leg_opening").value),
-
-    frontCrotch: Number(frontCrotchSlider.value),
-    backCrotch: Number(backCrotchSlider.value),
-    waistShift: Number(waistSlider.value),
-    hipShift: Number(hipSlider.value),
-    crotchShift: Number(crotchShiftSlider.value),
-    crotchDepth: Number(crotchSlider.value),
-    frontWaistAdj: Number(frontWaistSlider.value),
-    frontHipAdj: Number(frontHipSlider.value),
-    thighAdj: Number(thighSlider.value),
-    kneeAdj: Number(kneeSlider.value),
-    bottomAdj: Number(bottomSlider.value)
-  };
-  }
-
-  const saveBtn = document.getElementById("savePatternBtn");
-
-
-
-
-  
-saveBtn.addEventListener("click", function () {
-if (!isPremium) {
-    showPremiumModal();
-    return;
-}
-  const name = prompt("Pattern name?", document.getElementById("client").value);
-  if (!name) return;
-
-  const pattern = {
-    name: name,
-    data: getPatternData(),
-    createdAt: Date.now()
-  };
-
-  let patterns = JSON.parse(localStorage.getItem("patterns")) || [];
-
-// check duplicate
-const exists = patterns.some(p => p.name === name);
-
-if (exists) {
-  if (!confirm("Pattern exists. Overwrite?")) return;
-
-  patterns = patterns.filter(p => p.name !== name);
-}
-
-patterns.push(pattern);
-
-const user = firebase.auth().currentUser;
-
-if (!user) {
-  alert("Not logged in");
-  return;
-}
-
-db.collection("patterns").add({
-  uid: user.uid,
-  name: name,
-  data: getPatternData(),
-  createdAt: Date.now()
-});
-
-alert("Saved to cloud! ☁️");
-  
-});
-  /////////////////////////////////////////////
+  //THIS FUNCTION LOADS LOCALSTORAGE DATA
+  //SAVED REALTIME
   function loadData() {
   document.getElementById("client").value = localStorage.getItem("client") || "";
   document.getElementById("waist").value = localStorage.getItem("waist") || "";
@@ -741,6 +737,7 @@ frontWaistSlider.addEventListener("input", function() {
   updatePattern();
 });
 
+//DELETE SAVED PATTERN SYSTEM
 function openDeleteModal() {
   if (!selectedCreatedAt) {
     alert("No pattern selected!");
@@ -748,11 +745,8 @@ function openDeleteModal() {
   }
 
   document.getElementById("deleteModal").style.display = "flex";
-}
-
-
-
-
+  }
+  
   async function confirmDelete() {
   console.log("Selected ID:", selectedCreatedAt);
 
