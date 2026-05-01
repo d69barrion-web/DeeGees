@@ -514,13 +514,19 @@ if (!user) {
   return;
 }
 
-db.collection("patterns").add({
-  uid: user.id,
+//db.collection("patterns").add({
+//  uid: user.id,
+//  name: name,
+//  data: getPatternData(),
+//  createdAt: Date.now()
+//});
+db.collection("patterns").doc(pattern.createdAt.toString()).set({
+  uid: user.uid,
   name: name,
   data: getPatternData(),
-  createdAt: Date.now()
+  createdAt: pattern.createdAt
 });
-
+  
 alert("Saved to cloud! ☁️");
   
 });
@@ -740,46 +746,51 @@ frontWaistSlider.addEventListener("input", function() {
 });
 
 //DELETE SAVED PATTERN SYSTEM
-function openDeleteModal() {
-  if (!selectedCreatedAt) {
-    alert("No pattern selected!");
-    return;
+function openDeleteModal(patternId) {
+  selectedPatternId = patternId;
+  document.getElementById("deleteModal").style.display = "block";
   }
 
-  document.getElementById("deleteModal").style.display = "flex";
-  }
+  
   
   async function confirmDelete() {
-  console.log("Selected ID:", selectedPatternId);
-  debug(selectedPatternId);
   if (!selectedPatternId) {
     alert("No pattern selected");
     return;
   }
 
-  const confirmDelete = confirm("Delete this pattern?");
-  if (!confirmDelete) return;
+  const user = firebase.auth().currentUser;
+
+  if (!user) {
+    alert("Not logged in");
+    return;
+  }
 
   try {
-    await db.collection("patterns").doc(selectedPatternId).delete();
-    alert("Deleted! 🗑️");
+    // 🔥 DELETE SA FIRESTORE
+    await db.collection("patterns")
+      .doc(selectedPatternId.toString())
+      .delete();
 
-    selectedCreatedAt = null;
+    // 🔥 DELETE SA LOCAL STORAGE
+    let patterns = JSON.parse(localStorage.getItem("patterns")) || [];
+    patterns = patterns.filter(p => p.createdAt != selectedPatternId);
+    localStorage.setItem("patterns", JSON.stringify(patterns));
+
+    alert("Deleted successfully 🗑️");
 
     closeDeleteModal();
 
-    renderPatternList(); // refresh
-
   } catch (error) {
-    console.error("FULL ERROR:", error);
-    alert(error.message);
+    console.error(error);
+    alert("Delete failed");
   }
 }
  
 function closeDeleteModal() {
   document.getElementById("deleteModal").style.display = "none";
-  renderPatternList();
-  }
+  selectedPatternId = null;
+}
   
 //////////////////////////////////////////////
 function getPointAtDistance(p1, y2, d, side = "left") {
