@@ -751,9 +751,7 @@ function openDeleteModal() {
 }
 
 
-function closeDeleteModal() {
-  document.getElementById("deleteModal").style.display = "none";
-}
+
 
   async function confirmDelete() {
   if (!selectedPatternId) {
@@ -774,7 +772,7 @@ function closeDeleteModal() {
     closeDeleteModal(); // 👈 ibinalik
 
     // optional kung hindi realtime
-    renderPatternList();
+    
 
   } catch (error) {
     console.error("Delete error:", error);
@@ -782,7 +780,10 @@ function closeDeleteModal() {
   }
   }
  
-
+function closeDeleteModal() {
+  document.getElementById("deleteModal").style.display = "none";
+  renderPatternList();
+  }
   
 //////////////////////////////////////////////
 function getPointAtDistance(p1, y2, d, side = "left") {
