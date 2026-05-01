@@ -30,8 +30,8 @@ app.post("/create-checkout", async (req, res) => {
               }
             ],
             payment_method_types: ["gcash", "card"],
-            success_url: "https://yourdomain.com/success.html",
-            cancel_url: "https://yourdomain.com/unlock.html"
+            success_url: "https://deegees.onrender.com/success.html",
+            cancel_url: "https://deegees.onrender.com/unlock.html"
           }
         }
       },
