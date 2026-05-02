@@ -135,7 +135,26 @@
 
   </div>
 
-  <script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  
+<!-- Firebase config + init -->
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAdQ7By9HrCbNhy2pT9cEVVcD-YCdHEuSs",
+  authDomain: "deegees-a23ec.firebaseapp.com",
+  projectId: "deegees-a23ec",
+  storageBucket: "deegees-a23ec.firebasestorage.app",
+  messagingSenderId: "8167578850",
+  appId: "1:8167578850:web:a5d3dd989aec5bd83d92bb"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+</script>
+  
+<script>
 async function unlockPremium() {
   const user = firebase.auth().currentUser;
 
