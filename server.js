@@ -77,11 +77,17 @@ app.post("/webhook", async (req, res) => {
       return res.sendStatus(200);
     }
 
-    const userId = event.metadata?.userId;
+    console.log("WEBHOOK BODY:", JSON.stringify(event, null, 2));
 
-    if (!userId) {
-      console.log("Missing userId in webhook");
-      return res.sendStatus(200);
+    const userId =
+      event.metadata?.userId ||
+      event.user_defined?.userId ||
+      event.data?.metadata?.userId ||
+      event.data?.user_defined?.userId;
+
+     if (!userId) {
+       console.log("Missing userId in webhook");
+       return res.sendStatus(200);
     }
 
     const userRef = db.collection("users").doc(userId);
