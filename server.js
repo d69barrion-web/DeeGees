@@ -40,7 +40,7 @@ app.post("/create-checkout", async (req, res) => {
     const response = await axios.post(
       "https://api.xendit.co/v2/invoices",
       {
-        external_id: "deegees_" + Date.now(),
+        external_id: "deegees_" + userId,
         amount: 49,
         description: "DGs Pattern Studio Premium Access",
         success_redirect_url: "https://deegees.onrender.com/success.html",
@@ -79,11 +79,7 @@ app.post("/webhook", async (req, res) => {
 
     console.log("WEBHOOK BODY:", JSON.stringify(event, null, 2));
 
-    const userId =
-      event.metadata?.userId ||
-      event.user_defined?.userId ||
-      event.data?.metadata?.userId ||
-      event.data?.user_defined?.userId;
+    const userId = event.external_id?.replace("deegees_", "");
 
      if (!userId) {
        console.log("Missing userId in webhook");
