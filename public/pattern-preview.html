@@ -2236,7 +2236,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
   const doc = await db.collection("users").doc(user.uid).get();
 
   if (doc.exists) {
-    isPremium = doc.data().isPremiumUser || false;
+    isPremium = doc.data().isPremium || false;
     console.log("Premium status:", isPremium);
   }
 });
