@@ -93,14 +93,18 @@ app.post("/webhook", async (req, res) => {
 
     const userRef = db.collection("users").doc(userId);
 
-    await userRef.set(
-      {
-        isPremium: true,
-        paidAt: admin.firestore.FieldValue.serverTimestamp(),
-        paymentProvider: "xendit"
-      },
-      { merge: true }
-    );
+    const now = new Date();
+const premiumUntil = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+await userRef.set(
+  {
+    isPremium: true,
+    paidAt: admin.firestore.FieldValue.serverTimestamp(),
+    premiumUntil: premiumUntil,
+    paymentProvider: "xendit"
+  },
+  { merge: true }
+);
 
     console.log("USER UNLOCKED:", userId);
 
