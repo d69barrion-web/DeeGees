@@ -9,6 +9,11 @@ let serviceAccount;
 
 try {
   serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+  // important for Render env formatting
+  serviceAccount.private_key =
+    serviceAccount.private_key.replace(/\\n/g, "\n");
+
 } catch (err) {
   console.error("Invalid FIREBASE_SERVICE_ACCOUNT");
   process.exit(1);
