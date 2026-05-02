@@ -50,11 +50,13 @@ app.post("/create-checkout", async (req, res) => {
         }
       },
       {
-        auth: {
-          username: XENDIT_SECRET,
-          password: ""
+         headers: {
+             Authorization:
+               "Basic " +
+               Buffer.from(XENDIT_SECRET + ":").toString("base64"),
+             "Content-Type": "application/json"
+           }
         }
-      }
     );
 
     res.json({
