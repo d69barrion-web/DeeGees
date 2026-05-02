@@ -26,6 +26,8 @@ app.use(express.static("public"));
 
 const XENDIT_SECRET = process.env.XENDIT_SECRET;
 
+console.log("XENDIT SECRET EXISTS:", !!XENDIT_SECRET);
+console.log("XENDIT SECRET PREFIX:", XENDIT_SECRET ? XENDIT_SECRET.slice(0, 16) : "NONE");
 // ================= CREATE PAYMENT =================
 app.post("/create-checkout", async (req, res) => {
   try {
