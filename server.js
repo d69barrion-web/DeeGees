@@ -41,7 +41,6 @@ app.post("/create-checkout", async (req, res) => {
         external_id: "deegees_" + Date.now(),
         amount: 49,
         description: "DGs Pattern Studio Premium Access",
-        currency: "PHP",
         success_redirect_url: "https://deegees.onrender.com/success.html",
         failure_redirect_url: "https://deegees.onrender.com/unlockv2.html",
         metadata: {
