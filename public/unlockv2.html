@@ -136,11 +136,39 @@
   </div>
 
   <script>
-    function unlockPremium() {
-      alert("Redirecting to payment...");
-      // dito natin ilalagay PayMongo checkout
+async function unlockPremium() {
+  const user = firebase.auth().currentUser;
+
+  if (!user) {
+    alert("Please log in first.");
+    return;
+  }
+
+  try {
+    const res = await fetch("/create-checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userId: user.uid
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.checkout_url) {
+      window.location.href = data.checkout_url;
+    } else {
+      alert("Unable to create checkout.");
     }
-  </script>
+
+  } catch (err) {
+    console.error(err);
+    alert("Payment request failed.");
+  }
+}
+</script>
 
 </body>
 </html>
