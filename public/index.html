@@ -268,58 +268,44 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
   
-function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const remember = document.getElementById("rememberMe").checked;
-
-  const persistence = remember
-    ? firebase.auth.Auth.Persistence.LOCAL
-    : firebase.auth.Auth.Persistence.SESSION;
-
-  auth.setPersistence(persistence)
-    .then(() => {
+function login() {   
+   const email = document.getElementById("email").value;   
+  const password = document.getElementById("password").value;   
+  const remember = document.getElementById("rememberMe").checked;    
+  
+  const persistence = remember     
+    ? firebase.auth.Auth.Persistence.LOCAL     
+    : firebase.auth.Auth.Persistence.SESSION;    
+  
+  auth.setPersistence(persistence)     
+    .then(() => {       
       return auth.signInWithEmailAndPassword(email, password);
-    })
-    .catch(error => {
-      alert(error.message);
-    });
-}
+    })     
+    .then(() => {       
+      window.location.href = "pattern-preview.html";     
+    })     
+    .catch(error => {       
+      alert(error.message);     
+    });   
+}    
+  
+  function loginWithGoogle() {   
+    const provider = new firebase.auth.GoogleAuthProvider();    
+    auth.signInWithPopup(provider)     
+      .then(result => {       
+        const user = result.user;       
+        console.log(user);            
+      })     
+      .catch(err => alert(err.message));   
+  }      
+  
+  const rememberMe = document.getElementById("rememberMe").checked;   
+  firebase.auth().onAuthStateChanged(user => {   
+    if (user) {     // naka-login pa     
+      window.location.href = "/pattern-preview.html";   
+    }  
+  });
 
-function loginWithGoogle() {
-  const remember = document.getElementById("rememberMe").checked;
-
-  const persistence = remember
-    ? firebase.auth.Auth.Persistence.LOCAL
-    : firebase.auth.Auth.Persistence.SESSION;
-
-  const provider = new firebase.auth.GoogleAuthProvider();
-
-  auth.setPersistence(persistence)
-    .then(() => {
-      return auth.signInWithPopup(provider);
-    })
-    .then(async result => {
-      const user = result.user;
-
-      const userRef = db.collection("users").doc(user.uid);
-      const doc = await userRef.get();
-
-      if (!doc.exists) {
-        await userRef.set({
-          email: user.email || "",
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          isPremium: false
-        });
-      }
-
-      window.location.href = "/pattern-preview.html";
-    })
-    .catch(err => {
-      console.error(err);
-      alert(err.message);
-    });
-}
 </script>
 
 </body>
