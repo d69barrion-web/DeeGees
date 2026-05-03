@@ -2242,7 +2242,11 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
   if (doc.exists) {
     isPremium = doc.data().isPremium || false;
-    debug("Premium status:", isPremium);
+    console.log("Premium status:", isPremium);
+  if (!isPremium) {
+    showPremiumModal();
+    return;
+  }
   }
 });
 
