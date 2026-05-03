@@ -2172,7 +2172,12 @@ function downloadFront() {
 
   function downloadBack() {
   const svg = document.getElementById("svgCanvasBack");
-
+  
+    if (!isPremium) {
+    showPremiumModal();
+    return;
+ }
+    
   // ✅ CHECK KUNG WALANG LAMAN
   if (!svg || svg.children.length === 0) {
     alert("Walang pattern na naka-draw.");
