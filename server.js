@@ -98,8 +98,8 @@ const premiumUntil = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
 await userRef.set(
   {
-    userId: userId,
     isPremium: true,
+    email: userId.email,
     paidAt: admin.firestore.FieldValue.serverTimestamp(),
     premiumUntil: premiumUntil,
     paymentProvider: "xendit"
