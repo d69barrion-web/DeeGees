@@ -299,29 +299,27 @@ function loginWithGoogle() {
     .then(() => {
       return auth.signInWithPopup(provider);
     })
-    .then(async (result) => {
-      const user = result.user;
-      const userRef = db.collection("users").doc(user.uid);
-      const doc = await userRef.get();
-
-      if (!doc.exists) {
-        await userRef.set({
-          email: user.email || "",
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          isPremium: false
-        });
-      }
-    })
     .catch(err => {
       alert(err.message);
     });
 }
 
-// auto redirect if already logged in
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    window.location.href = "/pattern-preview.html";
+// auto-create user doc if missing, then redirect
+firebase.auth().onAuthStateChanged(async user => {
+  if (!user) return;
+
+  const userRef = db.collection("users").doc(user.uid);
+  const doc = await userRef.get();
+
+  if (!doc.exists) {
+    await userRef.set({
+      email: user.email || "",
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      isPremium: false
+    });
   }
+
+  window.location.href = "/pattern-preview.html";
 });
 </script>
 
