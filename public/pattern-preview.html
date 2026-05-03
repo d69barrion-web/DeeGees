@@ -687,7 +687,7 @@ document.getElementById("leg_opening").value = d.Bottom;
 // Sliders
 const frontCrotchSlider = document.getElementById("frontCrotchCurve");
 const backCrotchSlider = document.getElementById("backCrotchCurve");
-const frontWaistSlider = document.getElementById("fronWaistShift");
+const frontWaistSlider = document.getElementById("frontWaistShift");
 const backWaistSlider = document.getElementById("backWaistShift");
 const hipSlider = document.getElementById("hipShift");
 const crotchShiftSlider = document.getElementById("crotchShift");
@@ -700,8 +700,8 @@ const frontWaistAdjSlider = document.getElementById("frontWaistAdj");
 
 frontCrotchSlider.value = Number(localStorage.getItem("frontCrotchCurve")) || 0;
 backCrotchSlider.value = Number(localStorage.getItem("backCrotchCurve")) || 0;
-frontWaistSlider.value = Number(localStorage.getItem("waistShift")) || 0;
-backWaistSlider.value = Number(localStorage.getItem("waistShift")) || 0;
+frontWaistSlider.value = Number(localStorage.getItem("frontWaistShift")) || 0;
+backWaistSlider.value = Number(localStorage.getItem("backWaistShift")) || 0;
 hipSlider.value = Number(localStorage.getItem("hipShift")) || 0;
 crotchShiftSlider.value = Number(localStorage.getItem("crotchShift")) || 0;
 crotchSlider.value = Number(localStorage.getItem("crotchDepth")) || 0;
