@@ -954,7 +954,7 @@ function drawPattern(m) {
   const fp14 = { x: fc2h.x + frontCrotchCurve, y: fc2h.y };
   const fc2h2 = getPointAtY(fp14, fp16, frontHipLine + ((fc2h.y - frontHipLine) / 2));
   const fp15 = { x: fc2h2.x + (frontCrotchCurve/2), y: fc2h2.y };
-  const fp17 = { x: center - (3 * scale) + waistShift, y: frontWaistLine };
+  const fp17 = { x: center - (3 * scale) + frontWaistShift, y: frontWaistLine };
   
   
   const fpath = `
