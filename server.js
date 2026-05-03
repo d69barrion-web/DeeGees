@@ -98,7 +98,6 @@ const premiumUntil = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
 await userRef.set(
   {
-    email: userRef.email,
     isPremium: true,
     paidAt: admin.firestore.FieldValue.serverTimestamp(),
     premiumUntil: premiumUntil,
