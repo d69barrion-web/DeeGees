@@ -2263,12 +2263,22 @@ firebase.auth().onAuthStateChanged(async (user) => {
   const now = new Date();
 
   if (now > premiumUntil) {
-    isPremium = false;
-    console.log("Premium expired");
-  } else {
-    isPremium = true;
-    console.log("Premium active until:", premiumUntil);
+  isPremium = false;
+  console.log("Premium expired");
+
+  try {
+    await db.collection("users").doc(user.uid).update({
+      isPremium: false
+    });
+    console.log("Firestore premium downgraded");
+  } catch (err) {
+    console.error("Firestore downgrade failed:", err);
   }
+
+} else {
+  isPremium = true;
+  console.log("Premium active until:", premiumUntil);
+}
 });
   
 // 🔒 PROTECTION
