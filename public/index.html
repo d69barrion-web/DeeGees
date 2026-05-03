@@ -281,32 +281,47 @@ function login() {
     .then(() => {
       return auth.signInWithEmailAndPassword(email, password);
     })
-    .then(() => {
-      window.location.href = "pattern-preview.html";
-    })
     .catch(error => {
       alert(error.message);
     });
-  }
+}
 
-  function loginWithGoogle() {
+function loginWithGoogle() {
+  const remember = document.getElementById("rememberMe").checked;
+
+  const persistence = remember
+    ? firebase.auth.Auth.Persistence.LOCAL
+    : firebase.auth.Auth.Persistence.SESSION;
+
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  auth.signInWithPopup(provider)
-    .then(result => {
-      const user = result.user;
-      console.log(user);
-      
+  auth.setPersistence(persistence)
+    .then(() => {
+      return auth.signInWithPopup(provider);
     })
-    .catch(err => alert(err.message));
-  }
-  
-  const rememberMe = document.getElementById("rememberMe").checked;
-  firebase.auth().onAuthStateChanged(user => {
+    .then(async (result) => {
+      const user = result.user;
+      const userRef = db.collection("users").doc(user.uid);
+      const doc = await userRef.get();
+
+      if (!doc.exists) {
+        await userRef.set({
+          email: user.email || "",
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          isPremium: false
+        });
+      }
+    })
+    .catch(err => {
+      alert(err.message);
+    });
+}
+
+// auto redirect if already logged in
+firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    // naka-login pa
     window.location.href = "/pattern-preview.html";
-  } 
+  }
 });
 </script>
 
