@@ -2234,42 +2234,47 @@ if (!isPremium) {
 
 
   firebase.auth().onAuthStateChanged(async (user) => {
-  if (!user) return;
+  try {
+    if (!user) return;
 
-  const userRef = db.collection("users").doc(user.uid);
-  const doc = await userRef.get();
+    const userRef = db.collection("users").doc(user.uid);
+    const doc = await userRef.get();
 
-  if (!doc.exists) return;
-
-  const data = doc.data();
-
-  if (!data.isPremium) {
-    isPremium = false;
-    return;
-  }
-
-  if (!data.premiumUntil || typeof data.premiumUntil.toDate !== "function") {
-    isPremium = false;
-    return;
-  }
-
-  const now = new Date();
-  const premiumUntil = data.premiumUntil.toDate();
-
-  if (now > premiumUntil) {
-    try {
-      await userRef.update({
-        isPremium: false
-      });
-    } catch (err) {
-      console.error("Premium downgrade failed:", err);
+    if (!doc.exists) {
+      isPremium = false;
+      return;
     }
 
-    isPremium = false;
-    console.log("Premium expired");
-  } else {
-    isPremium = true;
-    console.log("Premium active until:", premiumUntil);
+    const data = doc.data();
+
+    if (!data.isPremium) {
+      isPremium = false;
+      return;
+    }
+
+    if (!data.premiumUntil) {
+      isPremium = true; // para hindi ma-block ang mga lumang premium users
+      console.log("No premiumUntil yet");
+      return;
+    }
+
+    const premiumUntil =
+      typeof data.premiumUntil.toDate === "function"
+        ? data.premiumUntil.toDate()
+        : new Date(data.premiumUntil);
+
+    const now = new Date();
+
+    if (now > premiumUntil) {
+      isPremium = false;
+      console.log("Premium expired");
+    } else {
+      isPremium = true;
+      console.log("Premium active until:", premiumUntil);
+    }
+
+  } catch (err) {
+    console.error("Premium check error:", err);
   }
 });
   
