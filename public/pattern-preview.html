@@ -2244,11 +2244,12 @@ firebase.auth().onAuthStateChanged(async (user) => {
     isPremium = doc.data().isPremium || false;
     console.log("Premium status:", isPremium);
   }
-});
-if (!isPremium) {
+  if (!isPremium) {
     showPremiumModal();
     return;
-  }
+    }
+});
+
 // 🔒 PROTECTION
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
