@@ -633,11 +633,9 @@ loadBtn.addEventListener("click", () => {
         return;
       }
 
-      try {
-  loadPattern(p);
-} catch (err) {
-  alert("ERROR: " + err.message);
-}
+      
+     loadPattern(p);
+
       container.style.display = "none";
     });
 
@@ -650,7 +648,7 @@ loadBtn.addEventListener("click", () => {
 let selectedCreatedAt = null;
 function loadPattern(pattern) {
 const d = pattern.data;
-
+alert("loadPattern start");
 selectedCreatedAt = pattern.createdAt; // ⭐ important
 
 document.getElementById("client").value = d.Client;
