@@ -480,6 +480,60 @@ kneeAdjSlider.value = Number(localStorage.getItem("kneeAdj")) || 0;
 bottomAdjSlider.value = Number(localStorage.getItem("bottomAdj")) || 0;
 frontHipAdjSlider.value = Number(localStorage.getItem("frontHipAdj")) || 0;
 frontWaistAdjSlider.value = Number(localStorage.getItem("frontWaistAdj")) || 0;
+
+frontCrotchSlider.addEventListener("input", function() {
+  localStorage.setItem("frontCrotchCurve", this.value);
+  updatePattern();
+});
+backCrotchSlider.addEventListener("input", function() {
+  localStorage.setItem("backCrotchCurve", this.value);
+  updatePattern();
+});
+frontWaistShiftSlider.addEventListener("input", function() {
+  localStorage.setItem("frontWaistShift", this.value);
+  updatePattern();
+});
+backWaistShiftSlider.addEventListener("input", function() {
+  localStorage.setItem("backWaistShift", this.value);
+  updatePattern();
+});
+frontHipShiftSlider.addEventListener("input", function() {
+  localStorage.setItem("frontHipShift", this.value);
+  updatePattern();
+});
+backHipShiftSlider.addEventListener("input", function() {
+  localStorage.setItem("backHipShift", this.value);
+  updatePattern();
+});
+crotchShiftSlider.addEventListener("input", function() {
+  localStorage.setItem("crotchShift", this.value);
+  updatePattern();
+});
+crotchSlider.addEventListener("input", function() {
+  localStorage.setItem("crotchDepth", this.value);
+  updatePattern();
+});
+thighAdjSlider.addEventListener("input", function() {
+  localStorage.setItem("thighAdj", this.value);
+  updatePattern();
+});
+kneeAdjSlider.addEventListener("input", function() {
+  localStorage.setItem("kneeAdj", this.value);
+  updatePattern();
+});
+bottomAdjSlider.addEventListener("input", function() {
+  localStorage.setItem("bottomAdj", this.value);
+  updatePattern();
+});
+frontHipAdjSlider.addEventListener("input", function() {
+  localStorage.setItem("frontHipAdj", this.value);
+  updatePattern();
+});
+frontWaistAdjSlider.addEventListener("input", function() {
+  localStorage.setItem("frontWaistAdj", this.value);
+  updatePattern();
+});
+
   
 loadData();
 </script>
