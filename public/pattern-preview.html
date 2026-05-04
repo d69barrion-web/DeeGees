@@ -630,7 +630,14 @@ function getPointAtX(p1, p2, x)
   //const px = getPointAtY(p1, p2, 75);
 //////////////////////////////////////////////
 
- 
+ // THIS CODE SHOW/HIDE BACK PART
+let showFrontMeasurements = false;
+let isBackVisible = false;
+toggleFront.addEventListener("change", function () {
+  showFrontMeasurements = this.checked;
+  isBackVisible = this.checked;
+  updatePattern();
+});
   function drawPattern(m) {
   
   const svgFront = document.getElementById("svgCanvasFront");
@@ -859,14 +866,7 @@ function getPointAtX(p1, p2, x)
   const Rbdy = Rbottom.y - frontBottomCenterPoint.y;
   const Rbdistance = Math.sqrt(Rbdx * Rbdx + Rbdy * Rbdy) / scale;
 
-    // THIS CODE SHOW/HIDE BACK PART
-let showFrontMeasurements = false;
-let isBackVisible = false;
-toggleFront.addEventListener("change", function () {
-  showFrontMeasurements = this.checked;
-  isBackVisible = this.checked;
-  updatePattern();
-});
+    
   svgFront.innerHTML =  `
 <path 
     d="${fpath}" 
