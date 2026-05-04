@@ -351,19 +351,19 @@ background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
      <input type="range" id="frontWaistAdj" min="-50" max="50" value="0">
   </div>
   <div class="form-group slider-group hidden" data-control="frontHipAdj">
-     <label>Front Hip adj: <span id="frontHipVal">0</span></label>
+     <label>Front Hip adj: <span id="frontHipAdjVal">0</span></label>
      <input type="range" id="frontHipAdj" min="-50" max="50" value="0">
   </div>
   <div class="form-group slider-group hidden" data-control="thighAdj">
-     <label>Thigh adj: <span id="thighVal">0</span></label>
+     <label>Thigh adj: <span id="thighAdjVal">0</span></label>
      <input type="range" id="thighAdj" min="-50" max="50" value="0">
   </div>
   <div class="form-group slider-group hidden" data-control="kneeAdj">
-           <label>Knee adj: <span id="kneeVal">0</span></label>
+           <label>Knee adj: <span id="kneeAdjVal">0</span></label>
            <input type="range" id="kneeAdj" min="-20" max="20" value="0">
   </div>
   <div class="form-group slider-group hidden" data-control="bottomAdj">
-           <label>Leg Opening adj: <span id="bottomVal">0</span></label>
+           <label>Leg Opening adj: <span id="bottomAdjVal">0</span></label>
            <input type="range" id="bottomAdj" min="-20" max="20" value="0">
   </div>
       
@@ -573,11 +573,11 @@ function getPatternData() {
     backHipShift: Number(backHipShiftSlider.value),
     crotchShift: Number(crotchShiftSlider.value),
     crotchDepth: Number(crotchSlider.value),
-    frontWaistAdj: Number(frontWaistSliderAdj.value),
-    frontHipAdj: Number(frontHipSliderAdj.value),
-    thighAdj: Number(thighSlider.value),
-    kneeAdj: Number(kneeSlider.value),
-    bottomAdj: Number(bottomSlider.value)
+    frontWaistAdj: Number(frontWaistAdjSlider.value),
+    frontHipAdj: Number(frontHipAdjSlider.value),
+    thighAdj: Number(thighAdjSlider.value),
+    kneeAdj: Number(kneeAdjSlider.value),
+    bottomAdj: Number(bottomAdjSlider.value)
   };
   }
 //////////////LOADING SAVED PATTERN SYSTEM/////////////////////
@@ -659,21 +659,21 @@ document.getElementById("thigh").value = d.Thigh;
 document.getElementById("knee").value = d.Knee;
 document.getElementById("leg_opening").value = d.Bottom;
     
-  frontWaistSlider.value = d.frontWaistShift;
-  backWaistSlider.value = d.backWaistShift;
-  frontHipSlider.value = d.frontHipShift;
-  backHipSlider.value = d.backHipShift;
+  frontWaistShiftSlider.value = d.frontWaistShift;
+  backWaistShiftSlider.value = d.backWaistShift;
+  frontHipShiftSlider.value = d.frontHipShift;
+  backHipShiftSlider.value = d.backHipShift;
   crotchSlider.value = d.crotchDepth;
   crotchShiftSlider.value = d.crotchShift;
   frontCrotchSlider.value = d.frontCrotch;
   backCrotchSlider.value = d.backCrotch;
   
-  frontWaistSliderAdj.value = d.frontWaistAdj;
-  frontHipSlider.value = d.frontHipAdj;
+  frontWaistAdjSlider.value = d.frontWaistAdj;
+  frontHipAdjSlider.value = d.frontHipAdj;
 
-  thighSlider.value = d.thighAdj;
-  kneeSlider.value = d.kneeAdj;
-  bottomSlider.value = d.bottomAdj;
+  thighAdjSlider.value = d.thighAdj;
+  kneeAdjSlider.value = d.kneeAdj;
+  bottomAdjSlider.value = d.bottomAdj;
     
   updatePattern(); // to redraw selected saved pattern
   }
@@ -696,30 +696,30 @@ document.getElementById("leg_opening").value = d.Bottom;
 // Sliders
 const frontCrotchSlider = document.getElementById("frontCrotchCurve");
 const backCrotchSlider = document.getElementById("backCrotchCurve");
-const frontWaistSlider = document.getElementById("frontWaistShift");
-const backWaistSlider = document.getElementById("backWaistShift");
-const frontHipSlider = document.getElementById("frontHipShift");
-const backHipSlider = document.getElementById("backHipShift");
+const frontWaistShiftSlider = document.getElementById("frontWaistShift");
+const backWaistShiftSlider = document.getElementById("backWaistShift");
+const frontHipShiftSlider = document.getElementById("frontHipShift");
+const backHipShiftSlider = document.getElementById("backHipShift");
 const crotchShiftSlider = document.getElementById("crotchShift");
 const crotchSlider = document.getElementById("crotchDepth");
-const thighSlider = document.getElementById("thighAdj");
-const kneeSlider = document.getElementById("kneeAdj");
-const bottomSlider = document.getElementById("bottomAdj");
-const frontHipSlider = document.getElementById("frontHipAdj");
+const thighAdjSlider = document.getElementById("thighAdj");
+const kneeAdjSlider = document.getElementById("kneeAdj");
+const bottomAdjSlider = document.getElementById("bottomAdj");
+const frontHipAdjSlider = document.getElementById("frontHipAdj");
 const frontWaistAdjSlider = document.getElementById("frontWaistAdj");
 
 frontCrotchSlider.value = Number(localStorage.getItem("frontCrotchCurve")) || 0;
 backCrotchSlider.value = Number(localStorage.getItem("backCrotchCurve")) || 0;
-frontWaistSlider.value = Number(localStorage.getItem("frontWaistShift")) || 0;
-backWaistSlider.value = Number(localStorage.getItem("backWaistShift")) || 0;
-frontHipSlider.value = Number(localStorage.getItem("fronHipShift")) || 0;
-backHipSlider.value = Number(localStorage.getItem("backHipShift")) || 0;
+frontWaistShiftSlider.value = Number(localStorage.getItem("frontWaistShift")) || 0;
+backWaistShiftSlider.value = Number(localStorage.getItem("backWaistShift")) || 0;
+frontHipShiftSlider.value = Number(localStorage.getItem("fronHipShift")) || 0;
+backHipShiftSlider.value = Number(localStorage.getItem("backHipShift")) || 0;
 crotchShiftSlider.value = Number(localStorage.getItem("crotchShift")) || 0;
 crotchSlider.value = Number(localStorage.getItem("crotchDepth")) || 0;
-thighSlider.value = Number(localStorage.getItem("thighAdj")) || 0;
-kneeSlider.value = Number(localStorage.getItem("kneeAdj")) || 0;
-bottomSlider.value = Number(localStorage.getItem("bottomAdj")) || 0;
-frontHipSlider.value = Number(localStorage.getItem("frontHipAdj")) || 0;
+thighAdSlider.value = Number(localStorage.getItem("thighAdj")) || 0;
+kneeAdjSlider.value = Number(localStorage.getItem("kneeAdj")) || 0;
+bottomAdjSlider.value = Number(localStorage.getItem("bottomAdj")) || 0;
+frontHipAdjSlider.value = Number(localStorage.getItem("frontHipAdj")) || 0;
 frontWaistAdjSlider.value = Number(localStorage.getItem("frontWaistAdj")) || 0;
 
 frontCrotchSlider.addEventListener("input", function() {
@@ -730,19 +730,19 @@ backCrotchSlider.addEventListener("input", function() {
   localStorage.setItem("backCrotchCurve", this.value);
   updatePattern();
 });
-frontWaistSlider.addEventListener("input", function() {
+frontWaistShiftSlider.addEventListener("input", function() {
   localStorage.setItem("frontWaistShift", this.value);
   updatePattern();
 });
-backWaistSlider.addEventListener("input", function() {
+backWaistShiftSlider.addEventListener("input", function() {
   localStorage.setItem("backWaistShift", this.value);
   updatePattern();
 });
-frontHipSlider.addEventListener("input", function() {
+frontHipShiftSlider.addEventListener("input", function() {
   localStorage.setItem("frontHipShift", this.value);
   updatePattern();
 });
-backHipSlider.addEventListener("input", function() {
+backHipShiftSlider.addEventListener("input", function() {
   localStorage.setItem("backHipShift", this.value);
   updatePattern();
 });
@@ -754,19 +754,19 @@ crotchSlider.addEventListener("input", function() {
   localStorage.setItem("crotchDepth", this.value);
   updatePattern();
 });
-thighSlider.addEventListener("input", function() {
+thighAdjSlider.addEventListener("input", function() {
   localStorage.setItem("thighAdj", this.value);
   updatePattern();
 });
-kneeSlider.addEventListener("input", function() {
+kneeAdjSlider.addEventListener("input", function() {
   localStorage.setItem("kneeAdj", this.value);
   updatePattern();
 });
-bottomSlider.addEventListener("input", function() {
+bottomAdjSlider.addEventListener("input", function() {
   localStorage.setItem("bottomAdj", this.value);
   updatePattern();
 });
-frontHipSlider.addEventListener("input", function() {
+frontHipAdjSlider.addEventListener("input", function() {
   localStorage.setItem("frontHipAdj", this.value);
   updatePattern();
 });
@@ -878,16 +878,16 @@ function getPointAtX(p1, p2, x)
 
     frontCrotch_curve: parseInt(frontCrotchSlider.value),
     backCrotch_curve: parseInt(backCrotchSlider.value),
-    frontWaist_shift: parseInt(frontWaistSlider.value),
-    backWaist_shift: parseInt(backWaistSlider.value),
-    frontHip_shift: parseInt(frontHipSlider.value),
-    backHip_shift: parseInt(backHipSlider.value),
+    frontWaist_shift: parseInt(frontWaistShiftSlider.value),
+    backWaist_shift: parseInt(backWaistShiftSlider.value),
+    frontHip_shift: parseInt(frontHipShiftSlider.value),
+    backHip_shift: parseInt(backHipShiftSlider.value),
     crotch_shift: parseInt(crotchShiftSlider.value),
     crotch_depth: parseInt(crotchSlider.value),
-    thigh_adj: parseInt(thighSlider.value),
-    knee_adj: parseInt(kneeSlider.value),
-    bottom_adj: parseInt(bottomSlider.value),
-    frontHip_adj: parseInt(frontHipSlider.value),
+    thigh_adj: parseInt(thighAdjSlider.value),
+    knee_adj: parseInt(kneeAdjSlider.value),
+    bottom_adj: parseInt(bottomAdjSlider.value),
+    frontHip_adj: parseInt(frontHipAdjSlider.value),
     frontWaist_adj: parseInt(frontWaistAdjSlider.value)
   };
 
@@ -899,10 +899,10 @@ function getPointAtX(p1, p2, x)
   document.getElementById("backHipShiftVal").textContent = m.hip_shift;
   document.getElementById("crotchShiftVal").textContent = m.crotch_shift;
   document.getElementById("crotchVal").textContent = m.crotch_depth;
-  document.getElementById("thighVal").textContent = m.thigh_adj;
-  document.getElementById("kneeVal").textContent = m.knee_adj;
-  document.getElementById("bottomVal").textContent = m.bottom_adj;
-  document.getElementById("frontHipVal").textContent = m.frontHip_adj;
+  document.getElementById("thighAdjVal").textContent = m.thigh_adj;
+  document.getElementById("kneeAdjVal").textContent = m.knee_adj;
+  document.getElementById("bottomAdjVal").textContent = m.bottom_adj;
+  document.getElementById("frontHipAdjVal").textContent = m.frontHip_adj;
   document.getElementById("frontWaistAdjVal").textContent = m.frontWaist_adj;
 
  drawPattern(m);
