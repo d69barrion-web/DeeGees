@@ -885,7 +885,7 @@ toggleFront.addEventListener("change", function () {
   const mbp2 = getPointAtDistance(mbp1, frontWaistLine, (BHwaist - waistOffset), "right");
   const mbp5 = {x: center + Hthigh - thighOffset + (1.25 * scale) , y: thighLine};
   const mrBackHipSP = getPointAtY(mbp2, mbp5, frontHipLine);
-  const mbp3 = {x: mrBackHipSP.x backHipShift , y: mrBackHipSP.y};
+  const mbp3 = {x: mrBackHipSP.x + backHipShift , y: mrBackHipSP.y};
   const mrBackCrotch = getPointAtY(mbp2, mbp5, backCrotchLine);
   const mbp4 = {x: mrBackCrotch.x + (backHipShift / 2), y: mrBackCrotch.y};
   const mbp6 = {x: center + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
