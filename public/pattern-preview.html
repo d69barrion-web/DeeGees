@@ -630,6 +630,49 @@ function updatePattern() {
   const HRcrotch = (m.hip / 6) * scale;
 
   const crotchDepth = m.crotch_depth || 0;
+   ////////FRONT PATTERN DRAWING////////////////
+  
+  const fp1 = { x: center + frontWaistShift - waistOffset, y: frontWaistLine };
+  const fp2 = { x: center + Hwaist + frontWaistShift + waistOffset + (Hwaist - (3 * scale)), y: frontWaistLine };
+  const fp3 = { x: center + Hthigh + frontHipShift + thighOffset, y: frontHipLine };
+  const fp4 = { x: center + Hthigh + thighOffset + crotchShift, y: crotchLine};
+  const fp5 = { x: center + Hthigh + thighOffset - (0.125 * scale), y: thighLine };
+  const fp6 = { x: center + Hknee + kneeOffset - (0.125 * scale), y: kneeLine };
+  const fp7 = { x: center + Hbottom + bottomOffset, y: bottomLine1 };
+  const fp8 = { x: center + Hbottom + bottomOffset, y: bottomLine0 };
+  const fp9 = { x: center - Hbottom - bottomOffset, y: bottomLine0 };
+  const fp10 = { x: center - Hbottom - bottomOffset, y: bottomLine1 };
+  const fp11 = { x: center - Hknee - kneeOffset, y: kneeLine };
+  const fp12 = { x: center - Hthigh - thighOffset, y: thighLine };
+  // adjust crotch point
+  const fp13 = { x: center - Hcrotch - crotchDepth + crotchShift, y: crotchLine};
+  const fp16 = { x: center - HFhip + frontHipShift - hipOffset - (HFhip - Hthigh), y: frontHipLine };
+  const fc2h = getPointAtY(fp13, fp16, frontHipLine + (((crotchLine - frontHipLine) / 3) * 2))
+  const fp14 = { x: fc2h.x + frontCrotchCurve, y: fc2h.y };
+  const fc2h2 = getPointAtY(fp14, fp16, frontHipLine + ((fc2h.y - frontHipLine) / 2));
+  const fp15 = { x: fc2h2.x + (frontCrotchCurve/2), y: fc2h2.y };
+  const fp17 = { x: center - (3 * scale) + frontWaistShift, y: frontWaistLine };
+  
+  
+  const fpath = `
+    M ${fp1.x} ${fp1.y}
+    L ${fp2.x} ${fp2.y}
+    Q ${fp3.x} ${fp3.y} ${fp4.x} ${fp4.y}
+    Q ${fp4.x} ${fp4.y} ${fp5.x} ${fp5.y}
+    L ${fp6.x} ${fp6.y}
+    L ${fp7.x} ${fp7.y}
+    L ${fp8.x} ${fp8.y}
+    L ${fp9.x} ${fp9.y}
+    L ${fp10.x} ${fp10.y}
+    Q ${fp11.x} ${fp11.y} ${fp12.x} ${fp12.y}
+    Q ${fp12.x} ${fp12.y} ${fp13.x} ${fp13.y}
+    L ${fp14.x} ${fp14.y}
+    L ${fp15.x} ${fp15.y}
+    L ${fp16.x} ${fp16.y}
+    L ${fp17.x} ${fp17.y}
+    Z
+  `;
+  
   }
 loadData();
 </script>
