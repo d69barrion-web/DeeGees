@@ -922,6 +922,90 @@ toggleFront.addEventListener("change", function () {
     L ${mbp16.x} ${mbp16.y}
     Z
     `; 
+    //BACK HIP LENGTH
+  const mbackWaistEndPoint = { x: mbp2.x , y: frontWaistLine };
+  //RIGHT END-POINT 
+  const mRbwaist = { x: mbp1.x , y: mbp1.y };
+  const mRbwmidX = (mbackWaistEndPoint.x + mRbwaist.x) / 2;
+  const mRbwmidY = (mbackWaistEndPoint.y + mRbwaist.y) / 2;
+  const mRbwdx = mRbwaist.x - mbackWaistEndPoint.x;
+  const mRbwdy = mRbwaist.y - mbackWaistEndPoint.y;
+  const mRbwdistance = Math.sqrt(mRbwdx * mRbwdx + mRbwdy * mRbwdy) / scale;
+  
+  //BACK HIP LENGTH
+  const mbackHipEndPoint = { x: mbp3.x , y: frontHipLine };
+  //RIGHT END-POINT 
+  const mRbEhip = { x: mbp16.x , y: mbp16.y };
+  const mRbEmidX = (mbackHipEndPoint.x + mRbEhip.x) / 2;
+  const mRbEmidY = (mbackHipEndPoint.y + mRbEhip.y) / 2;
+  const mRbEdx = mRbEhip.x - mbackHipEndPoint.x;
+  const mRbEdy = mRbEhip.y - mbackHipEndPoint.y;
+  const mRbEdistance = Math.sqrt(mRbEdx * mRbEdx + mRbEdy * mRbEdy) / scale;
+  
+  //DISTANCE FROM CENTER TO BACK HIP END-POINT
+  const mbackHipCenterPoint = { x: center, y: frontHipLine };
+  //RIGHT END-POINT 
+  const mRbhip = { x: mbp3.x, y: frontHipLine };
+  const mRbhmidX = (mbackHipCenterPoint.x + mRbhip.x) / 2;
+  const mRbhmidY = (mbackHipCenterPoint.y + mRbhip.y) / 2;
+  const mRbhdx = mRbhip.x - mbackHipCenterPoint.x;
+  const mRbhdy = mRbhip.y - mbackHipCenterPoint.y;
+  const mRbhdistance = Math.sqrt(mRbhdx * mRbhdx + mRbhdy * mRbhdy) / scale;
+
+  //DISTANCE FROM CENTER TO BACK THIGH END-POINTS 
+  const mbackThighCenterPoint = { x: center, y: thighLine };
+  //LEFT END-POINT 
+  const mLbthigh = { x: center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
+  const mLbtmidX = (mbackThighCenterPoint.x + mLbthigh.x) / 2;
+  const mLbtmidY = (mbackThighCenterPoint.y + mLbthigh.y) / 2;
+  const mLbtdx = mLbthigh.x - mbackThighCenterPoint.x;
+  const mLbtdy = mLbthigh.y - mbackThighCenterPoint.y;
+  const mLbtdistance = Math.sqrt(mLbtdx * mLbtdx + mLbtdy * mLbtdy) / scale;
+
+  //RIGHT END-POINT 
+  const mRbthigh = { x: center + Hthigh - thighOffset + (1.25 * scale), y: thighLine };
+  const mRbtmidX = (mbackThighCenterPoint.x + mRbthigh.x) / 2;
+  const mRbtmidY = (mbackThighCenterPoint.y + mRbthigh.y) / 2;
+  const mRbtdx = mRbthigh.x - mbackThighCenterPoint.x;
+  const mRbtdy = mRbthigh.y - mbackThighCenterPoint.y;
+  const mRbtdistance = Math.sqrt(mRbtdx * mRbtdx + mRbtdy * mRbtdy) / scale;
+
+  //DISTANCE FROM CENTER TO BACK KNEE END-POINTS
+  const mbackKneeCenterPoint = { x: center, y: kneeLine };
+  //LEFT END-POINT 
+  const mLbknee = { x: center - Hknee + kneeOffset - (1.125 * scale), y: kneeLine };
+  const mLbkmidX = (mbackKneeCenterPoint.x + mLbknee.x) / 2;
+  const mLbkmidY = (mbackKneeCenterPoint.y + mLbknee.y) / 2;
+  const mLbkdx = mLbknee.x - mbackKneeCenterPoint.x;
+  const mLbkdy = mLbknee.y - mbackKneeCenterPoint.y;
+  const mLbkdistance = Math.sqrt(mLbkdx * mLbkdx + mLbkdy * mLbkdy) / scale;
+
+  //RIGHT END-POINT 
+  const mRbknee = { x: center + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
+  const mRbkmidX = (mbackKneeCenterPoint.x + mRbknee.x) / 2;
+  const mRbkmidY = (mbackKneeCenterPoint.y + mRbknee.y) / 2;
+  const mRbkdx = mRbknee.x - mbackKneeCenterPoint.x;
+  const mRbkdy = mRbknee.y - mbackKneeCenterPoint.y;
+  const mRbkdistance = Math.sqrt(mRbkdx * mRbkdx + mRbkdy * mRbkdy) / scale;
+
+  //DISTANCE FROM CENTER TO BACK LEG-OPENING END-POINTS 
+  const mbackBottomCenterPoint = { x: center, y: bottomLine0 };
+  //LEFT END-POINT 
+  const mLbbottom = { x: center - Hbottom + bottomOffset - scale, y: bottomLine0 };
+  const mLbbmidX = (mbackBottomCenterPoint.x + mLbbottom.x) / 2;
+  const mLbbmidY = (mbackBottomCenterPoint.y + mLbbottom.y) / 2;
+  const mLbbdx = mLbbottom.x - mbackBottomCenterPoint.x;
+  const mLbbdy = mLbbottom.y - mbackBottomCenterPoint.y;
+  const mLbbdistance = Math.sqrt(mLbbdx * mLbbdx + mLbbdy * mLbbdy) / scale;
+
+  //RIGHT END-POINT 
+  const mRbbottom = { x: center + Hbottom - bottomOffset + scale, y: bottomLine0 };
+  const mRbbmidX = (mbackBottomCenterPoint.x + mRbbottom.x) / 2;
+  const mRbbmidY = (mbackBottomCenterPoint.y + mRbbottom.y) / 2;
+  const mRbbdx = mRbbottom.x - mbackBottomCenterPoint.x;
+  const mRbbdy = mRbbottom.y - mbackBottomCenterPoint.y;
+  const mRbbdistance = Math.sqrt(mRbbdx * mRbbdx + mRbbdy * mRbbdy) / scale;
+  
   svgFront.innerHTML =  `
 <path 
     d="${fpath}" 
