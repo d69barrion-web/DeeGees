@@ -450,7 +450,7 @@ radios.forEach(radio => {
   document.getElementById("thigh").value = localStorage.getItem("thigh") || "";
   document.getElementById("knee").value = localStorage.getItem("knee") || "";
   document.getElementById("leg_opening").value = localStorage.getItem("leg_opening") || "";
- //updatePattern();
+updatePattern();
 }
 // RETRIEVING VALUES FROM LOCALSTORAGE FOR SLIDERS
 const frontCrotchSlider = document.getElementById("frontCrotchCurve");
@@ -534,6 +534,49 @@ frontWaistAdjSlider.addEventListener("input", function() {
   updatePattern();
 });
 
+function updatePattern() {
+  const m = {
+    client: parseFloat(document.getElementById("client").value) || 0,
+    waist: parseFloat(document.getElementById("waist").value) || 0,
+    hip: parseFloat(document.getElementById("hip").value) || 0,
+    rise: parseFloat(document.getElementById("rise").value) || 0,
+    outseam: parseFloat(document.getElementById("outseam").value) || 0,
+    inseam: parseFloat(document.getElementById("inseam").value) || 0,
+    thigh: parseFloat(document.getElementById("thigh").value) || 0,
+    knee: parseFloat(document.getElementById("knee").value) || 0,
+    leg_opening: parseFloat(document.getElementById("leg_opening").value) || 0,
+
+    frontCrotch_curve: parseInt(frontCrotchSlider.value) || 0,
+    backCrotch_curve: parseInt(backCrotchSlider.value) || 0,
+    frontWaist_shift: parseInt(frontWaistShiftSlider.value) || 0,
+    backWaist_shift: parseInt(backWaistShiftSlider.value) || 0,
+    frontHip_shift: parseInt(frontHipShiftSlider.value) || 0,
+    backHip_shift: parseInt(backHipShiftSlider.value) || 0,
+    crotch_shift: parseInt(crotchShiftSlider.value) || 0,
+    crotch_depth: parseInt(crotchSlider.value) || 0,
+    thigh_adj: parseInt(thighAdjSlider.value) || 0,
+    knee_adj: parseInt(kneeAdjSlider.value) || 0,
+    bottom_adj: parseInt(bottomAdjSlider.value) || 0,
+    frontHip_adj: parseInt(frontHipAdjSlider.value) || 0,
+    frontWaist_adj: parseInt(frontWaistAdjSlider.value) || 0
+  };
+
+  document.getElementById("frontCrotchVal").textContent = m.frontCrotch_curve;
+  document.getElementById("backCrotchVal").textContent = m.backCrotch_curve;
+  document.getElementById("frontWaistShiftVal").textContent = m.frontWaist_shift;
+  document.getElementById("backWaistShiftVal").textContent = m.backWaist_shift;
+  document.getElementById("frontHipShiftVal").textContent = m.frontHip_shift;
+  document.getElementById("backHipShiftVal").textContent = m.backHip_shift;
+  document.getElementById("crotchShiftVal").textContent = m.crotch_shift;
+  document.getElementById("crotchVal").textContent = m.crotch_depth;
+  document.getElementById("thighAdjVal").textContent = m.thigh_adj;
+  document.getElementById("kneeAdjVal").textContent = m.knee_adj;
+  document.getElementById("bottomAdjVal").textContent = m.bottom_adj;
+  document.getElementById("frontHipAdjVal").textContent = m.frontHip_adj;
+  document.getElementById("frontWaistAdjVal").textContent = m.frontWaist_adj;
+
+ //drawPattern(m);
+  } 
   
 loadData();
 </script>
