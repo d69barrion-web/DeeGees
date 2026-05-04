@@ -396,4 +396,79 @@
 <script>
   
 </script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAdQ7By9HrCbNhy2pT9cEVVcD-YCdHEuSs",
+  authDomain: "deegees-a23ec.firebaseapp.com",
+  projectId: "deegees-a23ec",
+  storageBucket: "deegees-a23ec.firebasestorage.app",
+  messagingSenderId: "8167578850",
+  appId: "1:8167578850:web:a5d3dd989aec5bd83d92bb"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+let isPremium = false;
+
+firebase.auth().onAuthStateChanged(async (user) => {
+  if (!user) return;
+
+  const doc = await db.collection("users").doc(user.uid).get();
+
+  if (!doc.exists) return;
+
+  const data = doc.data();
+
+  if (!data.isPremium) {
+    isPremium = false;
+    return;
+  }
+
+  if (!data.premiumUntil) {
+    isPremium = true;
+    console.log("Premium active (legacy user)");
+    return;
+  }
+
+  const premiumUntil = data.premiumUntil.toDate();
+  const now = new Date();
+
+  if (now > premiumUntil) {
+  isPremium = false;
+  console.log("Premium expired");
+
+  try {
+    await db.collection("users").doc(user.uid).update({
+      isPremium: false
+    });
+    console.log("Firestore premium downgraded");
+  } catch (err) {
+    console.error("Firestore downgrade failed:", err);
+  }
+
+} else {
+  isPremium = true;
+  console.log("Premium active until:", premiumUntil);
+}
+});
+  
+// 🔒 PROTECTION
+firebase.auth().onAuthStateChanged(function(user) {
+  if (!user) {
+    window.location.href = "index.html";
+  }
+});
+  function logout() {
+  firebase.auth().signOut()
+    .then(() => {
+      window.location.href = "index.html";
+    });
+  }
+    
+</script>
+</body>
+</html>
     
