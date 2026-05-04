@@ -633,7 +633,11 @@ loadBtn.addEventListener("click", () => {
         return;
       }
 
-      loadPattern(p);
+      try {
+  loadPattern(p);
+} catch (err) {
+  alert("ERROR: " + err.message);
+}
       container.style.display = "none";
     });
 
