@@ -199,3 +199,193 @@
 </style>
  </head>
   <body>
+    <div class="container">
+     <h1>Pattern Preview</h1>
+     <div class="layout">
+<!-- Ist DIV LEFT SIDE -->
+      <div>
+<!-- Measurements -->
+       <div class="card">
+        <input type="text" id="client" placeholder="Name"/>
+        <h3>Measurements</h3>
+        <input type="number" id="waist" placeholder="Waist">
+        <input type="number" id="hip" placeholder="Hip">
+        <input type="number" id="rise" placeholder="Rise">
+        <input type="number" id="outseam" placeholder="Outseam">
+        <input type="number" id="inseam" placeholder="Inseam">
+        <input type="number" id="thigh" placeholder="Thigh">
+        <input type="number" id="knee" placeholder="Knee">
+        <input type="number" id="leg_opening" placeholder="Leg Opening">
+<!-- GENERATE PATTERN BUTTON -->
+        <button class="btn" onclick="updatePattern()">Generate Pattern</button>
+       </div>
+<!-- RADIO BUTTONS (ADJUSTMENTS)-->
+       <h3 style="margin: 0;">Adjustments</h3>
+       <div>
+        <label><input type="radio" name="control" value="frontCrotchCurve"> Front Crotch Curve</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="backCrotchCurve"> Back Crotch Curve</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="frontWaistShift"> Front Waist Shift</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="backWaistShift"> Back Waist Shift</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="frontHipShift"> Front Hip Shift</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="backHipShift"> Back Hip Shift</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="crotchShift"> Crotch Shift</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="crotchDepth"> Crotch Depth</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="frontWaistAdj"> Front Waist adj</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="frontHipAdj"> Front Hip adj</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="thighAdj"> Thigh adj</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="kneeAdj"> Knee adj</label>
+       </div>
+       <div>
+        <label><input type="radio" name="control" value="bottomAdj"> Leg Opening adj</label>
+       </div>
+      </div>
+      <div class="card">
+<!-- HEADER ROW -->
+       <div class="card-header">
+        <h2>(FRONT PART)</h2>
+       <div class="header-buttons">
+        <label style="margin-left:10px;"><input type="checkbox" id="toggleFront">back</label>
+        <button id="savePatternBtn">💾</button>
+        <button id="loadPatternBtn">📂</button>
+        <button onclick="openDeleteModal(selectedCreatedAt)">Delete</button>
+       </div>
+    <!-- DELETE BUTTON -->
+      <div id="deleteModal" class="modal">
+       <div class="modal-content">
+        <h3>Delete Pattern?</h3>
+        <p>Are you sure you want to delete this pattern?</p>
+       <div class="modal-actions">
+        <button class="cancel-btn" onclick="closeDeleteModal()">Cancel</button>
+        <button class="confirm-btn" onclick="confirmDelete()">Delete</button>
+       </div>
+      </div>
+    </div>
+   </div>
+<!-- UNLOCKPREMIUM MODAL -->
+   <div id="premiumModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+     background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
+     <div style="background:white; padding:20px; border-radius:10px; text-align:center;">
+     <h3>Premium Required</h3>
+     <p>Unlock premium to save your pattern.</p>
+    <a href="unlockv2.html" class="btn">Unlock</a>
+    <button class="cancel-btn" onclick="closeModal()" style="margin:5px;">Cancel</button>
+   </div>
+  </div>
+<!-- SVG  -->
+  <svg id="svgCanvasFront"></svg> 
+  <div class="form-group slider-group hidden" data-control="frontCrotchCurve">
+     <label>Front Crotch Curve: <span id="frontCrotchVal">0</span></label>
+     <input type="range" id="frontCrotchCurve" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="backCrotchCurve">
+     <label>Back Crotch Curve: <span id="backCrotchVal">0</span></label>
+     <input type="range" id="backCrotchCurve" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="frontWaistShift">
+     <label>Front Waist Shift: <span id="frontWaistShiftVal">0</span></label>
+     <input type="range" id="frontWaistShift" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="backWaistShift">
+     <label>Back Waist Shift: <span id="backWaistShiftVal">0</span></label>
+     <input type="range" id="backWaistShift" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="frontHipShift">
+     <label>Front Hip Shift: <span id="frontHipShiftVal">0</span></label>
+     <input type="range" id="frontHipShift" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="backHipShift">
+     <label>Back Hip Shift: <span id="backHipShiftVal">0</span></label>
+     <input type="range" id="backHipShift" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="crotchShift">
+     <label>Crotch Shift: <span id="crotchShiftVal">0</span></label>
+     <input type="range" id="crotchShift" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="crotchDepth">
+     <label>Crotch Tip: <span id="crotchVal">0</span></label>
+     <input type="range" id="crotchDepth" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="frontWaistAdj">
+     <label>Front Waist adj: <span id="frontWaistAdjVal">0</span></label>
+     <input type="range" id="frontWaistAdj" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="frontHipAdj">
+     <label>Front Hip adj: <span id="frontHipAdjVal">0</span></label>
+     <input type="range" id="frontHipAdj" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="thighAdj">
+     <label>Thigh adj: <span id="thighAdjVal">0</span></label>
+     <input type="range" id="thighAdj" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="kneeAdj">
+           <label>Knee adj: <span id="kneeAdjVal">0</span></label>
+           <input type="range" id="kneeAdj" min="-20" max="20" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="bottomAdj">
+           <label>Leg Opening adj: <span id="bottomAdjVal">0</span></label>
+           <input type="range" id="bottomAdj" min="-20" max="20" value="0">
+  </div>
+      
+  <button class="btn" onclick="downloadFront()">Download as PNG</button>
+  <button class="btn" onclick="logout()">Logout</button>
+  </div>
+</div>
+<div id="patternListContainer" style="
+  display:none;
+  position: fixed;
+  top: 160px;
+  right: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+">
+  <h4>Saved Patterns</h4>
+  <div id="patternList"></div>
+      </div>
+    
+    </div>
+  </div>
+</div>
+  
+<div id="debugPanel" style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  background: black;
+  color: #00ff00;
+  font-size: 12px;
+  padding: 5px;
+  z-index: 9999;
+  font-family: monospace;
+">
+  <b>DEBUG:</b><br>
+    </div>
+    
