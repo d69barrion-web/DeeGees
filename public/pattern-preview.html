@@ -1325,6 +1325,192 @@ toggleFront.addEventListener("change", function () {
     ${((bottomLine1 - frontWaistLine) / scale).toFixed(1)} "
   </text>
 </g>
+
+<g id="isBackVisible" opacity="${isBackVisible ? 1 : 0}"> 
+  <path 
+    d="${mbpath}" 
+    fill="none" 
+    stroke="white" 
+    stroke-width="2"
+  /> 
+  <line
+    x1="${mbackWaistLineXo}" 
+    y1="${backWaistLine}" 
+    x2="${mbackWaistLineXi}" 
+    y2="${backWaistLine}"
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${mbackHipLineXo}" 
+    y1="${backHipLine}" 
+    x2="${mbackHipLineXi}" 
+    y2="${backHipLine}" 
+    stroke="red" 
+    stroke-width="1"
+    stroke-dasharray="5,5"
+  />
+  <line 
+    x1="${10}" 
+    y1="${frontWaistLine}" 
+    x2="${10}" 
+    y2="${bottomLine0}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${30}" 
+    y1="${backWaistLine}" 
+    x2="${30}" 
+    y2="${backHipLine}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${270}" 
+    y1="${frontWaistLine}" 
+    x2="${270}" 
+    y2="${backHipLine}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackWaistEndPoint.x}" 
+    y1="${mbackWaistEndPoint.y}" 
+    x2="${mRbwaist.x}" 
+    y2="${mRbwaist.y}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackHipEndPoint.x}" 
+    y1="${mbackHipEndPoint.y}" 
+    x2="${mRbEhip.x}" 
+    y2="${mRbEhip.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackHipCenterPoint.x}" 
+    y1="${mbackHipCenterPoint.y}" 
+    x2="${mRbhip.x}" 
+    y2="${mRbhip.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackThighCenterPoint.x}" 
+    y1="${mbackThighCenterPoint.y}" 
+    x2="${mLbthigh.x}" 
+    y2="${mLbthigh.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackThighCenterPoint.x}" 
+    y1="${mbackThighCenterPoint.y}" 
+    x2="${mRbthigh.x}" 
+    y2="${mRbthigh.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackKneeCenterPoint.x}" 
+    y1="${mbackKneeCenterPoint.y}" 
+    x2="${mLbknee.x}" 
+    y2="${mLbknee.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="$m{backKneeCenterPoint.x}" 
+    y1="${mbackKneeCenterPoint.y}" 
+    x2="${mRbknee.x}" 
+    y2="${mRbknee.y}"  
+    stroke="white"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackBottomCenterPoint.x}" 
+    y1="${mbackBottomCenterPoint.y}"
+    x2="${mLbbottom.x}" 
+    y2="${mLbbottom.y}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <line 
+    x1="${mbackBottomCenterPoint.x}" 
+    y1="${mbackBottomCenterPoint.y}" 
+    x2="${mRbbottom.x}" 
+    y2="${mRbbottom.y}"  
+    stroke="#38bdf8"
+    stroke-width="0.5"
+    marker-start="url(#arrow)"
+    marker-end="url(#arrow)"
+  />
+  <text x="${mRbwmidX}" y="${mRbwmidY}" fill="yellow" font-size="10">
+    ${mRbwdistance.toFixed(2)} "
+  </text>
+  <text x="${mRbhmidX}" y="${mRbhmidY}" fill="yellow" font-size="10">
+    ${mRbhdistance.toFixed(2)} "
+  </text>
+  <text x="${mRbEmidX}" y="${mRbEmidY}" fill="yellow" font-size="10">
+    ${mRbEdistance.toFixed(2)} "
+  </text>
+  <text x="${mLbtmidX}" y="${mLbtmidY}" fill="yellow" font-size="10">
+    ${mLbtdistance.toFixed(2)} "
+  </text>
+  <text x="${mRbtmidX}" y="${mRbtmidY}" fill="yellow" font-size="10">
+    ${mRbtdistance.toFixed(2)} "
+  </text>
+  <text x="${mLbkmidX}" y="${mLbkmidY}" fill="yellow" font-size="10">
+    ${mLbkdistance.toFixed(2)} "
+  </text>
+  <text x="${mRbkmidX}" y="${mRbkmidY}" fill="yellow" font-size="10">
+    ${mRbkdistance.toFixed(2)} "
+  </text>
+  <text x="${mLbbmidX}" y="${mLbbmidY}" fill="yellow" font-size="10">
+    ${mLbbdistance.toFixed(2)} "
+  </text>
+  <text x="${mRbbmidX}" y="${mRbbmidY}" fill="yellow" font-size="10">
+    ${mRbbdistance.toFixed(2)} "
+  </text>
+  <text x="${10}" y="${totFrontHeightCenterPoint}" fill="yellow" font-size="10">
+    ${(m.outseam + 1).toFixed(2)} "
+  </text>
+  <text x="${30}" y="${backWaistToBackHipCenterPoint}" fill="yellow" font-size="10">
+    ${((backHipLine - backWaistLine) / scale).toFixed(1)} "
+  </text>
+  
+  <text x="${270}" y="${frontWaistToBackHipCenterPoint}" fill="yellow" font-size="10">
+    ${((backHipLine - frontWaistLine) / scale).toFixed(1)} "
+  </text>
+  
+</g>
+
   `;
   }
 
