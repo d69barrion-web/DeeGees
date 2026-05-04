@@ -999,6 +999,15 @@ function getPointAtX(p1, p2, x)
 </g>
   `;
   }
+
+  // THIS CODE SHOW/HIDE BACK PART
+let showFrontMeasurements = false;
+let isBackVisible = false;
+toggleFront.addEventListener("change", function () {
+  showFrontMeasurements = this.checked;
+  isBackVisible = this.checked;
+  updatePattern();
+});
 loadData();
 </script>
 
