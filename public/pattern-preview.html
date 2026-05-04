@@ -648,7 +648,7 @@ loadBtn.addEventListener("click", () => {
 let selectedCreatedAt = null;
 function loadPattern(pattern) {
 const d = pattern.data;
-alert("loadPattern start");
+
 selectedCreatedAt = pattern.createdAt; // ⭐ important
 
 document.getElementById("client").value = d.Client;
@@ -2169,6 +2169,7 @@ function drawPattern(m) {
   </text>
   `;}
   // init
+  alert("loadPattern start");
 loadData();
 
   
