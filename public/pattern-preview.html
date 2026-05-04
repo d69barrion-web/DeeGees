@@ -426,7 +426,7 @@ background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
   
   
 <script>
-alert("loadPattern start");
+
 window.onerror = function (message, source, lineno, colno, error) {
   debug("❌ ERROR: " + message);
   debug("📄 File: " + source);
@@ -583,7 +583,7 @@ function getPatternData() {
 //////////////LOADING SAVED PATTERN SYSTEM/////////////////////
 const loadBtn = document.getElementById("loadPatternBtn");
 const container = document.getElementById("patternListContainer");
-
+alert("loadPattern start");
 loadBtn.addEventListener("click", () => {
   container.style.display =
     container.style.display === "none" ? "block" : "none";
