@@ -1160,8 +1160,8 @@ function drawPattern(m) {
   const mbp1 = {x: center - scale + backWaistShift, y: backWaistLine};
   const mbp2 = getPointAtDistance(mbp1, frontWaistLine, (BHwaist - waistOffset), "right");
   const mbp5 = {x: center + Hthigh - thighOffset + (1.25 * scale) , y: thighLine};
-  const rBackHipSP = getPointAtY(mbp2, mbp5, frontHipLine);
-  const mbp3 = {x: rBackHipSP.x , y: rBackHipSP.y};
+  const mrBackHipSP = getPointAtY(mbp2, mbp5, frontHipLine);
+  const mbp3 = {x: mrBackHipSP.x , y: mrBackHipSP.y};
   const mbp4 = getPointAtY(mbp2, mbp5, backCrotchLine);
   const mbp6 = {x: center + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
   const mbp7 = {x: center + Hbottom - bottomOffset + scale, y: bottomLine1};
