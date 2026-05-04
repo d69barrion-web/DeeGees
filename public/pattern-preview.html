@@ -414,7 +414,30 @@ function debug(msg) {
     panel.scrollTop = panel.scrollHeight;
   }
   }
-  
+//<--RADIO BUTTONS CODE-->
+const radios = document.querySelectorAll('input[name="control"]');
+const groups = document.querySelectorAll('.slider-group');
+
+radios.forEach(radio => {
+  radio.addEventListener("change", () => {
+
+    // hide all
+    groups.forEach(g => g.classList.add("hidden"));
+
+    // show selected
+    const active = document.querySelector(
+      `.slider-group[data-control="${radio.value}"]`
+    );
+
+    if (active) {
+      active.classList.remove("hidden");
+
+      // optional: scroll into view
+      active.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+  });
+});
 </script>
 
 <script>
