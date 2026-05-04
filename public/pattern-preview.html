@@ -939,6 +939,64 @@ function getPointAtX(p1, p2, x)
     stroke-width="1"
     stroke-dasharray="5,5"
   />
+  <text x="${LwmidX}" y="${LwmidY}" fill="yellow" font-size="10">
+    ${Lwdistance.toFixed(2)} "
+  </text>
+  <text x="${RwmidX}" y="${RwmidY}" fill="yellow" font-size="10">
+    ${Rwdistance.toFixed(2)} "
+  </text>
+  <text x="${LhmidX}" y="${LhmidY}" fill="yellow" font-size="10">
+    ${Lhdistance.toFixed(2)} "
+  </text>
+  <text x="${RhmidX}" y="${RhmidY}" fill="yellow" font-size="10">
+    ${Rhdistance.toFixed(2)} "
+  </text>
+  <text x="${300}" y="${LcmidY}" fill="white" font-size="10">
+    crotchLine
+  </text>
+  <text x="${LcmidX}" y="${LcmidY}" fill="yellow" font-size="10">
+    ${Lcdistance.toFixed(2)} "
+  </text>
+  <text x="${RcmidX}" y="${RcmidY}" fill="yellow" font-size="10">
+    ${Rcdistance.toFixed(2)} "
+  </text>
+  <text x="${230}" y="${waistToHipCenterPoint}" fill="yellow" font-size="10">
+   ${hipY.toFixed(2)} "
+  </text>
+  <text x="${20}" y="${waistToCrotchCenterPoint}" fill="yellow" font-size="10">
+    ${crotchY.toFixed(2)} "
+  </text>
+  <text x="${LtmidX}" y="${LtmidY}" fill="yellow" font-size="10">
+    ${Ltdistance.toFixed(2)} "
+  </text>
+  <text x="${RtmidX}" y="${RtmidY}" fill="yellow" font-size="10">
+    ${Rtdistance.toFixed(2)} "
+  </text>
+  <text x="${20}" y="${crotchToThighCenterPoint}" fill="yellow" font-size="10">
+    ${thighY.toFixed(2)} "
+  </text>
+  <text x="${20}" y="${thighToKneeCenterPoint}" fill="yellow" font-size="10">
+    ${kneeY.toFixed(2)} "
+  </text>
+  <text x="${20}" y="${kneeToBottomCenterPoint}" fill="yellow" font-size="10">
+    ${bottomY0.toFixed(2)} "
+  </text>
+  <text x="${LkmidX}" y="${LkmidY}" fill="yellow" font-size="10">
+    ${Lkdistance.toFixed(2)} "
+  </text>
+  <text x="${RkmidX}" y="${RkmidY}" fill="yellow" font-size="10">
+    ${Rkdistance.toFixed(2)} "
+  </text>
+  <text x="${LbmidX}" y="${LbmidY}" fill="yellow" font-size="10">
+    ${Lbdistance.toFixed(2)} "
+  </text>
+  <text x="${RbmidX}" y="${RbmidY}" fill="yellow" font-size="10">
+    ${Rbdistance.toFixed(2)} "
+  </text>
+  <text x="${260}" y="${pantsLengthCenterPoint}" fill="yellow" font-size="10">
+    ${((bottomLine1 - frontWaistLine) / scale).toFixed(1)} "
+  </text>
+</g>
   `;
   }
 loadData();
