@@ -450,7 +450,8 @@ radios.forEach(radio => {
   document.getElementById("thigh").value = localStorage.getItem("thigh") || "";
   document.getElementById("knee").value = localStorage.getItem("knee") || "";
   document.getElementById("leg_opening").value = localStorage.getItem("leg_opening") || "";
-updatePattern();
+
+  updatePattern();
 }
 // RETRIEVING VALUES FROM LOCALSTORAGE FOR SLIDERS
 const frontCrotchSlider = document.getElementById("frontCrotchCurve");
