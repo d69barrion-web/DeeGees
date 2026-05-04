@@ -235,13 +235,16 @@
            <label><input type="radio" name="control" value="backCrotchCurve"> Back Crotch Curve</label>
       </div>
       <div>
-           <label><input type="radio" name="control" value="frontWaistShift">Front Waist Shift</label>
+           <label><input type="radio" name="control" value="frontWaistShift"> Front Waist Shift</label>
       </div>
       <div>
-           <label><input type="radio" name="control" value="backWaistShift">Back Waist Shift</label>
+           <label><input type="radio" name="control" value="backWaistShift"> Back Waist Shift</label>
       </div>
       <div>
-           <label><input type="radio" name="control" value="hipShift"> Hip Shift</label>
+           <label><input type="radio" name="control" value="frontHipShift"> Front Hip Shift</label>
+      </div>
+      <div>
+           <label><input type="radio" name="control" value="backHipShift"> Back Hip Shift</label>
       </div>
       <div>
            <label><input type="radio" name="control" value="crotchShift"> Crotch Shift</label>
@@ -328,8 +331,12 @@ background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
      <input type="range" id="backWaistShift" min="-50" max="50" value="0">
   </div>
   <div class="form-group slider-group hidden" data-control="hipShift">
-     <label>Hip Shift: <span id="hipShiftVal">0</span></label>
-     <input type="range" id="hipShift" min="-50" max="50" value="0">
+     <label>Front Hip Shift: <span id="frontHipShiftVal">0</span></label>
+     <input type="range" id="fronHipShift" min="-50" max="50" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="hipShift">
+     <label>Back Hip Shift: <span id="backHipShiftVal">0</span></label>
+     <input type="range" id="backHipShift" min="-50" max="50" value="0">
   </div>
   <div class="form-group slider-group hidden" data-control="crotchShift">
      <label>Crotch Shift: <span id="crotchShiftVal">0</span></label>
@@ -562,7 +569,8 @@ function getPatternData() {
     backCrotch: Number(backCrotchSlider.value),
     frontWaistShift: Number(frontWaistSlider.value),
     backWaistShift: Number(backWaistSlider.value),
-    hipShift: Number(hipSlider.value),
+    frontHipShift: Number(frontHipSlider.value),
+    backHipShift: Number(backHipSlider.value),
     crotchShift: Number(crotchShiftSlider.value),
     crotchDepth: Number(crotchSlider.value),
     frontWaistAdj: Number(frontWaistSliderAdj.value),
@@ -653,7 +661,8 @@ document.getElementById("leg_opening").value = d.Bottom;
     
   frontWaistSlider.value = d.frontWaistShift;
   backWaistSlider.value = d.backWaistShift;
-  hipSlider.value = d.hipShift;
+  frontHipSlider.value = d.frontHipShift;
+  backHipSlider.value = d.backHipShift;
   crotchSlider.value = d.crotchDepth;
   crotchShiftSlider.value = d.crotchShift;
   frontCrotchSlider.value = d.frontCrotch;
@@ -689,7 +698,8 @@ const frontCrotchSlider = document.getElementById("frontCrotchCurve");
 const backCrotchSlider = document.getElementById("backCrotchCurve");
 const frontWaistSlider = document.getElementById("frontWaistShift");
 const backWaistSlider = document.getElementById("backWaistShift");
-const hipSlider = document.getElementById("hipShift");
+const frontHipSlider = document.getElementById("frontHipShift");
+const backHipSlider = document.getElementById("backHipShift");
 const crotchShiftSlider = document.getElementById("crotchShift");
 const crotchSlider = document.getElementById("crotchDepth");
 const thighSlider = document.getElementById("thighAdj");
@@ -702,7 +712,8 @@ frontCrotchSlider.value = Number(localStorage.getItem("frontCrotchCurve")) || 0;
 backCrotchSlider.value = Number(localStorage.getItem("backCrotchCurve")) || 0;
 frontWaistSlider.value = Number(localStorage.getItem("frontWaistShift")) || 0;
 backWaistSlider.value = Number(localStorage.getItem("backWaistShift")) || 0;
-hipSlider.value = Number(localStorage.getItem("hipShift")) || 0;
+frontHipSlider.value = Number(localStorage.getItem("fronHipShift")) || 0;
+backHipSlider.value = Number(localStorage.getItem("backHipShift")) || 0;
 crotchShiftSlider.value = Number(localStorage.getItem("crotchShift")) || 0;
 crotchSlider.value = Number(localStorage.getItem("crotchDepth")) || 0;
 thighSlider.value = Number(localStorage.getItem("thighAdj")) || 0;
@@ -727,8 +738,12 @@ backWaistSlider.addEventListener("input", function() {
   localStorage.setItem("backWaistShift", this.value);
   updatePattern();
 });
-hipSlider.addEventListener("input", function() {
-  localStorage.setItem("hipShift", this.value);
+frontHipSlider.addEventListener("input", function() {
+  localStorage.setItem("frontHipShift", this.value);
+  updatePattern();
+});
+backHipSlider.addEventListener("input", function() {
+  localStorage.setItem("backHipShift", this.value);
   updatePattern();
 });
 crotchShiftSlider.addEventListener("input", function() {
@@ -865,7 +880,8 @@ function getPointAtX(p1, p2, x)
     backCrotch_curve: parseInt(backCrotchSlider.value),
     frontWaist_shift: parseInt(frontWaistSlider.value),
     backWaist_shift: parseInt(backWaistSlider.value),
-    hip_shift: parseInt(hipSlider.value),
+    frontHip_shift: parseInt(frontHipSlider.value),
+    backHip_shift: parseInt(backHipSlider.value),
     crotch_shift: parseInt(crotchShiftSlider.value),
     crotch_depth: parseInt(crotchSlider.value),
     thigh_adj: parseInt(thighSlider.value),
@@ -879,7 +895,8 @@ function getPointAtX(p1, p2, x)
   document.getElementById("backCrotchVal").textContent = m.backCrotch_curve;
   document.getElementById("frontWaistShiftVal").textContent = m.frontWaist_shift;
   document.getElementById("backWaistShiftVal").textContent = m.backWaist_shift;
-  document.getElementById("hipShiftVal").textContent = m.hip_shift;
+  document.getElementById("frontHipShiftVal").textContent = m.hip_shift;
+  document.getElementById("backHipShiftVal").textContent = m.hip_shift;
   document.getElementById("crotchShiftVal").textContent = m.crotch_shift;
   document.getElementById("crotchVal").textContent = m.crotch_depth;
   document.getElementById("thighVal").textContent = m.thigh_adj;
@@ -904,7 +921,8 @@ function drawPattern(m) {
   
   const frontWaistShift = m.frontWaist_shift;
   const backWaistShift = m.backWaist_shift;
-  const frontHipShift = m.hip_shift;
+  const frontHipShift = m.frontHip_shift;
+  const backHipShift = m.backHip_shift;
   const frontCrotchCurve = m.frontCrotch_curve;
   const crotchShift = m.crotch_shift;
   const thighOffset = m.thigh_adj;
@@ -1142,7 +1160,8 @@ function drawPattern(m) {
   const mbp1 = {x: center - scale + backWaistShift, y: backWaistLine};
   const mbp2 = getPointAtDistance(mbp1, frontWaistLine, (BHwaist - waistOffset), "right");
   const mbp5 = {x: center + Hthigh - thighOffset + (1.25 * scale) , y: thighLine};
-  const mbp3 = getPointAtY(mbp2, mbp5, frontHipLine);
+  const rBackHipSP = getPointAtY(mbp2, mbp5, frontHipLine);
+  const mbp3 = {x: rBackHipSP.x + backHipShift, y: rBackHipSP.y};
   const mbp4 = getPointAtY(mbp2, mbp5, backCrotchLine);
   const mbp6 = {x: center + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
   const mbp7 = {x: center + Hbottom - bottomOffset + scale, y: bottomLine1};
@@ -1153,7 +1172,8 @@ function drawPattern(m) {
   const mbp12 = {x: center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
   const mbpx =  {x: center - Hcrotch - crotchDepth + crotchShift - (scale * 1.375), y: crotchLine};
   const mbp13 = getPointAtY(mbpx, mbp12, crotchLine + (scale/2));
-  const mbp16 = getPointAtDistance(mbp3, backHipLine, BHhip - hipOffset , "left");
+  const lBackHipEP = getPointAtDistance(mbp3, backHipLine, BHhip - hipOffset , "left");
+  const mbp16 = {x: lBackHipEP.x + backHipShift, y: lBackHipEP.y};
   const mbpa = getPointAtY(mbp13, mbp16, frontHipLine);
   const mbp15 = {x: mbpa.x + backCrotchCurve, y: mbpa.y};
   const mbpb = getPointAtY(mbp13, mbp15, frontHipLine + ((crotchLine - frontHipLine) /2));
@@ -1271,7 +1291,8 @@ function drawPattern(m) {
   const bp1 = {x: bCenter - scale + backWaistShift, y: backWaistLine};
   const bp2 = getPointAtDistance(bp1, frontWaistLine, (BHwaist - waistOffset), "right");
   const bp5 = {x: bCenter + Hthigh - thighOffset + (1.25 * scale) , y: thighLine};
-  const bp3 = getPointAtY(bp2, bp5, frontHipLine);
+  const rBackHipSP = getPointAtY(bp2, bp5, frontHipLine);
+  const bp3 = {x: rBackHipSP.x + backHipShift, y: rBackHipSP.y};
   const bp4 = getPointAtY(bp2, bp5, backCrotchLine);
   const bp6 = {x: bCenter + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
   const bp7 = {x: bCenter + Hbottom - bottomOffset + scale, y: bottomLine1};
@@ -1282,7 +1303,8 @@ function drawPattern(m) {
   const bp12 = {x: bCenter - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
   const bpx =  {x: bCenter - Hcrotch - crotchDepth + crotchShift - (scale * 1.375), y: crotchLine};
   const bp13 = getPointAtY(bpx, bp12, crotchLine + (scale/2));
-  const bp16 = getPointAtDistance(bp3, backHipLine, BHhip - hipOffset , "left");
+  const lBackHipEP = getPointAtDistance(bp3, backHipLine, BHhip - hipOffset , "left");
+  const bp16 = {x: rBackHipEP.x + backHipShift, y: rBackHipEP.y};
   const bpa = getPointAtY(bp13, bp16, frontHipLine);
   const bp15 = {x: bpa.x + backCrotchCurve, y: bpa.y};
   const bpb = getPointAtY(bp13, bp15, frontHipLine + ((crotchLine - frontHipLine) /2));
