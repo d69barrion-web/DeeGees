@@ -866,6 +866,20 @@ toggleFront.addEventListener("change", function () {
   const Rbdy = Rbottom.y - frontBottomCenterPoint.y;
   const Rbdistance = Math.sqrt(Rbdx * Rbdx + Rbdy * Rbdy) / scale;
 
+  ////////BACK PATTERN DRAWING//////////////////// 
+  const backCrotchCurve = m.backCrotch_curve;
+  const backWaistLine = frontWaistLine - (2 * scale);
+  const backCrotchLine = crotchLine + (scale/2);
+  const backHipLine = backWaistLine + (frontHipLine - frontWaistLine);
+  const mbackWaistLineXo = 0;
+  const mbackWaistLineXi = 300;
+  const mbackHipLineXo = 0;
+  const mbackHipLineXi = 300;
+  const totFrontHeightCenterPoint = ((m.outseam + 2) / 2) * scale;
+  const backWaistToBackHipCenterPoint = backWaistLine + ((backHipLine - backWaistLine) / 2);
+  const frontWaistToBackHipCenterPoint = frontWaistLine + ((backHipLine - frontWaistLine) / 2);
+  const pantsLengthCenterPoint = frontWaistLine + ((bottomLine1 - frontWaistLine) / 2);
+    
     
   svgFront.innerHTML =  `
 <path 
