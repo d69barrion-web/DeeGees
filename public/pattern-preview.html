@@ -880,7 +880,48 @@ toggleFront.addEventListener("change", function () {
   const frontWaistToBackHipCenterPoint = frontWaistLine + ((backHipLine - frontWaistLine) / 2);
   const pantsLengthCenterPoint = frontWaistLine + ((bottomLine1 - frontWaistLine) / 2);
     
-    
+   //mBack
+  const mbp1 = {x: center - scale + backWaistShift, y: backWaistLine};
+  const mbp2 = getPointAtDistance(mbp1, frontWaistLine, (BHwaist - waistOffset), "right");
+  const mbp5 = {x: center + Hthigh - thighOffset + (1.25 * scale) , y: thighLine};
+  const mrBackHipSP = getPointAtY(mbp2, mbp5, frontHipLine);
+  const mbp3 = {x: mrBackHipSP.x , y: mrBackHipSP.y};
+  const mbp4 = getPointAtY(mbp2, mbp5, backCrotchLine);
+  const mbp6 = {x: center + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
+  const mbp7 = {x: center + Hbottom - bottomOffset + scale, y: bottomLine1};
+  const mbp8 = {x: center + Hbottom - bottomOffset + scale, y: bottomLine0};
+  const mbp9 = {x: center - Hbottom + bottomOffset - scale, y: bottomLine0};
+  const mbp10 = {x: center - Hbottom + bottomOffset - scale, y: bottomLine1};
+  const mbp11 = {x: center - Hknee + kneeOffset - (1.125 * scale), y: kneeLine };
+  const mbp12 = {x: center - Hthigh + thighOffset - (1.25 * scale), y: thighLine };
+  const mbpx =  {x: center - Hcrotch - crotchDepth + crotchShift - (scale * 1.375), y: crotchLine};
+  const mbp13 = getPointAtY(mbpx, mbp12, crotchLine + (scale/2));
+  const lBackHipEP = getPointAtDistance(mbp3, backHipLine, BHhip - hipOffset , "left");
+  const mbp16 = {x: lBackHipEP.x , y: lBackHipEP.y};
+  const mbpa = getPointAtY(mbp13, mbp16, frontHipLine);
+  const mbp15 = {x: mbpa.x + backCrotchCurve, y: mbpa.y};
+  const mbpb = getPointAtY(mbp13, mbp15, frontHipLine + ((crotchLine - frontHipLine) /2));
+  const mbp14 = {x: mbpb.x + (backCrotchCurve / 2), y: mbpb.y};
+  
+  const mbpath = `
+    M ${mbp1.x} ${mbp1.y}
+    L ${mbp2.x} ${mbp2.y}
+    L ${mbp3.x} ${mbp3.y}
+    L ${mbp4.x} ${mbp4.y}
+    L ${mbp5.x} ${mbp5.y}
+    L ${mbp6.x} ${mbp6.y}
+    L ${mbp7.x} ${mbp7.y}
+    L ${mbp8.x} ${mbp8.y}
+    L ${mbp9.x} ${mbp9.y}
+    L ${mbp10.x} ${mbp10.y}
+    L ${mbp11.x} ${mbp11.y}
+    L ${mbp12.x} ${mbp12.y} 
+    L ${mbp13.x} ${mbp13.y} 
+    L ${mbp14.x} ${mbp14.y} 
+    L ${mbp15.x} ${mbp15.y}
+    L ${mbp16.x} ${mbp16.y}
+    Z
+    `; 
   svgFront.innerHTML =  `
 <path 
     d="${fpath}" 
