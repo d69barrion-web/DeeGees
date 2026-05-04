@@ -589,6 +589,48 @@ function updatePattern() {
  drawPattern(m);
   } 
 
+  function getPointAtDistance(p1, y2, d, side = "left") {
+  const dy = y2 - p1.y;
+  const dx = Math.sqrt(d * d - dy * dy);
+
+  return {
+    x: side === "right" ? p1.x + dx : p1.x - dx,
+    y: y2
+  };
+}
+/////////////////////////////////////////////
+function getPointAtY(p1, p2, y) 
+{
+   const t = (y - p1.y) / (p2.y - p1.y);
+
+   return {
+     x: p1.x + (p2.x - p1.x) * t,
+     y: y
+   };
+}
+//Usage of function getPointAyY(p1, p2, y)
+  //const p1 = { x: 50, y: 50 };
+  //const p2 = { x: 10, y: 100 };
+
+  //const px = getPointAtY(p1, p2, 75);
+//////////////////////////////////////////////
+function getPointAtX(p1, p2, x) 
+{
+   const t = (x - p1.x) / (p2.x - p1.x);
+
+   return {
+     x: x,
+     y: p1.y + (p2.y - p1.y) * t,
+   };
+}
+  //Usage of function getPointAyY(p1, p2, y)
+  //const p1 = { x: 50, y: 50 };
+  //const p2 = { x: 10, y: 100 };
+
+  //const px = getPointAtY(p1, p2, 75);
+//////////////////////////////////////////////
+
+ 
   function drawPattern(m) {
   
   const svgFront = document.getElementById("svgCanvasFront");
