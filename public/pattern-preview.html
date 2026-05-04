@@ -452,7 +452,36 @@ radios.forEach(radio => {
   document.getElementById("leg_opening").value = localStorage.getItem("leg_opening") || "";
  //updatePattern();
 }
-  loadData();
+// RETRIEVING VALUES FROM LOCALSTORAGE FOR SLIDERS
+const frontCrotchSlider = document.getElementById("frontCrotchCurve");
+const backCrotchSlider = document.getElementById("backCrotchCurve");
+const frontWaistShiftSlider = document.getElementById("frontWaistShift");
+const backWaistShiftSlider = document.getElementById("backWaistShift");
+const frontHipShiftSlider = document.getElementById("frontHipShift");
+const backHipShiftSlider = document.getElementById("backHipShift");
+const crotchShiftSlider = document.getElementById("crotchShift");
+const crotchSlider = document.getElementById("crotchDepth");
+const thighAdjSlider = document.getElementById("thighAdj");
+const kneeAdjSlider = document.getElementById("kneeAdj");
+const bottomAdjSlider = document.getElementById("bottomAdj");
+const frontHipAdjSlider = document.getElementById("frontHipAdj");
+const frontWaistAdjSlider = document.getElementById("frontWaistAdj");
+
+frontCrotchSlider.value = Number(localStorage.getItem("frontCrotchCurve")) || 0;
+backCrotchSlider.value = Number(localStorage.getItem("backCrotchCurve")) || 0;
+frontWaistShiftSlider.value = Number(localStorage.getItem("frontWaistShift")) || 0;
+backWaistShiftSlider.value = Number(localStorage.getItem("backWaistShift")) || 0;
+frontHipShiftSlider.value = Number(localStorage.getItem("frontHipShift")) || 0;
+backHipShiftSlider.value = Number(localStorage.getItem("backHipShift")) || 0;
+crotchShiftSlider.value = Number(localStorage.getItem("crotchShift")) || 0;
+crotchSlider.value = Number(localStorage.getItem("crotchDepth")) || 0;
+thighAdjSlider.value = Number(localStorage.getItem("thighAdj")) || 0;
+kneeAdjSlider.value = Number(localStorage.getItem("kneeAdj")) || 0;
+bottomAdjSlider.value = Number(localStorage.getItem("bottomAdj")) || 0;
+frontHipAdjSlider.value = Number(localStorage.getItem("frontHipAdj")) || 0;
+frontWaistAdjSlider.value = Number(localStorage.getItem("frontWaistAdj")) || 0;
+  
+loadData();
 </script>
 
 <script>
