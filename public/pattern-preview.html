@@ -438,6 +438,16 @@ radios.forEach(radio => {
 
   });
 });
+//////// LOCALSTORAGE SAVING FOR REFRESH LOADING////////////////
+const fields = ["client", "waist", "hip", "rise", "outseam", "inseam", "thigh", "knee", "leg_opening"];
+
+fields.forEach(id => {
+  const input = document.getElementById(id);
+
+  input.addEventListener("input", function() {
+    localStorage.setItem(id, this.value);
+  });
+});
 //THIS FUNCTION LOADS LOCALSTORAGE DATA
   //SAVED REALTIME
   function loadData() {
