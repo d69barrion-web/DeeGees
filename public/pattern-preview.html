@@ -438,6 +438,20 @@ radios.forEach(radio => {
 
   });
 });
+//THIS FUNCTION LOADS LOCALSTORAGE DATA
+  //SAVED REALTIME
+  function loadData() {
+  document.getElementById("client").value = localStorage.getItem("client") || "";
+  document.getElementById("waist").value = localStorage.getItem("waist") || "";
+  document.getElementById("hip").value = localStorage.getItem("hip") || "";
+  document.getElementById("rise").value = localStorage.getItem("rise") || "";
+  document.getElementById("outseam").value = localStorage.getItem("outseam") || "";
+  document.getElementById("inseam").value = localStorage.getItem("inseam") || "";
+  document.getElementById("thigh").value = localStorage.getItem("thigh") || "";
+  document.getElementById("knee").value = localStorage.getItem("knee") || "";
+  document.getElementById("leg_opening").value = localStorage.getItem("leg_opening") || "";
+ //updatePattern();
+}
 </script>
 
 <script>
