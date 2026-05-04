@@ -731,6 +731,134 @@ function getPointAtX(p1, p2, x)
     L ${fp17.x} ${fp17.y}
     Z
   `;
+    //DISTANCE FROM WAIST TO HIP
+  const waistToHipCenterPoint = frontWaistLine + ((frontHipLine - frontWaistLine) / 2);
+  const hipY = (frontHipLine - frontWaistLine) / scale;
+
+  //DISTANCE FROM WAIST TO CROTCH
+  const waistToCrotchCenterPoint = frontWaistLine + ((crotchLine - frontWaistLine) / 2);
+  const crotchY = (crotchLine - frontWaistLine) / scale;
+
+  //DISTANCE FROM CROTCH TO THIGH
+  const crotchToThighCenterPoint = crotchLine + ((thighLine - crotchLine) / 2);
+  const thighY = (thighLine - crotchLine) / scale;
+  
+  //DISTANCE FROM THIGH TO KNEE
+  const thighToKneeCenterPoint = thighLine + ((kneeLine - thighLine) / 2);
+  const kneeY = (kneeLine - thighLine) / scale;
+
+  //DISTANCE FROM KNEE TO LEG OPENING 
+  const kneeToBottomCenterPoint = kneeLine + ((bottomLine0 - kneeLine) / 2);
+  const bottomY0 = (bottomLine0 - kneeLine) / scale;
+  
+  //DISTANCE FROM CENTER TO WAIST END-POINTS 
+  const waistCenterPoint = { x: center, y: frontWaistLine };
+  //LEFT END-POINT 
+  const Lwaist = { x: center - (3 * scale) + frontWaistShift, y: frontWaistLine };
+  const LwmidX = (waistCenterPoint.x + Lwaist.x) / 2;
+  const LwmidY = (waistCenterPoint.y + Lwaist.y) / 2;
+  const Lwdx = Lwaist.x - waistCenterPoint.x;
+  const Lwdy = Lwaist.y - waistCenterPoint.y;
+  const Lwdistance = Math.sqrt(Lwdx * Lwdx + Lwdy * Lwdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rwaist = { x: center + Hwaist + frontWaistShift + waistOffset + (Hwaist - (3 * scale)), y: frontWaistLine };
+  const RwmidX = (waistCenterPoint.x + Rwaist.x) / 2;
+  const RwmidY = (waistCenterPoint.y + Rwaist.y) / 2;
+  const Rwdx = Rwaist.x - waistCenterPoint.x;
+  const Rwdy = Rwaist.y - waistCenterPoint.y;
+  const Rwdistance = Math.sqrt(Rwdx * Rwdx + Rwdy * Rwdy) / scale;
+
+  //DISTANCE FROM CENTER TO FRONTHIP END-POINTS 
+  const frontHipCenterPoint = { x: center, y: frontHipLine };
+  //LEFT END-POINT 
+  const Lhip = { x: center - HFhip + frontHipShift - hipOffset - (HFhip - Hthigh), y: frontHipLine };
+  const LhmidX = (frontHipCenterPoint.x + Lhip.x) / 2;
+  const LhmidY = (frontHipCenterPoint.y + Lhip.y) / 2;
+  const Lhdx = Lhip.x - frontHipCenterPoint.x;
+  const Lhdy = Lhip.y - frontHipCenterPoint.y;
+  const Lhdistance = Math.sqrt(Lhdx * Lhdx + Lhdy * Lhdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rhip = { x: center + Hthigh + frontHipShift + thighOffset, y: frontHipLine };
+  const RhmidX = (frontHipCenterPoint.x + Rhip.x) / 2;
+  const RhmidY = (frontHipCenterPoint.y + Rhip.y) / 2;
+  const Rhdx = Rhip.x - frontHipCenterPoint.x;
+  const Rhdy = Rhip.y - frontHipCenterPoint.y;
+  const Rhdistance = Math.sqrt(Rhdx * Rhdx + Rhdy * Rhdy) / scale;
+ 
+  //CROTCH TIP computation 
+  const frontCrotchCenterPoint = { x: center, y: crotchLine };
+  //LEFT + CROTCHTIP +- CROTCHDEPTH
+  const Lcrotch = { x: center - Hcrotch - crotchDepth + crotchShift, y: crotchLine };
+  const LcmidX = (frontCrotchCenterPoint.x + Lcrotch.x) / 2;
+  const LcmidY = (frontCrotchCenterPoint.y + Lcrotch.y) / 2;
+  const Lcdx = Lcrotch.x - frontCrotchCenterPoint.x;
+  const Lcdy = Lcrotch.y - frontCrotchCenterPoint.y;
+  const Lcdistance = Math.sqrt(Lcdx * Lcdx + Lcdy * Lcdy) / scale;
+
+  //RIGHT
+  const Rcrotch = { x: center + Hthigh + thighOffset + crotchShift, y: crotchLine};
+  const RcmidX = (frontCrotchCenterPoint.x + Rcrotch.x) / 2;
+  const RcmidY = (frontCrotchCenterPoint.y + Rcrotch.y) / 2;
+  const Rcdx = Rcrotch.x - frontCrotchCenterPoint.x;
+  const Rcdy = Rcrotch.y - frontCrotchCenterPoint.y;
+  const Rcdistance = Math.sqrt(Rcdx * Rcdx + Rcdy * Rcdy) / scale;
+
+  //DISTANCE FROM CENTER TO FRONT THIGH END-POINTS 
+  const frontThighCenterPoint = { x: center, y: thighLine };
+  //LEFT END-POINT 
+  const Lthigh = { x: center - Hthigh - thighOffset, y: thighLine };
+  const LtmidX = (frontThighCenterPoint.x + Lthigh.x) / 2;
+  const LtmidY = (frontThighCenterPoint.y + Lthigh.y) / 2;
+  const Ltdx = Lthigh.x - frontThighCenterPoint.x;
+  const Ltdy = Lthigh.y - frontThighCenterPoint.y;
+  const Ltdistance = Math.sqrt(Ltdx * Ltdx + Ltdy * Ltdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rthigh = { x: center + Hthigh + thighOffset, y: thighLine };
+  const RtmidX = (frontThighCenterPoint.x + Rthigh.x) / 2;
+  const RtmidY = (frontThighCenterPoint.y + Rthigh.y) / 2;
+  const Rtdx = Rthigh.x - frontThighCenterPoint.x;
+  const Rtdy = Rthigh.y - frontThighCenterPoint.y;
+  const Rtdistance = Math.sqrt(Rtdx * Rtdx + Rtdy * Rtdy) / scale;
+
+  //DISTANCE FROM CENTER TO FRONT KNEE END-POINTS 
+  const frontkneeCenterPoint = { x: center, y: kneeLine };
+  //LEFT END-POINT 
+  const Lknee = { x: center - Hknee - kneeOffset, y: kneeLine };
+  const LkmidX = (frontkneeCenterPoint.x + Lknee.x) / 2;
+  const LkmidY = (frontkneeCenterPoint.y + Lknee.y) / 2;
+  const Lkdx = Lknee.x - frontkneeCenterPoint.x;
+  const Lkdy = Lknee.y - frontkneeCenterPoint.y;
+  const Lkdistance = Math.sqrt(Lkdx * Lkdx + Lkdy * Lkdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rknee = { x: center + Hknee + kneeOffset, y: kneeLine };
+  const RkmidX = (frontkneeCenterPoint.x + Rknee.x) / 2;
+  const RkmidY = (frontkneeCenterPoint.y + Rknee.y) / 2;
+  const Rkdx = Rknee.x - frontkneeCenterPoint.x;
+  const Rkdy = Rknee.y - frontkneeCenterPoint.y;
+  const Rkdistance = Math.sqrt(Rkdx * Rkdx + Rkdy * Rkdy) / scale;
+
+  //DISTANCE FROM CENTER TO FRONT LEG-OPENING END-POINTS 
+  const frontBottomCenterPoint = { x: center, y: bottomLine0 };
+  //LEFT END-POINT 
+  const Lbottom = { x: center - Hbottom - bottomOffset, y: bottomLine0 };
+  const LbmidX = (frontBottomCenterPoint.x + Lbottom.x) / 2;
+  const LbmidY = (frontBottomCenterPoint.y + Lbottom.y) / 2;
+  const Lbdx = Lbottom.x - frontBottomCenterPoint.x;
+  const Lbdy = Lbottom.y - frontBottomCenterPoint.y;
+  const Lbdistance = Math.sqrt(Lbdx * Lbdx + Lbdy * Lbdy) / scale;
+
+  //RIGHT END-POINT 
+  const Rbottom = { x: center + Hbottom + bottomOffset, y: bottomLine0 };
+  const RbmidX = (frontBottomCenterPoint.x + Rbottom.x) / 2;
+  const RbmidY = (frontBottomCenterPoint.y + Rbottom.y) / 2;
+  const Rbdx = Rbottom.x - frontBottomCenterPoint.x;
+  const Rbdy = Rbottom.y - frontBottomCenterPoint.y;
+  const Rbdistance = Math.sqrt(Rbdx * Rbdx + Rbdy * Rbdy) / scale;
+  
   svgFront.innerHTML =  `
 <path 
     d="${fpath}" 
