@@ -919,17 +919,17 @@ function drawPattern(m) {
   const bCenter = 500;
   
   
-  const frontWaistShift = m.frontWaist_shift;
-  const backWaistShift = m.backWaist_shift;
-  const frontHipShift = m.frontHip_shift;
-  const backHipShift = m.backHip_shift;
-  const frontCrotchCurve = m.frontCrotch_curve;
-  const crotchShift = m.crotch_shift;
-  const thighOffset = m.thigh_adj;
-  const kneeOffset = m.knee_adj;
-  const bottomOffset = m.bottom_adj;
-  const hipOffset = m.frontHip_adj;
-  const waistOffset = m.frontWaist_adj;
+  const frontWaistShift = Number(m.frontWaist_shift) || 0 ;
+  const backWaistShift = Number(m.backWaist_shift) || 0;
+  const frontHipShift = Number(m.frontHip_shift) || 0;
+  const backHipShift = Number(m.backHip_shift) || 0;
+  const frontCrotchCurve = Number(m.frontCrotch_curve) || 0;
+  const crotchShift = Number(m.crotch_shift) || 0;
+  const thighOffset = Number(m.thigh_adj) || 0;
+  const kneeOffset = Number(m.knee_adj) || 0;
+  const bottomOffset = Number(m.bottom_adj) || 0;
+  const hipOffset = Number(m.frontHip_adj) || 0;
+  const waistOffset = Number(m.frontWaist_adj) || 0;
   const Length = m.outseam * scale;
   const frontWaistLine = 50;
   const crotchLine = frontWaistLine + ((m.rise - 1) * scale);
