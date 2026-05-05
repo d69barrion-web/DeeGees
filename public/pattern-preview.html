@@ -316,6 +316,9 @@
       <div>
            <label><input type="radio" name="control" value="backFBAdj"> Back Fishbowl adj</label>
       </div>
+      <div>
+           <label><input type="radio" name="control" value="frontFBAdj"> Front Fishbowl adj</label>
+      </div>
       
     </div>
 
@@ -417,6 +420,10 @@ background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
   <div class="form-group slider-group hidden" data-control="backFBAdj">
            <label>Back Fishbowl adj: <span id="backFBVal">0</span></label>
            <input type="range" id="backFBAdj" min="-20" max="20" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="frontFBAdj">
+           <label>Front Fishbowl adj: <span id="frontFBVal">0</span></label>
+           <input type="range" id="frontFBAdj" min="-20" max="20" value="0">
   </div>
       
   <button class="btn" onclick="downloadFront()">Download as PNG</button>
@@ -629,8 +636,9 @@ function getPatternData() {
     thighAdj: Number(thighAdjSlider.value),
     kneeAdj: Number(kneeAdjSlider.value),
     bottomAdj: Number(bottomAdjSlider.value),
-    backFBAdj: Number(backFBSlider.value)
-  };
+    backFBAdj: Number(backFBSlider.value),
+    frontFBAdj: Number(frontFBSlider.value)
+};
   }
 //////////////LOADING SAVED PATTERN SYSTEM/////////////////////
 const loadBtn = document.getElementById("loadPatternBtn");
@@ -729,6 +737,7 @@ document.getElementById("leg_opening").value = d.Bottom;
   kneeAdjSlider.value = d.kneeAdj;
   bottomAdjSlider.value = d.bottomAdj;
   backFBSlider.value = d.backFBAdj;
+  frontFBSlider.value = d.frontFBAdj;
     
   updatePattern(); // to redraw selected saved pattern
   }
@@ -763,7 +772,7 @@ const bottomAdjSlider = document.getElementById("bottomAdj");
 const frontHipAdjSlider = document.getElementById("frontHipAdj");
 const frontWaistAdjSlider = document.getElementById("frontWaistAdj");
 const backFBSlider = document.getElementById("backFBAdj");
-
+const frontFBSlider = document.getElementById("frontFBAdj");
 
 frontCrotchSlider.value = Number(localStorage.getItem("frontCrotchCurve")) || 0;
 backCrotchSlider.value = Number(localStorage.getItem("backCrotchCurve")) || 0;
@@ -779,6 +788,7 @@ bottomAdjSlider.value = Number(localStorage.getItem("bottomAdj")) || 0;
 frontHipAdjSlider.value = Number(localStorage.getItem("frontHipAdj")) || 0;
 frontWaistAdjSlider.value = Number(localStorage.getItem("frontWaistAdj")) || 0;
 backFBSlider.value = Number(localStorage.getItem("backFBAdj")) || 0;
+frontFBSlider.value = Number(localStorage.getItem("frontFBAdj")) || 0;
   
 
 frontCrotchSlider.addEventListener("input", function() {
@@ -835,6 +845,10 @@ frontWaistAdjSlider.addEventListener("input", function() {
 });
 backFBSlider.addEventListener("input", function() {
   localStorage.setItem("backFBAdj", this.value);
+  updatePattern();
+});
+frontFBSlider.addEventListener("input", function() {
+  localStorage.setItem("frontFBAdj", this.value);
   updatePattern();
 });
 
@@ -953,6 +967,7 @@ function getPointAtX(p1, p2, x)
     frontHip_adj: parseInt(frontHipAdjSlider.value) || 0,
     frontWaist_adj: parseInt(frontWaistAdjSlider.value) || 0,
     backFB_adj: parseInt(backFBSlider.value) || 0
+    frontFB_adj: parseInt(frontFBSlider.value) || 0
   
   };
 
@@ -970,7 +985,8 @@ function getPointAtX(p1, p2, x)
   document.getElementById("frontHipAdjVal").textContent = m.frontHip_adj;
   document.getElementById("frontWaistAdjVal").textContent = m.frontWaist_adj;
   document.getElementById("backFBVal").textContent = m.backFB_adj;
-  
+  document.getElementById("frontFBVal").textContent = m.frontFB_adj;
+ 
  drawPattern(m);
   } 
   
@@ -997,9 +1013,10 @@ function drawPattern(m) {
   const hipOffset = Number(m.frontHip_adj) || 0;
   const waistOffset = Number(m.frontWaist_adj) || 0;
   const backFBOffset = Number(m.backFB_adj) || 0;
+  const frontFBOffset = Number(m.frontFB_adj) || 0;
   const Length = m.outseam * scale;
   const frontWaistLine = 50;
-  const crotchLine = frontWaistLine + ((m.rise - 1) * scale);
+  const crotchLine = frontWaistLine + ((m.rise - 1) * scale) + frontFBOffset;
   const frontHipLine = crotchLine - (2 * scale);
   const thighLine = crotchLine + (4 * scale);
   const kneeLine = crotchLine + (((m.outseam - m.rise) / 2) * scale);
