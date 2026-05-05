@@ -1267,9 +1267,8 @@ function drawPattern(m) {
   const mbpath = `
     M ${mbp1.x} ${mbp1.y}
     L ${mbp2.x} ${mbp2.y}
-    L ${mbp3.x} ${mbp3.y}
-    L ${mbp4.x} ${mbp4.y}
-    L ${mbp5.x} ${mbp5.y}
+    Q ${mbp3.x} ${mbp3.y} ${mbp4.x} ${mbp4.y}
+    Q ${mbp4.x} ${mbp4.y} ${mbp5.x} ${mbp5.y}
     L ${mbp6.x} ${mbp6.y}
     L ${mbp7.x} ${mbp7.y}
     L ${mbp8.x} ${mbp8.y}
