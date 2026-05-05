@@ -1211,7 +1211,7 @@ function drawPattern(m) {
 
 ////////BACK PATTERN DRAWING//////////////////// 
   const backCrotchCurve = m.backCrotch_curve;
-  const backWaistLine = frontWaistLine - (2 * scale) + (backFBOffset * scale);
+  const backWaistLine = frontWaistLine - (2 * scale) + backFBOffset;
   const backCrotchLine = crotchLine + (scale/2);
   const backHipLine = backWaistLine + (frontHipLine - frontWaistLine);
   const mbackWaistLineXo = 0;
