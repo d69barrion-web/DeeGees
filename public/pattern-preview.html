@@ -313,7 +313,9 @@
       <div>
            <label><input type="radio" name="control" value="bottomAdj"> Leg Opening adj</label>
       </div>
-      
+      <div>
+           <label><input type="radio" name="control" value="backFBAdj"> Back Fishbowl adj</label>
+      </div>
       
     </div>
 
@@ -411,6 +413,10 @@ background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
   <div class="form-group slider-group hidden" data-control="bottomAdj">
            <label>Leg Opening adj: <span id="bottomAdjVal">0</span></label>
            <input type="range" id="bottomAdj" min="-20" max="20" value="0">
+  </div>
+  <div class="form-group slider-group hidden" data-control="bottomAdj">
+           <label>Back Fishbowl adj: <span id="backFBVal">0</span></label>
+           <input type="range" id="backFBAdj" min="-20" max="20" value="0">
   </div>
       
   <button class="btn" onclick="downloadFront()">Download as PNG</button>
@@ -622,7 +628,8 @@ function getPatternData() {
     frontHipAdj: Number(frontHipAdjSlider.value),
     thighAdj: Number(thighAdjSlider.value),
     kneeAdj: Number(kneeAdjSlider.value),
-    bottomAdj: Number(bottomAdjSlider.value)
+    bottomAdj: Number(bottomAdjSlider.value),
+    backFBAdj: Number(backFBSlider.value)
   };
   }
 //////////////LOADING SAVED PATTERN SYSTEM/////////////////////
@@ -721,6 +728,7 @@ document.getElementById("leg_opening").value = d.Bottom;
   thighAdjSlider.value = d.thighAdj;
   kneeAdjSlider.value = d.kneeAdj;
   bottomAdjSlider.value = d.bottomAdj;
+  backFBSlider.value = d.backFBAdj;
     
   updatePattern(); // to redraw selected saved pattern
   }
@@ -754,6 +762,8 @@ const kneeAdjSlider = document.getElementById("kneeAdj");
 const bottomAdjSlider = document.getElementById("bottomAdj");
 const frontHipAdjSlider = document.getElementById("frontHipAdj");
 const frontWaistAdjSlider = document.getElementById("frontWaistAdj");
+const backFBSlider = document.getElementById("backFBAdj");
+
 
 frontCrotchSlider.value = Number(localStorage.getItem("frontCrotchCurve")) || 0;
 backCrotchSlider.value = Number(localStorage.getItem("backCrotchCurve")) || 0;
@@ -768,6 +778,8 @@ kneeAdjSlider.value = Number(localStorage.getItem("kneeAdj")) || 0;
 bottomAdjSlider.value = Number(localStorage.getItem("bottomAdj")) || 0;
 frontHipAdjSlider.value = Number(localStorage.getItem("frontHipAdj")) || 0;
 frontWaistAdjSlider.value = Number(localStorage.getItem("frontWaistAdj")) || 0;
+backFBSlider.value = Number(localStorage.getItem("backFBAdj")) || 0;
+  
 
 frontCrotchSlider.addEventListener("input", function() {
   localStorage.setItem("frontCrotchCurve", this.value);
@@ -819,6 +831,10 @@ frontHipAdjSlider.addEventListener("input", function() {
 });
 frontWaistAdjSlider.addEventListener("input", function() {
   localStorage.setItem("frontWaistAdj", this.value);
+  updatePattern();
+});
+backFBSlider.addEventListener("input", function() {
+  localStorage.setItem("backFBAdj", this.value);
   updatePattern();
 });
 
@@ -936,6 +952,8 @@ function getPointAtX(p1, p2, x)
     bottom_adj: parseInt(bottomAdjSlider.value) || 0,
     frontHip_adj: parseInt(frontHipAdjSlider.value) || 0,
     frontWaist_adj: parseInt(frontWaistAdjSlider.value) || 0
+    backFB_adj: parseInt(backFBSlider.value) || 0
+  
   };
 
   document.getElementById("frontCrotchVal").textContent = m.frontCrotch_curve;
@@ -951,7 +969,8 @@ function getPointAtX(p1, p2, x)
   document.getElementById("bottomAdjVal").textContent = m.bottom_adj;
   document.getElementById("frontHipAdjVal").textContent = m.frontHip_adj;
   document.getElementById("frontWaistAdjVal").textContent = m.frontWaist_adj;
-
+  document.getElementById("backFBAdjVal").textContent = m.frontWaist_adj;
+  
  drawPattern(m);
   } 
   
@@ -977,6 +996,7 @@ function drawPattern(m) {
   const bottomOffset = Number(m.bottom_adj) || 0;
   const hipOffset = Number(m.frontHip_adj) || 0;
   const waistOffset = Number(m.frontWaist_adj) || 0;
+  const backFBOffset = Number(m.backFB_adj) || 0;
   const Length = m.outseam * scale;
   const frontWaistLine = 50;
   const crotchLine = frontWaistLine + ((m.rise - 1) * scale);
@@ -1191,7 +1211,7 @@ function drawPattern(m) {
 
 ////////BACK PATTERN DRAWING//////////////////// 
   const backCrotchCurve = m.backCrotch_curve;
-  const backWaistLine = frontWaistLine - (2 * scale);
+  const backWaistLine = frontWaistLine - (2 * scale) + (backFBOffset * scale);
   const backCrotchLine = crotchLine + (scale/2);
   const backHipLine = backWaistLine + (frontHipLine - frontWaistLine);
   const mbackWaistLineXo = 0;
