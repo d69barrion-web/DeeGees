@@ -1163,8 +1163,9 @@ function drawPattern(m) {
   const mbp2 = getPointAtDistance(mbp1, frontWaistLine, (BHwaist - waistOffset), "right");
   const mbp5 = {x: center + Hthigh - thighOffset + (1.25 * scale) , y: thighLine};
   const mrBackHipSP = getPointAtY(mbp2, mbp5, frontHipLine);
-  const mbp3 = {x: mrBackHipSP.x , y: mrBackHipSP.y};
-  const mbp4 = getPointAtY(mbp2, mbp5, backCrotchLine);
+  const mbp3 = {x: mrBackHipSP.x + backHipShift , y: mrBackHipSP.y};
+  const mrBackCrotch = getPointAtY(mbp2, mbp5, backCrotchLine);
+  const mbp4 = {x: mrBackCrotch.x + (backHipShift / 2), y: mrBackCrotch.y};
   const mbp6 = {x: center + Hknee - kneeOffset + (1.125 * scale), y: kneeLine };
   const mbp7 = {x: center + Hbottom - bottomOffset + scale, y: bottomLine1};
   const mbp8 = {x: center + Hbottom - bottomOffset + scale, y: bottomLine0};
@@ -1175,7 +1176,7 @@ function drawPattern(m) {
   const mbpx =  {x: center - Hcrotch - crotchDepth + crotchShift - (scale * 1.375), y: crotchLine};
   const mbp13 = getPointAtY(mbpx, mbp12, crotchLine + (scale/2));
   const mlBackHipEP = getPointAtDistance(mbp3, backHipLine, BHhip - hipOffset , "left");
-  const mbp16 = {x: mlBackHipEP.x , y: mlBackHipEP.y};
+  const mbp16 = {x: mlBackHipEP.x + backHipShift  , y: mlBackHipEP.y};
   const mbpa = getPointAtY(mbp13, mbp16, frontHipLine);
   const mbp15 = {x: mbpa.x + backCrotchCurve, y: mbpa.y};
   const mbpb = getPointAtY(mbp13, mbp15, frontHipLine + ((crotchLine - frontHipLine) /2));
