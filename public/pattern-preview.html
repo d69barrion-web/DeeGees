@@ -1507,7 +1507,7 @@ function drawPattern(m) {
  
   const frontFB = (getDistance(fp13, fp14) + getDistance(fp14, fp15) + getDistance(fp15, fp16) + getDistance(fp16, fp17)) / scale;
   const backFB = (getDistance(mbp13, mbp14) + getDistance(mbp14, mbp15) + getDistance(mbp15, mbp16) + getDistance(mbp16, mbp1)) / scale;
-  const totFB = frontFB + backFB;
+  const totFB = (frontFB + backFB);
   
   svgFront.innerHTML =  `
 <path 
@@ -2265,7 +2265,7 @@ function drawPattern(m) {
     backFB = ${backFB.toFixed(2)} "
   </text>
   <text x="${10}" y="${30}" fill="white" font-size="10">
-    totFB = ${totFB + .toFixed(2)} "
+    totFB = ${totFB.toFixed(2)} "
   </text>
   <text x="${10}" y="${40}" fill="white" font-size="10">
     inseam = 
