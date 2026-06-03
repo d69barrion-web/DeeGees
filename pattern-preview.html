@@ -731,7 +731,7 @@ let selectedCreatedAt = null;
 function loadPattern(pattern) {
 const d = pattern.data;
 
-selectedCreatedAt = pattern.id; // ⭐ important
+selectedCreatedAt = doc.id; // ⭐ important
 
 document.getElementById("client").value = d.Client;
 document.getElementById("waist").value = d.Waist;
