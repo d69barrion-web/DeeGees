@@ -615,7 +615,8 @@ saveBtn.addEventListener("click", async function () {
 
   } catch (err) {
     console.error(err);
-    alert("Error saving pattern");
+    //alert("Error saving pattern");
+    alert(err.message);
   }
 });
 
