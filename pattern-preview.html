@@ -552,55 +552,71 @@ fields.forEach(id => {
 });
 //////SAVE PATTERN SYSTEM/////////  
 const saveBtn = document.getElementById("savePatternBtn");
-saveBtn.addEventListener("click", function () {
-if (!isPremium) {
+saveBtn.addEventListener("click", async function () {
+  if (!isPremium) {
     showPremiumModal();
     return;
-}
+  }
+
+  const user = firebase.auth().currentUser;
+  if (!user) {
+    alert("Not logged in");
+    return;
+  }
+
   const name = prompt("Pattern name?", document.getElementById("client").value);
   if (!name) return;
 
-  const pattern = {
+  const createdAt = Date.now();
+
+  const patternData = {
+    uid: user.uid,
     name: name,
     data: getPatternData(),
-    createdAt: Date.now()
+    createdAt: createdAt
   };
 
-  let patterns = JSON.parse(localStorage.getItem("patterns")) || [];
+  try {
+    // 1. GET USER PATTERNS (sorted oldest first)
+    const snapshot = await db.collection("patterns")
+      .where("uid", "==", user.uid)
+      .orderBy("createdAt", "asc")
+      .get();
 
-// check duplicate
-const exists = patterns.some(p => p.name === name);
+    // 2. CHECK DUPLICATE
+    const existing = snapshot.docs.find(doc => doc.data().name === name);
 
-if (exists) {
-  if (!confirm("Pattern exists. Overwrite?")) return;
+    if (existing) {
+      const confirmOverwrite = confirm("Pattern exists. Overwrite?");
+      if (!confirmOverwrite) return;
 
-  patterns = patterns.filter(p => p.name !== name);
-}
+      await existing.ref.update({
+        data: getPatternData(),
+        createdAt: createdAt
+      });
 
-patterns.push(pattern);
+      alert("Pattern updated!");
+      return;
+    }
 
-const user = firebase.auth().currentUser;
+    // 3. AUTO-DELETE IF LIMIT REACHED
+    if (snapshot.size >= 30) {
+      const excess = snapshot.size - 29; // make room for new one
 
-if (!user) {
-  alert("Not logged in");
-  return;
-}
+      for (let i = 0; i < excess; i++) {
+        await snapshot.docs[i].ref.delete(); // delete oldest
+      }
+    }
 
-//db.collection("patterns").add({
-//  uid: user.id,
-//  name: name,
-//  data: getPatternData(),
-//  createdAt: Date.now()
-//});
-db.collection("patterns").doc(pattern.createdAt.toString()).set({
-  uid: user.uid,
-  name: name,
-  data: getPatternData(),
-  createdAt: pattern.createdAt
-});
-  
-alert("Saved to cloud! ☁️");
-  
+    // 4. SAVE NEW PATTERN
+    await db.collection("patterns").add(patternData);
+
+    alert("Saved to cloud! ☁️");
+
+  } catch (err) {
+    console.error(err);
+    alert("Error saving pattern");
+  }
 });
 
 function showPremiumModal() {
