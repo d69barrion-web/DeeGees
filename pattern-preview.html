@@ -913,7 +913,7 @@ function openDeleteModal(patternId) {
 
   } catch (error) {
     console.error(error);
-    alert("Delete failed");
+    alert("Delete failed:" + error.message);
   }
 }
  
