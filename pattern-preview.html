@@ -902,9 +902,9 @@ function openDeleteModal(patternId) {
       .delete();
 
     // 🔥 DELETE SA LOCAL STORAGE
-    let patterns = JSON.parse(localStorage.getItem("patterns")) || [];
-    patterns = patterns.filter(p => p.createdAt != selectedPatternId);
-    localStorage.setItem("patterns", JSON.stringify(patterns));
+   // let patterns = JSON.parse(localStorage.getItem("patterns")) || [];
+   // patterns = patterns.filter(p => p.createdAt != selectedPatternId);
+   // localStorage.setItem("patterns", JSON.stringify(patterns));
 
     alert("Deleted successfully 🗑️");
     selectedCreatedAt = null;
