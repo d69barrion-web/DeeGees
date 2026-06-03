@@ -898,7 +898,7 @@ function openDeleteModal(patternId) {
   try {
     // 🔥 DELETE SA FIRESTORE
     await db.collection("patterns")
-      .doc(selectedPatternId.toString())
+      .doc(selectedPatternId)
       .delete();
 
     // 🔥 DELETE SA LOCAL STORAGE
