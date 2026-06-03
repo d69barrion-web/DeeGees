@@ -705,7 +705,7 @@ try {
     item.textContent = p.name;
 
     item.addEventListener("click", () => {
-      selectedPatternId = p.id;
+      selectedPatternId = doc.id;
       if (!isPremium) {
         alert("Unlock premium to use this feature.");
         return;
