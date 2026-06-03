@@ -664,18 +664,18 @@ loadBtn.addEventListener("click", () => {
     return;
   }
 
-  try {
+ // try {
 
   const snapshot = await db.collection("patterns")
   .where("uid", "==", user.uid)
   .get();
 
-} catch(err) {
+//} catch(err) {
 
-  console.error(err);
-  alert("Database Error: " + err.message);
+ // console.error(err);
+  //alert("Database Error: " + err.message);
 
-}
+//}
 
   list.innerHTML = "";
 
