@@ -657,6 +657,7 @@ loadBtn.addEventListener("click", () => {
   const list = document.getElementById("patternList");
   list.innerHTML = "Loading...";
 
+try {
   const user = firebase.auth().currentUser;
 
   if (!user) {
@@ -664,18 +665,9 @@ loadBtn.addEventListener("click", () => {
     return;
   }
 
- // try {
-
   const snapshot = await db.collection("patterns")
   .where("uid", "==", user.uid)
   .get();
-
-//} catch(err) {
-
- // console.error(err);
-//  alert("Database Error: " + err.message);
-
-//}
 
   list.innerHTML = "";
 
@@ -710,7 +702,11 @@ loadBtn.addEventListener("click", () => {
 
     list.appendChild(item);
   });
+} catch(err) {
+  console.error(err);
+  alert("Database Error: " + err.message);
   }
+}
   
   
 ///////////////////////////////////////////////
