@@ -666,7 +666,9 @@ loadBtn.addEventListener("click", () => {
 
   try {
 
-  const snapshot = await db.collection("patterns").get();
+  const snapshot = await db.collection("patterns")
+  .where("uid", "==", user.uid)
+  .get();
 
 } catch(err) {
 
